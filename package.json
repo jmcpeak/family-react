@@ -1,0 +1,35 @@
+{
+  "name": "family-react",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://d182zizp92qmd.cloudfront.net/",
+  "dependencies": {
+    "aws-sdk": "^2.205.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.0",
+    "material-ui": "^1.0.0-beta.35",
+    "material-ui-icons": "^1.0.0-beta.35",
+    "prettier": "^1.11.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router": "^4.2.0",
+    "react-scripts": "1.1.1"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,css}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
+  },
+  "scripts": {
+    "prebuild": "aws s3 cp s3://familyreact-hosting-mobilehub-1016334214/aws-exports.js ./src/aws-exports.js",
+    "precommit": "lint-staged",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "serve": "serve -s build",
+    "predeploy": "react-scripts build",
+    "deploy": "aws s3 cp build s3://familyreact-hosting-mobilehub-1016334214 --recursive"
+  }
+}
