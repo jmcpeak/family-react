@@ -1,0 +1,12 @@
+.question {
+  width: 500px;
+}
+
+.question label {
+  font-size: 1.5rem;
+  top: -10px;
+}
+
+.question input {
+  font-size: 1.5rem;
+}

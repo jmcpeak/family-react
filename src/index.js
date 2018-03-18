@@ -1,14 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'react-router-redux';
+import store, { history } from './store';
+
+import App from './containers/app';
 import registerServiceWorker from './registerServiceWorker';
 
-/*
- * Import the SDK and Project Configuration
- */
+import 'sanitize.css/sanitize.css';
+import './index.css';
+
 import AWS from 'aws-sdk';
 import awsmobile from './aws-exports';
+
+/**
+ * AWS - huh?
+ * aws-config.js is used by browser sessions to configure the SDK.
+ * aws-exports.js is used by SPA applications that are packed (by Webpack, Browserify, or similar tools) to configure the SDK.
+ */
 
 /*
  * Configure the SDK to use anonymous identity
@@ -20,11 +29,13 @@ AWS.config.update({
   })
 });
 
-/**
- * AWS - huh?
- * aws-config.js is used by browser sessions to configure the SDK.
- * aws-exports.js is used by SPA applications that are packed (by Webpack, Browserify, or similar tools) to configure the SDK.
- */
+render(
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <App />
+    </ConnectedRouter>
+  </Provider>,
+  document.querySelector('#root')
+);
 
-ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
