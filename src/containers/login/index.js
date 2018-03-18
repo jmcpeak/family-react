@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
-import Icon from 'material-ui/Icon';
-import { InputAdornment } from 'material-ui/Input';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { TextField } from 'redux-form-material-ui';
 import clover from './clover.png';
 import './index.css';
 import { clear } from '../../modules/authActions';
+// import Icon from 'material-ui/Icon';
+// import { InputAdornment } from 'material-ui/Input';
 
 export const LOGIN_PATH = '/login';
 

@@ -29,7 +29,7 @@ class Home extends Component {
           </header>
 
           <Clock />
-          <Welcome name={'Sara'} />
+          <Welcome name={'Sheila'} />
 
           <button onClick={this.props.logout}>Logout</button>
         </div>
