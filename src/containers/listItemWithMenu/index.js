@@ -30,7 +30,7 @@ const ListItemWithMenu = props => {
     menuOpen = event => props.setMenuAnchorEl(event.currentTarget);
 
   return (
-    <ListItem onMouseOver={mouseOver} onMouseOut={mouseOut}>
+    <ListItem button={true} onMouseOver={mouseOver} onMouseOut={mouseOut}>
       <Avatar>
         <Icon>face</Icon>
       </Avatar>
