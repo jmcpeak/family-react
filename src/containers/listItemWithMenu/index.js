@@ -8,6 +8,7 @@ import Icon from 'material-ui/Icon';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import {
   ListItem,
+  ListItemIcon,
   ListItemText,
   ListItemSecondaryAction
 } from 'material-ui/List';
@@ -57,8 +58,18 @@ const ListItemWithMenu = props => {
           open={Boolean(menuAnchorEl)}
           onClose={menuClose}
         >
-          <MenuItem onClose={menuClose}>View</MenuItem>
-          <MenuItem onClose={menuClose}>Delete</MenuItem>
+          <MenuItem onClose={menuClose}>
+            <ListItemIcon>
+              <Icon>pageview</Icon>
+            </ListItemIcon>
+            <ListItemText inset primary="View" />
+          </MenuItem>
+          <MenuItem onClose={menuClose}>
+            <ListItemIcon>
+              <Icon>delete</Icon>
+            </ListItemIcon>
+            <ListItemText inset primary="Delete" />
+          </MenuItem>
         </Menu>
       </ListItemSecondaryAction>
     </ListItem>
