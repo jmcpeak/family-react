@@ -11,8 +11,6 @@ const persistedState = loadState(),
   enhancers = [],
   middleware = [thunk, routerMiddleware(history)];
 
-console.log('---> persistedState: ', persistedState);
-
 if (process.env.NODE_ENV === 'development') {
   const devToolsExtension = window.devToolsExtension;
 
