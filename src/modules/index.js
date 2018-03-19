@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
-import { reducer as formReducer } from 'redux-form';
-import authReducer from './authReducer';
-import counterReducer from './counterReducer';
+import { routerReducer as router } from 'react-router-redux';
+import { reducer as form } from 'redux-form';
+import authorization from './authReducer';
+import layout from './layoutReducer';
 
 export default combineReducers({
-  router: routerReducer,
-  form: formReducer,
-  authorization: authReducer,
-  counter: counterReducer
+  authorization,
+  form,
+  layout,
+  router
 });

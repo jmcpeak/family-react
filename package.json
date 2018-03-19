@@ -5,6 +5,7 @@
   "homepage": "https://d182zizp92qmd.cloudfront.net/",
   "dependencies": {
     "aws-sdk": "^2.205.0",
+    "classnames": "^2.2.5",
     "fetch-jsonp": "^1.1.3",
     "husky": "^0.14.3",
     "lint-staged": "^7.0.0",

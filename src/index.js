@@ -1,4 +1,5 @@
 import React from 'react';
+import throttle from 'lodash/throttle';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
@@ -6,6 +7,7 @@ import store, { history } from './store';
 
 import App from './containers/app';
 import registerServiceWorker from './registerServiceWorker';
+import { saveState } from './localStorage';
 
 import 'sanitize.css/sanitize.css';
 import './index.css';
@@ -28,6 +30,14 @@ AWS.config.update({
     IdentityPoolId: awsmobile.aws_cognito_identity_pool_id
   })
 });
+
+store.subscribe(
+  throttle(() => {
+    saveState({
+      authorization: store.getState().authorization
+    });
+  }, 1000)
+);
 
 render(
   <Provider store={store}>

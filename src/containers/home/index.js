@@ -1,47 +1,206 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
+import React from 'react';
 import { connect } from 'react-redux';
-
 import Clock, { Welcome } from './clock';
+import classNames from 'classnames';
+
+import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import IconButton from 'material-ui/IconButton';
+import Icon from 'material-ui/Icon';
+import List from 'material-ui/List';
 
 import { createMuiTheme, MuiThemeProvider } from 'material-ui/styles';
-import purple from 'material-ui/colors/purple';
-import logo from './logo.svg';
-import './index.css';
+import { withStyles } from 'material-ui/styles';
+import green from 'material-ui/colors/green';
+
 import { logout } from '../../modules/authActions';
+import { toggleDrawer } from '../../modules/layoutActions';
+import ListItemWithMenu from '../listItemWithMenu';
+
+import './index.css';
 export const HOME_PATH = '/';
 
-const theme = createMuiTheme({
-  palette: {
-    primary: { main: purple[500] }, // Purple and green play nicely together.
-    secondary: { main: '#11cb5f' } // This is just green.A700 as hex.
-  }
-});
+const drawerWidth = 320,
+  theme = createMuiTheme({
+    palette: {
+      primary: { main: green[500] }, // Purple and green play nicely together.
+      secondary: { main: '#11cb5f' } // This is just green.A700 as hex.
+    }
+  }),
+  styles = theme => ({
+    root: {
+      flexGrow: 1
+    },
+    appFrame: {
+      height: '100%',
+      zIndex: 1,
+      overflow: 'hidden',
+      position: 'relative',
+      display: 'flex',
+      width: '100%'
+    },
+    appBar: {
+      position: 'absolute',
+      transition: theme.transitions.create(['margin', 'width'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen
+      })
+    },
+    appBarShift: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      transition: theme.transitions.create(['margin', 'width'], {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen
+      })
+    },
+    'appBarShift-left': {
+      marginLeft: drawerWidth
+    },
+    menuButton: {
+      marginLeft: 12,
+      marginRight: 20
+    },
+    hide: {
+      display: 'none'
+    },
+    drawerPaper: {
+      position: 'relative',
+      width: drawerWidth
+    },
+    drawerHeader: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      padding: '0 8px',
+      ...theme.mixins.toolbar
+    },
+    content: {
+      flexGrow: 1,
+      backgroundColor: theme.palette.background.default,
+      padding: theme.spacing.unit * 3,
+      transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen
+      })
+    },
+    'content-left': {
+      marginLeft: -drawerWidth
+    },
+    contentShift: {
+      transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen
+      })
+    },
+    'contentShift-left': {
+      marginLeft: 0
+    }
+  });
 
-class Home extends Component {
-  render() {
-    return (
-      <MuiThemeProvider theme={theme}>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Welcome to React</h1>
-          </header>
+const Home = props => {
+  const { classes, drawerOpen, user } = props;
 
-          <Clock />
-          <Welcome name={'Sheila'} />
+  const users = (
+    <List>
+      {props.users.map((v, i) => (
+        <ListItemWithMenu
+          key={i}
+          position={i}
+          primary={v.primary}
+          secondary={v.secondary}
+        />
+      ))}
+    </List>
+  );
 
-          <button onClick={this.props.logout}>Logout</button>
+  const drawer = (
+    <Drawer
+      variant="persistent"
+      open={drawerOpen}
+      classes={{
+        paper: classes.drawerPaper
+      }}
+    >
+      <Toolbar className={classes.drawerHeader} disableGutters={!drawerOpen}>
+        <div>
+          <Typography variant="title" color="inherit" align="left">
+            McPeak Family
+          </Typography>
         </div>
-      </MuiThemeProvider>
-    );
-  }
-}
+        <IconButton onClick={props.toggleDrawer}>
+          <Icon>chevron_left</Icon>
+        </IconButton>
+      </Toolbar>
+      {users}
+    </Drawer>
+  );
+
+  return (
+    <MuiThemeProvider theme={theme}>
+      <div className={classes.root}>
+        <div className={classes.appFrame}>
+          <AppBar
+            className={classNames(classes.appBar, {
+              [classes.appBarShift]: drawerOpen,
+              [classes[`appBarShift-left`]]: drawerOpen
+            })}
+          >
+            <Toolbar disableGutters={!drawerOpen}>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={props.toggleDrawer}
+                className={classNames(
+                  classes.menuButton,
+                  drawerOpen && classes.hide
+                )}
+              >
+                <Icon>menu</Icon>
+              </IconButton>
+              <Typography variant="title" color="inherit" align="left">
+                {user.name}
+              </Typography>
+              <Typography color="inherit" align="right">
+                Last Update: Sunday, March 18, 2018 with 197 family members
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          {drawer}
+          <main
+            className={classNames(classes.content, classes['content-left'], {
+              [classes.contentShift]: drawerOpen,
+              [classes['contentShift-left']]: drawerOpen
+            })}
+          >
+            <div className={classes.drawerHeader} />
+
+            <Clock />
+            <Welcome name={'Sheila'} />
+            <button onClick={props.logout}>Logout</button>
+          </main>
+        </div>
+      </div>
+    </MuiThemeProvider>
+  );
+};
 
 const mapStateToProps = state => ({
-  something: state.something
+  drawerOpen: state.layout.drawerOpen,
+  userMenuVisibility: state.layout.userMenuVisibility,
+  user: { name: 'Jason McPeak' },
+  users: [
+    { primary: 'Jason & Sheila McPeak', secondary: 'Gaithersburg, MD' },
+    { primary: 'Shannon & Tara McPeak', secondary: 'Fremont, WI' }
+  ]
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ logout }, dispatch);
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logout()),
+  toggleDrawer: () => dispatch(toggleDrawer())
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default withStyles(styles)(
+  connect(mapStateToProps, mapDispatchToProps)(Home)
+);
