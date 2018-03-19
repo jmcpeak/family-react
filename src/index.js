@@ -4,14 +4,11 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import store, { history } from './store';
-
 import App from './containers/app';
 import registerServiceWorker from './registerServiceWorker';
 import { saveState } from './localStorage';
-
 import 'sanitize.css/sanitize.css';
 import './index.css';
-
 import AWS from 'aws-sdk';
 import awsmobile from './aws-exports';
 
