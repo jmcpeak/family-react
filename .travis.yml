@@ -8,3 +8,8 @@ branch:
     - master
 
 cache: yarn
+
+notifications:
+  email:
+    on_success: never # default: change
+    on_failure: always # default: always
