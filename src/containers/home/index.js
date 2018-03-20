@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Clock, { Welcome } from './clock';
 import classNames from 'classnames';
 
 import AppBar from 'material-ui/AppBar';
@@ -15,10 +14,10 @@ import { createMuiTheme, MuiThemeProvider } from 'material-ui/styles';
 import { withStyles } from 'material-ui/styles';
 import green from 'material-ui/colors/green';
 
-import { logout } from '../../modules/authActions';
 import { toggleDrawer } from '../../modules/layoutActions';
 import ListItemWithMenu from '../listItemWithMenu';
 import MainMoreMenu from '../mainMoreMenu';
+import About from '../about';
 
 import './index.css';
 export const HOME_PATH = '/';
@@ -125,11 +124,13 @@ const Home = props => {
       }}
     >
       <Toolbar className={classes.drawerHeader} disableGutters={!drawerOpen}>
-        <div>
-          <Typography variant="title" color="inherit" align="left">
-            McPeak Family
-          </Typography>
-        </div>
+        <Grid container justify="center" alignItems="center">
+          <Grid item lg>
+            <Typography variant="title" color="textSecondary">
+              McPeak Family
+            </Typography>
+          </Grid>
+        </Grid>
         <IconButton onClick={props.toggleDrawer}>
           <Icon>chevron_left</Icon>
         </IconButton>
@@ -162,11 +163,18 @@ const Home = props => {
           </Grid>
           <Grid item lg style={{ textAlign: 'center' }}>
             <Typography color="inherit">
-              Last Update: Sunday, March 18, 2018
+              Updated {'Sunday, March 18, 2018'}
             </Typography>
-            <Typography color="inherit">with 197 family members</Typography>
+            <Typography color="inherit">{'197'} family members</Typography>
           </Grid>
           <Grid item lg>
+            <IconButton
+              color="inherit"
+              aria-label="Add User"
+              onClick={props.addUser}
+            >
+              <Icon>person_add</Icon>
+            </IconButton>
             <MainMoreMenu />
           </Grid>
         </Grid>
@@ -187,10 +195,7 @@ const Home = props => {
             })}
           >
             <div className={classes.drawerHeader} />
-
-            <Clock />
-            <Welcome name={'Sheila'} />
-            <button onClick={props.logout}>Logout</button>
+            <About />
           </main>
         </div>
       </div>
@@ -201,7 +206,7 @@ const Home = props => {
 const mapStateToProps = state => ({
   drawerOpen: state.layout.drawerOpen,
   userMenuVisibility: state.layout.userMenuVisibility,
-  user: { name: 'Jason McPeak' },
+  user: { name: 'Jason & Sheila McPeak' },
   users: [
     { primary: 'Jason & Sheila McPeak', secondary: 'Gaithersburg, MD' },
     { primary: 'Shannon & Tara McPeak', secondary: 'Fremont, WI' },
@@ -210,7 +215,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(logout()),
   toggleDrawer: () => dispatch(toggleDrawer())
 });
 

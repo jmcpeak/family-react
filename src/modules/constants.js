@@ -13,6 +13,8 @@ const AUTH_CLEAR = 'auth/CLEAR',
   LAYOUT_MORE_MENU_CLEAR_ANCHOR_EL = 'layout/MORE_MENU_CLEAR_ANCHOR_EL',
   LAYOUT_HIDDEN = 'hidden',
   LAYOUT_VISIBLE = 'visible',
+  LAYOUT_ABOUT_CLOSE = 'layout/ABOUT_CLOSE',
+  LAYOUT_ABOUT_OPEN = 'layout/ABOUT_OPEN',
   HASH_CODE = str => {
     let hash = 0,
       len = str.length,
@@ -44,5 +46,7 @@ export {
   LAYOUT_MORE_MENU_CLEAR_ANCHOR_EL,
   LAYOUT_HIDDEN,
   LAYOUT_VISIBLE,
+  LAYOUT_ABOUT_CLOSE,
+  LAYOUT_ABOUT_OPEN,
   HASH_CODE
 };

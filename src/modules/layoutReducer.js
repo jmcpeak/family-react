@@ -8,10 +8,13 @@ import {
   LAYOUT_MORE_MENU_CLEAR_ANCHOR_EL,
   LAYOUT_MORE_MENU_SET_ANCHOR_EL,
   LAYOUT_HIDDEN,
-  LAYOUT_VISIBLE
+  LAYOUT_VISIBLE,
+  LAYOUT_ABOUT_CLOSE,
+  LAYOUT_ABOUT_OPEN
 } from './constants';
 
 const initialState = {
+  aboutOpen: false,
   drawerOpen: true,
   userMenus: [],
   listMenuAnchorEl: null,
@@ -72,6 +75,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         moreMenuAnchorEl: action.element
+      };
+
+    case LAYOUT_ABOUT_CLOSE:
+      return {
+        ...state,
+        aboutOpen: false
+      };
+
+    case LAYOUT_ABOUT_OPEN:
+      return {
+        ...state,
+        aboutOpen: true
       };
 
     default:
