@@ -15,19 +15,19 @@ import {
 import {
   hideUserMenu,
   showUserMenu,
-  clearMenuAnchorEl,
-  setMenuAnchorEl
+  clearListMenuAnchorEl,
+  setListMenuAnchorEl
 } from '../../modules/layoutActions';
 import { LAYOUT_HIDDEN } from '../../modules/constants';
 const styles = () => ({});
 
 const ListItemWithMenu = props => {
-  const { menuAnchorEl, position, primary, secondary } = props,
-    USER_MENU_ID = 'userMenu',
+  const { listMenuAnchorEl, position, primary, secondary } = props,
+    MENU_ID = 'listMenu',
     mouseOut = () => props.hideUserMenu(position),
     mouseOver = () => props.showUserMenu(position),
-    menuClose = () => props.clearMenuAnchorEl(),
-    menuOpen = event => props.setMenuAnchorEl(event.currentTarget);
+    menuClose = () => props.clearListMenuAnchorEl(),
+    menuOpen = event => props.setListMenuAnchorEl(event.currentTarget);
 
   return (
     <ListItem button={true} onMouseOver={mouseOver} onMouseOut={mouseOut}>
@@ -46,16 +46,16 @@ const ListItemWithMenu = props => {
       >
         <IconButton
           aria-label="Menu"
-          aria-owns={menuAnchorEl ? USER_MENU_ID : null}
+          aria-owns={listMenuAnchorEl ? MENU_ID : null}
           aria-haspopup="true"
           onClick={menuOpen}
         >
           <Icon>more_vert</Icon>
         </IconButton>
         <Menu
-          id={USER_MENU_ID}
-          anchorEl={menuAnchorEl}
-          open={Boolean(menuAnchorEl)}
+          id={MENU_ID}
+          anchorEl={listMenuAnchorEl}
+          open={Boolean(listMenuAnchorEl)}
           onClose={menuClose}
         >
           <MenuItem onClose={menuClose}>
@@ -78,14 +78,14 @@ const ListItemWithMenu = props => {
 
 const mapStateToProps = state => ({
   userMenus: state.layout.userMenus,
-  menuAnchorEl: state.layout.menuAnchorEl
+  listMenuAnchorEl: state.layout.listMenuAnchorEl
 });
 
 const mapDispatchToProps = dispatch => ({
   hideUserMenu: position => dispatch(hideUserMenu(position)),
   showUserMenu: position => dispatch(showUserMenu(position)),
-  clearMenuAnchorEl: () => dispatch(clearMenuAnchorEl()),
-  setMenuAnchorEl: element => dispatch(setMenuAnchorEl(element))
+  clearListMenuAnchorEl: () => dispatch(clearListMenuAnchorEl()),
+  setListMenuAnchorEl: element => dispatch(setListMenuAnchorEl(element))
 });
 
 ListItemWithMenu.propTypes = {

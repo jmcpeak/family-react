@@ -10,7 +10,6 @@ import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
 import List from 'material-ui/List';
-
 import { createMuiTheme, MuiThemeProvider } from 'material-ui/styles';
 import { withStyles } from 'material-ui/styles';
 import green from 'material-ui/colors/green';
@@ -18,6 +17,7 @@ import green from 'material-ui/colors/green';
 import { logout } from '../../modules/authActions';
 import { toggleDrawer } from '../../modules/layoutActions';
 import ListItemWithMenu from '../listItemWithMenu';
+import MainMoreMenu from '../mainMoreMenu';
 
 import './index.css';
 export const HOME_PATH = '/';
@@ -137,36 +137,38 @@ const Home = props => {
     </Drawer>
   );
 
+  const appBar = (
+    <AppBar
+      className={classNames(classes.appBar, {
+        [classes.appBarShift]: drawerOpen,
+        [classes[`appBarShift-left`]]: drawerOpen
+      })}
+    >
+      <Toolbar disableGutters={!drawerOpen}>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={props.toggleDrawer}
+          className={classNames(classes.menuButton, drawerOpen && classes.hide)}
+        >
+          <Icon>menu</Icon>
+        </IconButton>
+        <Typography variant="title" color="inherit" align="left">
+          {user.name}
+        </Typography>
+        <Typography color="inherit" align="right">
+          Last Update: Sunday, March 18, 2018 with 197 family members
+        </Typography>
+        <MainMoreMenu />
+      </Toolbar>
+    </AppBar>
+  );
+
   return (
     <MuiThemeProvider theme={theme}>
       <div className={classes.root}>
         <div className={classes.appFrame}>
-          <AppBar
-            className={classNames(classes.appBar, {
-              [classes.appBarShift]: drawerOpen,
-              [classes[`appBarShift-left`]]: drawerOpen
-            })}
-          >
-            <Toolbar disableGutters={!drawerOpen}>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={props.toggleDrawer}
-                className={classNames(
-                  classes.menuButton,
-                  drawerOpen && classes.hide
-                )}
-              >
-                <Icon>menu</Icon>
-              </IconButton>
-              <Typography variant="title" color="inherit" align="left">
-                {user.name}
-              </Typography>
-              <Typography color="inherit" align="right">
-                Last Update: Sunday, March 18, 2018 with 197 family members
-              </Typography>
-            </Toolbar>
-          </AppBar>
+          {appBar}
           {drawer}
           <main
             className={classNames(classes.content, classes['content-left'], {
@@ -192,7 +194,8 @@ const mapStateToProps = state => ({
   user: { name: 'Jason McPeak' },
   users: [
     { primary: 'Jason & Sheila McPeak', secondary: 'Gaithersburg, MD' },
-    { primary: 'Shannon & Tara McPeak', secondary: 'Fremont, WI' }
+    { primary: 'Shannon & Tara McPeak', secondary: 'Fremont, WI' },
+    { primary: 'Marta & Matt Behrens', secondary: 'Verona, WI' }
   ]
 });
 

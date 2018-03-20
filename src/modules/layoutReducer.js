@@ -1,10 +1,12 @@
 import {
   LAYOUT_DRAWER_CLOSED,
   LAYOUT_DRAWER_OPEN,
-  LAYOUT_USER_MENU_HIDDEN,
-  LAYOUT_USER_MENU_VISIBLE,
-  LAYOUT_USER_MENU_SET_ANCHOR_EL,
-  LAYOUT_USER_MENU_CLEAR_ANCHOR_EL,
+  LAYOUT_LIST_MENU_HIDDEN,
+  LAYOUT_LIST_MENU_VISIBLE,
+  LAYOUT_LIST_MENU_SET_ANCHOR_EL,
+  LAYOUT_LIST_MENU_CLEAR_ANCHOR_EL,
+  LAYOUT_MORE_MENU_CLEAR_ANCHOR_EL,
+  LAYOUT_MORE_MENU_SET_ANCHOR_EL,
   LAYOUT_HIDDEN,
   LAYOUT_VISIBLE
 } from './constants';
@@ -12,7 +14,8 @@ import {
 const initialState = {
   drawerOpen: true,
   userMenus: [],
-  menuAnchorEl: null
+  listMenuAnchorEl: null,
+  moreMenuAnchorEl: null
 };
 
 export default (state = initialState, action) => {
@@ -35,28 +38,40 @@ export default (state = initialState, action) => {
         drawerOpen: true
       };
 
-    case LAYOUT_USER_MENU_HIDDEN:
+    case LAYOUT_LIST_MENU_HIDDEN:
       return {
         ...state,
         userMenus: userMenus(LAYOUT_HIDDEN)
       };
 
-    case LAYOUT_USER_MENU_VISIBLE:
+    case LAYOUT_LIST_MENU_VISIBLE:
       return {
         ...state,
         userMenus: userMenus(LAYOUT_VISIBLE)
       };
 
-    case LAYOUT_USER_MENU_SET_ANCHOR_EL:
+    case LAYOUT_LIST_MENU_CLEAR_ANCHOR_EL:
       return {
         ...state,
-        menuAnchorEl: action.element
+        listMenuAnchorEl: null
       };
 
-    case LAYOUT_USER_MENU_CLEAR_ANCHOR_EL:
+    case LAYOUT_LIST_MENU_SET_ANCHOR_EL:
       return {
         ...state,
-        menuAnchorEl: null
+        listMenuAnchorEl: action.element
+      };
+
+    case LAYOUT_MORE_MENU_CLEAR_ANCHOR_EL:
+      return {
+        ...state,
+        moreMenuAnchorEl: null
+      };
+
+    case LAYOUT_MORE_MENU_SET_ANCHOR_EL:
+      return {
+        ...state,
+        moreMenuAnchorEl: action.element
       };
 
     default:
