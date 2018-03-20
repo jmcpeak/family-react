@@ -17,8 +17,8 @@ import {
   showUserMenu,
   clearListMenuAnchorEl,
   setListMenuAnchorEl
-} from '../../modules/layoutActions';
-import { LAYOUT_HIDDEN } from '../../modules/constants';
+} from '../modules/layoutActions';
+import { LAYOUT_HIDDEN } from '../modules/constants';
 const styles = () => ({});
 
 const ListItemWithMenu = props => {

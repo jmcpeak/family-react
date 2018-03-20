@@ -15,6 +15,8 @@ const AUTH_CLEAR = 'auth/CLEAR',
   LAYOUT_VISIBLE = 'visible',
   LAYOUT_ABOUT_CLOSE = 'layout/ABOUT_CLOSE',
   LAYOUT_ABOUT_OPEN = 'layout/ABOUT_OPEN',
+  LAYOUT_CHANGE_TAB = 'layout/CHANGE_TAB',
+  LAYOUT_ADD_USER_TOGGLE = 'layout/ADD_USER_OPEN',
   HASH_CODE = str => {
     let hash = 0,
       len = str.length,
@@ -48,5 +50,7 @@ export {
   LAYOUT_VISIBLE,
   LAYOUT_ABOUT_CLOSE,
   LAYOUT_ABOUT_OPEN,
+  LAYOUT_CHANGE_TAB,
+  LAYOUT_ADD_USER_TOGGLE,
   HASH_CODE
 };

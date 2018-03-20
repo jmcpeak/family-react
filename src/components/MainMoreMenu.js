@@ -8,8 +8,8 @@ import {
   aboutOpen,
   clearMoreMenuAnchorEl,
   setMoreMenuAnchorEl
-} from '../../modules/layoutActions';
-import { logout } from '../../modules/authActions';
+} from '../modules/layoutActions';
+import { logout } from '../modules/authActions';
 
 const MainMoreMenu = props => {
   const { moreMenuAnchorEl } = props,
@@ -38,13 +38,7 @@ const MainMoreMenu = props => {
           <ListItemIcon>
             <Icon>email</Icon>
           </ListItemIcon>
-          <ListItemText inset primary="E-mail All" />
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <Icon>delete</Icon>
-          </ListItemIcon>
-          <ListItemText inset primary="Delete" />
+          <ListItemText inset primary="Email" />
         </MenuItem>
         <MenuItem>
           <ListItemIcon>

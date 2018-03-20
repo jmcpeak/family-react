@@ -10,11 +10,15 @@ import {
   LAYOUT_HIDDEN,
   LAYOUT_VISIBLE,
   LAYOUT_ABOUT_CLOSE,
-  LAYOUT_ABOUT_OPEN
+  LAYOUT_ABOUT_OPEN,
+  LAYOUT_CHANGE_TAB,
+  LAYOUT_ADD_USER_TOGGLE
 } from './constants';
 
 const initialState = {
   aboutOpen: false,
+  activeTab: 0,
+  addUserOpen: false,
   drawerOpen: true,
   userMenus: [],
   listMenuAnchorEl: null,
@@ -23,8 +27,8 @@ const initialState = {
 
 export default (state = initialState, action) => {
   const userMenus = value => {
-    let menuArray = new Array(action.position);
-    menuArray.splice(action.position, 0, value);
+    let menuArray = new Array(action.value);
+    menuArray.splice(action.value, 0, value);
     return menuArray;
   };
 
@@ -62,7 +66,7 @@ export default (state = initialState, action) => {
     case LAYOUT_LIST_MENU_SET_ANCHOR_EL:
       return {
         ...state,
-        listMenuAnchorEl: action.element
+        listMenuAnchorEl: action.value
       };
 
     case LAYOUT_MORE_MENU_CLEAR_ANCHOR_EL:
@@ -74,7 +78,7 @@ export default (state = initialState, action) => {
     case LAYOUT_MORE_MENU_SET_ANCHOR_EL:
       return {
         ...state,
-        moreMenuAnchorEl: action.element
+        moreMenuAnchorEl: action.value
       };
 
     case LAYOUT_ABOUT_CLOSE:
@@ -87,6 +91,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         aboutOpen: true
+      };
+
+    case LAYOUT_CHANGE_TAB:
+      return {
+        ...state,
+        activeTab: action.value
+      };
+
+    case LAYOUT_ADD_USER_TOGGLE:
+      return {
+        ...state,
+        addUserOpen: !state.addUserOpen
       };
 
     default:

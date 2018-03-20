@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 
 import AppBar from 'material-ui/AppBar';
+import Card, { CardContent } from 'material-ui/Card';
 import Drawer from 'material-ui/Drawer';
 import Grid from 'material-ui/Grid';
+import Tabs, { Tab } from 'material-ui/Tabs';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
@@ -14,10 +16,16 @@ import { createMuiTheme, MuiThemeProvider } from 'material-ui/styles';
 import { withStyles } from 'material-ui/styles';
 import green from 'material-ui/colors/green';
 
-import { toggleDrawer } from '../../modules/layoutActions';
-import ListItemWithMenu from '../listItemWithMenu';
-import MainMoreMenu from '../mainMoreMenu';
-import About from '../about';
+import {
+  toggleAddUser,
+  toggleDrawer,
+  changeTab
+} from '../../modules/layoutActions';
+import ListItemWithMenu from '../../components/ListItemWithMenu';
+import MainMoreMenu from '../../components/MainMoreMenu';
+import About from '../../components/About';
+import AddUser from '../../components/AddUser';
+import AppSearch from '../../components/AppSearch';
 
 import './index.css';
 export const HOME_PATH = '/';
@@ -100,7 +108,7 @@ const drawerWidth = 320,
   });
 
 const Home = props => {
-  const { classes, drawerOpen, user } = props;
+  const { activeTab, classes, drawerOpen, user } = props;
 
   const users = (
     <List>
@@ -124,10 +132,13 @@ const Home = props => {
       }}
     >
       <Toolbar className={classes.drawerHeader} disableGutters={!drawerOpen}>
-        <Grid container justify="center" alignItems="center">
+        <Grid container justify="center" alignItems="flex-start">
           <Grid item lg>
             <Typography variant="title" color="textSecondary">
               McPeak Family
+            </Typography>
+            <Typography variant="caption" color="textSecondary">
+              Updated 03/21/18 - 197 users
             </Typography>
           </Grid>
         </Grid>
@@ -156,26 +167,24 @@ const Home = props => {
           <Icon>menu</Icon>
         </IconButton>
         <Grid container justify="space-between" alignItems="center">
-          <Grid item lg>
+          <Grid item lg={7}>
             <Typography variant="title" color="inherit">
               {user.name}
             </Typography>
           </Grid>
-          <Grid item lg style={{ textAlign: 'center' }}>
-            <Typography color="inherit">
-              Updated {'Sunday, March 18, 2018'}
-            </Typography>
-            <Typography color="inherit">{'197'} family members</Typography>
+          <Grid item lg={3}>
+            <AppSearch />
           </Grid>
           <Grid item lg>
+            <MainMoreMenu />
             <IconButton
               color="inherit"
               aria-label="Add User"
-              onClick={props.addUser}
+              onClick={props.toggleAddUser}
+              style={{ float: 'right' }}
             >
               <Icon>person_add</Icon>
             </IconButton>
-            <MainMoreMenu />
           </Grid>
         </Grid>
       </Toolbar>
@@ -196,6 +205,18 @@ const Home = props => {
           >
             <div className={classes.drawerHeader} />
             <About />
+            <AddUser open={props.addUserOpen} />
+            <Card>
+              <CardContent>
+                <Tabs value={activeTab} onChange={props.changeTab}>
+                  <Tab label="Family Member" />
+                  <Tab label="Address" />
+                  <Tab label="Spouse" />
+                  <Tab label="Dates | Places" />
+                  <Tab label="Children | Pets" />
+                </Tabs>
+              </CardContent>
+            </Card>
           </main>
         </div>
       </div>
@@ -204,6 +225,8 @@ const Home = props => {
 };
 
 const mapStateToProps = state => ({
+  activeTab: state.layout.activeTab,
+  addUserOpen: state.layout.addUserOpen,
   drawerOpen: state.layout.drawerOpen,
   userMenuVisibility: state.layout.userMenuVisibility,
   user: { name: 'Jason & Sheila McPeak' },
@@ -215,7 +238,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  toggleDrawer: () => dispatch(toggleDrawer())
+  toggleAddUser: () => dispatch(toggleAddUser()),
+  toggleDrawer: () => dispatch(toggleDrawer()),
+  changeTab: (event, tab) => dispatch(changeTab(tab))
 });
 
 export default withStyles(styles)(
