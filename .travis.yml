@@ -7,5 +7,4 @@ branch:
   only:
     - master
 
-cache:
-  yarn: true
+cache: yarn
