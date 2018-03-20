@@ -5,6 +5,7 @@ import classNames from 'classnames';
 
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
+import Grid from 'material-ui/Grid';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
@@ -153,13 +154,22 @@ const Home = props => {
         >
           <Icon>menu</Icon>
         </IconButton>
-        <Typography variant="title" color="inherit" align="left">
-          {user.name}
-        </Typography>
-        <Typography color="inherit" align="right">
-          Last Update: Sunday, March 18, 2018 with 197 family members
-        </Typography>
-        <MainMoreMenu />
+        <Grid container justify="space-between" alignItems="center">
+          <Grid item lg>
+            <Typography variant="title" color="inherit">
+              {user.name}
+            </Typography>
+          </Grid>
+          <Grid item lg style={{ textAlign: 'center' }}>
+            <Typography color="inherit">
+              Last Update: Sunday, March 18, 2018
+            </Typography>
+            <Typography color="inherit">with 197 family members</Typography>
+          </Grid>
+          <Grid item lg>
+            <MainMoreMenu />
+          </Grid>
+        </Grid>
       </Toolbar>
     </AppBar>
   );

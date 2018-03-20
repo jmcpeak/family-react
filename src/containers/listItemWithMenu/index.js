@@ -36,8 +36,6 @@ const ListItemWithMenu = props => {
       </Avatar>
       <ListItemText primary={primary} secondary={secondary} />
       <ListItemSecondaryAction
-        onMouseOver={mouseOver}
-        onMouseOut={mouseOut}
         style={{
           visibility: props.userMenus[position]
             ? props.userMenus[position]
@@ -45,6 +43,8 @@ const ListItemWithMenu = props => {
         }}
       >
         <IconButton
+          onMouseOver={mouseOver}
+          onMouseOut={mouseOut}
           aria-label="Menu"
           aria-owns={listMenuAnchorEl ? MENU_ID : null}
           aria-haspopup="true"

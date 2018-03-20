@@ -16,7 +16,7 @@ const MainMoreMenu = props => {
     moreMenuOpen = event => props.setMoreMenuAnchorEl(event.currentTarget);
 
   return (
-    <span>
+    <span style={{ float: 'right' }}>
       <IconButton
         aria-label="More Menu"
         aria-owns={moreMenuAnchorEl ? MORE_MENU_ID : null}
