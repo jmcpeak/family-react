@@ -27,8 +27,8 @@ const initialState = {
 
 export default (state = initialState, action) => {
   const userMenus = value => {
-    let menuArray = new Array(action.value);
-    menuArray.splice(action.value, 0, value);
+    let menuArray = new Array(action.payload);
+    menuArray.splice(action.payload, 0, value);
     return menuArray;
   };
 
@@ -66,7 +66,7 @@ export default (state = initialState, action) => {
     case LAYOUT_LIST_MENU_SET_ANCHOR_EL:
       return {
         ...state,
-        listMenuAnchorEl: action.value
+        listMenuAnchorEl: action.payload
       };
 
     case LAYOUT_MORE_MENU_CLEAR_ANCHOR_EL:
@@ -78,7 +78,7 @@ export default (state = initialState, action) => {
     case LAYOUT_MORE_MENU_SET_ANCHOR_EL:
       return {
         ...state,
-        moreMenuAnchorEl: action.value
+        moreMenuAnchorEl: action.payload
       };
 
     case LAYOUT_ABOUT_CLOSE:
@@ -96,7 +96,7 @@ export default (state = initialState, action) => {
     case LAYOUT_CHANGE_TAB:
       return {
         ...state,
-        activeTab: action.value
+        activeTab: action.payload
       };
 
     case LAYOUT_ADD_USER_TOGGLE:

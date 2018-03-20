@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - "node"
+
+branch:
+  only:
+    - master
+
+cache:
+  yarn: true
+  directories:
+    - "node_modules"
+
+#before_script:
+#  - npm ci
+#
+#script:
+#  - npm test
+#  - npm deploy

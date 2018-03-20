@@ -31,7 +31,8 @@ AWS.config.update({
 store.subscribe(
   throttle(() => {
     saveState({
-      authorization: store.getState().authorization
+      authorization: store.getState().authorization,
+      theme: store.getState().theme
     });
   }, 1000)
 );

@@ -17,6 +17,9 @@ const AUTH_CLEAR = 'auth/CLEAR',
   LAYOUT_ABOUT_OPEN = 'layout/ABOUT_OPEN',
   LAYOUT_CHANGE_TAB = 'layout/CHANGE_TAB',
   LAYOUT_ADD_USER_TOGGLE = 'layout/ADD_USER_OPEN',
+  THEME_CHANGE_PALETTE_TYPE = 'theme/THEME_CHANGE_PALETTE_TYPE',
+  THEME_DARK = 'dark',
+  THEME_LIGHT = 'light',
   HASH_CODE = str => {
     let hash = 0,
       len = str.length,
@@ -52,5 +55,8 @@ export {
   LAYOUT_ABOUT_OPEN,
   LAYOUT_CHANGE_TAB,
   LAYOUT_ADD_USER_TOGGLE,
+  THEME_CHANGE_PALETTE_TYPE,
+  THEME_DARK,
+  THEME_LIGHT,
   HASH_CODE
 };

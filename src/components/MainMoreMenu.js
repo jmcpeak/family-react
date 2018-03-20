@@ -4,6 +4,7 @@ import Menu, { MenuItem } from 'material-ui/Menu';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
 import { ListItemIcon, ListItemText } from 'material-ui/List';
+import Tooltip from 'material-ui/Tooltip';
 import {
   aboutOpen,
   clearMoreMenuAnchorEl,
@@ -18,16 +19,18 @@ const MainMoreMenu = props => {
     menuOpen = event => props.setMoreMenuAnchorEl(event.currentTarget);
 
   return (
-    <span style={{ float: 'right' }}>
-      <IconButton
-        color="inherit"
-        aria-label="More Menu"
-        aria-owns={moreMenuAnchorEl ? MORE_MENU_ID : null}
-        aria-haspopup="true"
-        onClick={menuOpen}
-      >
-        <Icon>more_vert</Icon>
-      </IconButton>
+    <section>
+      <Tooltip id="appbar-menu" title="More actions available" enterDelay={300}>
+        <IconButton
+          color="inherit"
+          aria-label="More Menu"
+          aria-owns={moreMenuAnchorEl ? MORE_MENU_ID : null}
+          aria-haspopup="true"
+          onClick={menuOpen}
+        >
+          <Icon>more_vert</Icon>
+        </IconButton>
+      </Tooltip>
       <Menu
         id={MORE_MENU_ID}
         anchorEl={moreMenuAnchorEl}
@@ -59,7 +62,7 @@ const MainMoreMenu = props => {
           <ListItemText inset primary="Logout" />
         </MenuItem>
       </Menu>
-    </span>
+    </section>
   );
 };
 

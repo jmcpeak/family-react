@@ -8,19 +8,23 @@ import Drawer from 'material-ui/Drawer';
 import Grid from 'material-ui/Grid';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Toolbar from 'material-ui/Toolbar';
+import Tooltip from 'material-ui/Tooltip';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
 import List from 'material-ui/List';
 import { createMuiTheme, MuiThemeProvider } from 'material-ui/styles';
 import { withStyles } from 'material-ui/styles';
-import green from 'material-ui/colors/green';
+import green from 'material-ui/colors/blue';
 
+import { THEME_LIGHT } from '../../modules/constants';
+import { togglePaletteType } from '../../modules/themeActions';
 import {
+  changeTab,
   toggleAddUser,
-  toggleDrawer,
-  changeTab
+  toggleDrawer
 } from '../../modules/layoutActions';
+
 import ListItemWithMenu from '../../components/ListItemWithMenu';
 import MainMoreMenu from '../../components/MainMoreMenu';
 import About from '../../components/About';
@@ -34,12 +38,16 @@ const drawerWidth = 320,
   theme = createMuiTheme({
     palette: {
       primary: { main: green[500] }, // Purple and green play nicely together.
-      secondary: { main: '#11cb5f' } // This is just green.A700 as hex.
+      secondary: { main: '#11cb5f' }, // This is just green.A700 as hex.
+      type: 'light'
     }
   }),
   styles = theme => ({
     root: {
       flexGrow: 1
+    },
+    flex: {
+      flex: 1
     },
     appFrame: {
       height: '100%',
@@ -108,7 +116,7 @@ const drawerWidth = 320,
   });
 
 const Home = props => {
-  const { activeTab, classes, drawerOpen, user } = props;
+  const { activeTab, classes, drawerOpen, user, uiTheme } = props;
 
   const users = (
     <List>
@@ -166,27 +174,42 @@ const Home = props => {
         >
           <Icon>menu</Icon>
         </IconButton>
-        <Grid container justify="space-between" alignItems="center">
-          <Grid item lg={7}>
-            <Typography variant="title" color="inherit">
-              {user.name}
-            </Typography>
-          </Grid>
-          <Grid item lg={3}>
-            <AppSearch />
-          </Grid>
-          <Grid item lg>
-            <MainMoreMenu />
-            <IconButton
-              color="inherit"
-              aria-label="Add User"
-              onClick={props.toggleAddUser}
-              style={{ float: 'right' }}
-            >
-              <Icon>person_add</Icon>
-            </IconButton>
-          </Grid>
-        </Grid>
+        <Typography variant="title" color="inherit" className={classes.flex}>
+          {user.name}
+        </Typography>
+        <AppSearch />
+        <Tooltip
+          id="appbar-theme"
+          title="Toggle light/dark theme"
+          enterDelay={300}
+        >
+          <IconButton
+            aria-label="Toggle light/dark theme"
+            color="inherit"
+            onClick={props.togglePaletteType}
+            aria-labelledby="appbar-theme"
+          >
+            {uiTheme.paletteType === THEME_LIGHT ? (
+              <Icon>lightbulb_outline</Icon>
+            ) : (
+              <Icon>highlight</Icon>
+            )}
+          </IconButton>
+        </Tooltip>
+        <Tooltip
+          id="appbar-user"
+          title="Add a new family member"
+          enterDelay={300}
+        >
+          <IconButton
+            color="inherit"
+            aria-label="Add User"
+            onClick={props.toggleAddUser}
+          >
+            <Icon>person_add</Icon>
+          </IconButton>
+        </Tooltip>
+        <MainMoreMenu />
       </Toolbar>
     </AppBar>
   );
@@ -225,6 +248,7 @@ const Home = props => {
 };
 
 const mapStateToProps = state => ({
+  uiTheme: state.theme,
   activeTab: state.layout.activeTab,
   addUserOpen: state.layout.addUserOpen,
   drawerOpen: state.layout.drawerOpen,
@@ -240,7 +264,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   toggleAddUser: () => dispatch(toggleAddUser()),
   toggleDrawer: () => dispatch(toggleDrawer()),
-  changeTab: (event, tab) => dispatch(changeTab(tab))
+  changeTab: (event, tab) => dispatch(changeTab(tab)),
+  togglePaletteType: () => dispatch(togglePaletteType())
 });
 
 export default withStyles(styles)(

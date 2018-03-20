@@ -4,7 +4,6 @@ import Button from 'material-ui/Button';
 import Dialog, {
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle
 } from 'material-ui/Dialog';
 import { aboutClose } from '../modules/layoutActions';
@@ -19,48 +18,46 @@ const About = props => {
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle id="alert-dialog-title">McPeak Family Website</DialogTitle>
-      <DialogContent>
-        <DialogContentText id="alert-dialog-description">
-          <img src={clover} alt="shamrock" />
+      <DialogContent id="alert-dialog-description">
+        <img src={clover} alt="shamrock" height={240} width={240} />
 
-          <div>version 3.0 (React)</div>
-          <div>
-            <a
-              href="mailto:jason.mcpeak@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              jason.mcpeak@gmail.com
-            </a>
-          </div>
-          <div>
-            <a
-              href="https://github.com/jmcpeak/family/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Report Issue
-            </a>
-          </div>
-          <div>
-            <a
-              href="https://github.com/jmcpeak/family/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GitHub
-            </a>
-          </div>
-          <div>
-            <a
-              href="https://travis-ci.org/jmcpeak/family"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Travis CI
-            </a>
-          </div>
-        </DialogContentText>
+        <div>version 3.0 (React)</div>
+        <div>
+          <a
+            href="mailto:jason.mcpeak@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            jason.mcpeak@gmail.com
+          </a>
+        </div>
+        <div>
+          <a
+            href="https://github.com/jmcpeak/family-react/issues"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Report an Issue
+          </a>
+        </div>
+        <div>
+          <a
+            href="https://github.com/jmcpeak/family-react/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Source code available on GitHub
+          </a>
+        </div>
+        <div>
+          <a
+            href="https://travis-ci.org/jmcpeak/family-react"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Travis CI - Test and Deploy with Confidence
+          </a>
+        </div>
       </DialogContent>
       <DialogActions>
         <Button onClick={props.close} color="primary" autoFocus>
