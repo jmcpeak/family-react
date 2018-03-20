@@ -21,7 +21,7 @@ const About = props => {
       <DialogContent id="alert-dialog-description">
         <img src={clover} alt="shamrock" height={240} width={240} />
 
-        <div>version 3.0 (React)</div>
+        <div>version 3.1 (React)</div>
         <div>
           <a
             href="mailto:jason.mcpeak@gmail.com"

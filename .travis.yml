@@ -8,12 +8,10 @@ branch:
 
 cache:
   yarn: true
-  directories:
-    - "node_modules"
 
 #before_script:
 #  - npm ci
-#
-#script:
-#  - npm test
-#  - npm deploy
+
+script:
+  - yarn run test
+  - yarn run deploy
