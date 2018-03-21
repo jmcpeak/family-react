@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-
 import AppBar from 'material-ui/AppBar';
 import Card, { CardContent } from 'material-ui/Card';
 import Drawer from 'material-ui/Drawer';
@@ -15,8 +14,6 @@ import Icon from 'material-ui/Icon';
 import List from 'material-ui/List';
 import { createMuiTheme, MuiThemeProvider } from 'material-ui/styles';
 import { withStyles } from 'material-ui/styles';
-import green from 'material-ui/colors/blue';
-
 import { THEME_LIGHT } from '../../modules/constants';
 import { togglePaletteType } from '../../modules/themeActions';
 import {
@@ -24,24 +21,16 @@ import {
   toggleAddUser,
   toggleDrawer
 } from '../../modules/layoutActions';
-
 import ListItemWithMenu from '../../components/ListItemWithMenu';
 import MainMoreMenu from '../../components/MainMoreMenu';
 import About from '../../components/About';
 import AddUser from '../../components/AddUser';
 import AppSearch from '../../components/AppSearch';
-
+import Theme from '../../components/Theme';
 import './index.css';
 export const HOME_PATH = '/';
 
 const drawerWidth = 320,
-  theme = createMuiTheme({
-    palette: {
-      primary: { main: green[500] }, // Purple and green play nicely together.
-      secondary: { main: '#11cb5f' }, // This is just green.A700 as hex.
-      type: 'light'
-    }
-  }),
   styles = theme => ({
     root: {
       flexGrow: 1
@@ -113,10 +102,23 @@ const drawerWidth = 320,
     'contentShift-left': {
       marginLeft: 0
     }
-  });
+  }),
+  getTheme = theme =>
+    createMuiTheme({
+      palette: {
+        primary: theme.primary,
+        secondary: theme.secondary,
+        type: theme.type
+      }
+    });
 
 const Home = props => {
-  const { activeTab, classes, drawerOpen, user, uiTheme } = props;
+  const { activeTab, classes, drawerOpen, user } = props,
+    theme = getTheme({
+      primary: props.theme.primary,
+      secondary: props.theme.secondary,
+      type: props.theme.type
+    });
 
   const users = (
     <List>
@@ -189,7 +191,7 @@ const Home = props => {
             onClick={props.togglePaletteType}
             aria-labelledby="appbar-theme"
           >
-            {uiTheme.paletteType === THEME_LIGHT ? (
+            {props.theme.type === THEME_LIGHT ? (
               <Icon>lightbulb_outline</Icon>
             ) : (
               <Icon>highlight</Icon>
@@ -228,10 +230,16 @@ const Home = props => {
           >
             <div className={classes.drawerHeader} />
             <About />
+            <Theme />
             <AddUser open={props.addUserOpen} />
+
             <Card>
               <CardContent>
-                <Tabs value={activeTab} onChange={props.changeTab}>
+                <Tabs
+                  value={activeTab}
+                  textColor="primary"
+                  onChange={props.changeTab}
+                >
                   <Tab label="Family Member" />
                   <Tab label="Address" />
                   <Tab label="Spouse" />
@@ -248,10 +256,10 @@ const Home = props => {
 };
 
 const mapStateToProps = state => ({
-  uiTheme: state.theme,
   activeTab: state.layout.activeTab,
   addUserOpen: state.layout.addUserOpen,
   drawerOpen: state.layout.drawerOpen,
+  theme: state.theme,
   userMenuVisibility: state.layout.userMenuVisibility,
   user: { name: 'Jason & Sheila McPeak' },
   users: [

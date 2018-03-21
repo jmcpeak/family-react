@@ -21,8 +21,8 @@ const AddUser = props => {
 
   return (
     <Drawer anchor={'right'} open={props.open}>
-      <AppBar position={'static'} color={'default'}>
-        <Toolbar color="secondary">
+      <AppBar position={'static'} color={'secondary'}>
+        <Toolbar>
           <Typography variant="title" color="inherit" className={classes.flex}>
             {'Add Family '}
           </Typography>

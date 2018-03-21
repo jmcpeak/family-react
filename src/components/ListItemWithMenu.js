@@ -60,7 +60,7 @@ const ListItemWithMenu = props => {
         >
           <MenuItem onClose={menuClose}>
             <ListItemIcon>
-              <Icon>pageview</Icon>
+              <Icon>launch</Icon>
             </ListItemIcon>
             <ListItemText inset primary="View" />
           </MenuItem>
