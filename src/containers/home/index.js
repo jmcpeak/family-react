@@ -11,7 +11,6 @@ import Tooltip from 'material-ui/Tooltip';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
-import List from 'material-ui/List';
 import { createMuiTheme, MuiThemeProvider } from 'material-ui/styles';
 import { withStyles } from 'material-ui/styles';
 import {
@@ -19,12 +18,12 @@ import {
   toggleAddUser,
   toggleDrawer
 } from '../../modules/layoutActions';
-import ListItemWithMenu from '../../components/ListItemWithMenu';
 import MainMoreMenu from '../../components/MainMoreMenu';
 import About from '../../components/About';
 import AddUser from '../../components/AddUser';
 import AppSearch from '../../components/AppSearch';
 import Theme from '../../components/Theme';
+import UserList from '../../components/UserList';
 import './index.css';
 export const HOME_PATH = '/';
 
@@ -116,85 +115,73 @@ const Home = props => {
       primary: props.theme.primary,
       secondary: props.theme.secondary,
       type: props.theme.type
-    });
-
-  const users = (
-    <List>
-      {props.users.map((v, i) => (
-        <ListItemWithMenu
-          key={i}
-          position={i}
-          primary={v.primary}
-          secondary={v.secondary}
-        />
-      ))}
-    </List>
-  );
-
-  const drawer = (
-    <Drawer
-      variant="persistent"
-      open={drawerOpen}
-      classes={{
-        paper: classes.drawerPaper
-      }}
-    >
-      <Toolbar className={classes.drawerHeader} disableGutters={!drawerOpen}>
-        <Grid container justify="center" alignItems="flex-start">
-          <Grid item lg>
-            <Typography variant="title" color="textSecondary">
-              McPeak Family
-            </Typography>
-            <Typography variant="caption" color="textSecondary">
-              Updated 03/21/18 - 197 users
-            </Typography>
-          </Grid>
-        </Grid>
-        <IconButton onClick={props.toggleDrawer}>
-          <Icon>chevron_left</Icon>
-        </IconButton>
-      </Toolbar>
-      {users}
-    </Drawer>
-  );
-
-  const appBar = (
-    <AppBar
-      className={classNames(classes.appBar, {
-        [classes.appBarShift]: drawerOpen,
-        [classes[`appBarShift-left`]]: drawerOpen
-      })}
-    >
-      <Toolbar disableGutters={!drawerOpen}>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={props.toggleDrawer}
-          className={classNames(classes.menuButton, drawerOpen && classes.hide)}
-        >
-          <Icon>menu</Icon>
-        </IconButton>
-        <Typography variant="title" color="inherit" className={classes.flex}>
-          {user.name}
-        </Typography>
-        <AppSearch />
-        <Tooltip
-          id="appbar-user"
-          title="Add a new family member"
-          enterDelay={300}
-        >
+    }),
+    appBar = (
+      <AppBar
+        className={classNames(classes.appBar, {
+          [classes.appBarShift]: drawerOpen,
+          [classes[`appBarShift-left`]]: drawerOpen
+        })}
+      >
+        <Toolbar disableGutters={!drawerOpen}>
           <IconButton
             color="inherit"
-            aria-label="Add User"
-            onClick={props.toggleAddUser}
+            aria-label="open drawer"
+            onClick={props.toggleDrawer}
+            className={classNames(
+              classes.menuButton,
+              drawerOpen && classes.hide
+            )}
           >
-            <Icon>person_add</Icon>
+            <Icon>menu</Icon>
           </IconButton>
-        </Tooltip>
-        <MainMoreMenu />
-      </Toolbar>
-    </AppBar>
-  );
+          <Typography variant="title" color="inherit" className={classes.flex}>
+            {user.name}
+          </Typography>
+          <AppSearch />
+          <Tooltip
+            id="appbar-user"
+            title="Add a new family member"
+            enterDelay={300}
+          >
+            <IconButton
+              color="inherit"
+              aria-label="Add User"
+              onClick={props.toggleAddUser}
+            >
+              <Icon>person_add</Icon>
+            </IconButton>
+          </Tooltip>
+          <MainMoreMenu />
+        </Toolbar>
+      </AppBar>
+    ),
+    drawer = (
+      <Drawer
+        variant="persistent"
+        open={drawerOpen}
+        classes={{
+          paper: classes.drawerPaper
+        }}
+      >
+        <Toolbar className={classes.drawerHeader} disableGutters={!drawerOpen}>
+          <Grid container justify="center" alignItems="flex-start">
+            <Grid item lg>
+              <Typography variant="title" color="textSecondary">
+                McPeak Family
+              </Typography>
+              <Typography variant="caption" color="textSecondary">
+                Updated 03/21/18 - 197 users
+              </Typography>
+            </Grid>
+          </Grid>
+          <IconButton onClick={props.toggleDrawer}>
+            <Icon>chevron_left</Icon>
+          </IconButton>
+        </Toolbar>
+        <UserList />
+      </Drawer>
+    );
 
   return (
     <MuiThemeProvider theme={theme}>
@@ -240,12 +227,7 @@ const mapStateToProps = state => ({
   drawerOpen: state.layout.drawerOpen,
   theme: state.theme,
   userMenuVisibility: state.layout.userMenuVisibility,
-  user: { name: 'Jason & Sheila McPeak' },
-  users: [
-    { primary: 'Jason & Sheila McPeak', secondary: 'Gaithersburg, MD' },
-    { primary: 'Shannon & Tara McPeak', secondary: 'Fremont, WI' },
-    { primary: 'Marta & Matt Behrens', secondary: 'Verona, WI' }
-  ]
+  user: { name: 'Jason & Sheila McPeak' }
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -30,7 +30,7 @@ const mapStateToProps = state => ({
     setListMenuAnchorEl: element => dispatch(setListMenuAnchorEl(element))
   });
 
-const ListItemWithMenu = props => {
+const UserListItemWithMenu = props => {
   const { listMenuAnchorEl, position, primary, secondary } = props,
     MENU_ID = 'listMenu',
     mouseOut = () => props.hideUserMenu(position),
@@ -85,10 +85,12 @@ const ListItemWithMenu = props => {
   );
 };
 
-ListItemWithMenu.propTypes = {
+UserListItemWithMenu.propTypes = {
   position: PropTypes.number.isRequired,
   primary: PropTypes.string.isRequired,
   secondary: PropTypes.string.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListItemWithMenu);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  UserListItemWithMenu
+);
