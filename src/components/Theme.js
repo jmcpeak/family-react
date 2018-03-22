@@ -22,6 +22,13 @@ import {
 } from '../modules/themeActions';
 
 const mainThemeColorKey = '500',
+  swatchRows = [
+    { start: 0, end: 4 },
+    { start: 4, end: 8 },
+    { start: 8, end: 12 },
+    { start: 12, end: 16 },
+    { start: 16, end: 19 }
+  ],
   themeColors = [
     'red',
     'pink',
@@ -81,6 +88,7 @@ class Theme extends PureComponent {
       togglePaletteSelected,
       type
     } = this.props;
+    let rows = [];
 
     const ThemeButton = props => {
         const { index, theme } = props;
@@ -106,18 +114,15 @@ class Theme extends PureComponent {
         <ThemeButton key={index} theme={theme} index={index} />
       );
 
-    const row1 = themes
-        .filter((theme, index) => index >= 0 && index < 5)
-        .map(getThemeButton),
-      row2 = themes
-        .filter((theme, index) => index >= 5 && index < 10)
-        .map((theme, index) => getThemeButton(theme, index + 5)),
-      row3 = themes
-        .filter((theme, index) => index >= 10 && index < 15)
-        .map((theme, index) => getThemeButton(theme, index + 10)),
-      row4 = themes
-        .filter((theme, index) => index >= 15 && index < 19)
-        .map((theme, index) => getThemeButton(theme, index + 15));
+    swatchRows.forEach(row => {
+      rows.push(
+        themes
+          .filter((theme, index) => index >= row.start && index < row.end)
+          .map((theme, index) =>
+            getThemeButton(theme, index + +(row.start !== 0 ? row.start : 0))
+          )
+      );
+    });
 
     return (
       <Drawer anchor={'right'} open={open}>
@@ -168,7 +173,7 @@ class Theme extends PureComponent {
             </Grid>
 
             <Grid item lg>
-              {[row1, row2, row3, row4].map((row, index) => (
+              {rows.map((row, index) => (
                 <Grid key={index} container alignItems={'center'} spacing={8}>
                   <Grid item lg>
                     {row}
