@@ -65,13 +65,13 @@ class Theme extends PureComponent {
   };
 
   async componentDidMount() {
-    if (this.props.availableThemes.length !== themeColors.length)
+    if (this.props.themes.length !== themeColors.length)
       themeColors.map(async theme => await this.addTheme(theme));
   }
 
   render() {
     const {
-      availableThemes,
+      themes,
       open,
       openCloseThemeDrawer,
       paletteSelected,
@@ -94,8 +94,8 @@ class Theme extends PureComponent {
             style={{ backgroundColor: theme[mainThemeColorKey] }}
             onClick={() =>
               paletteSelected
-                ? setPrimaryTheme(availableThemes[index])
-                : setSecondaryTheme(availableThemes[index])
+                ? setPrimaryTheme(themes[index])
+                : setSecondaryTheme(themes[index])
             }
           >
             &nbsp;
@@ -106,16 +106,16 @@ class Theme extends PureComponent {
         <ThemeButton key={index} theme={theme} index={index} />
       );
 
-    const row1 = availableThemes
+    const row1 = themes
         .filter((theme, index) => index >= 0 && index < 5)
         .map(getThemeButton),
-      row2 = availableThemes
+      row2 = themes
         .filter((theme, index) => index >= 5 && index < 10)
         .map((theme, index) => getThemeButton(theme, index + 5)),
-      row3 = availableThemes
+      row3 = themes
         .filter((theme, index) => index >= 10 && index < 15)
         .map((theme, index) => getThemeButton(theme, index + 10)),
-      row4 = availableThemes
+      row4 = themes
         .filter((theme, index) => index >= 15 && index < 19)
         .map((theme, index) => getThemeButton(theme, index + 15));
 
@@ -135,39 +135,38 @@ class Theme extends PureComponent {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <div>
+        <div style={{ padding: '36px' }}>
           <Grid
             container
-            justify={'space-between'}
+            direction={'column'}
+            justify={'center'}
             alignItems={'center'}
             spacing={24}
           >
             <Grid item lg>
-              <div>
-                <FormControl>
-                  <FormLabel>Which color palette?</FormLabel>
-                  <RadioGroup
-                    onChange={togglePaletteSelected}
-                    style={{ display: 'inline' }}
-                    value={paletteSelected.toString()}
-                  >
-                    <FormControlLabel
-                      value={'true'}
-                      control={<Radio />}
-                      label="Primary"
-                    />
-                    <FormControlLabel
-                      value={'false'}
-                      control={<Radio />}
-                      label="Accent"
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </div>
+              <FormControl>
+                <FormLabel style={{ textAlign: 'center' }}>
+                  Color Palette
+                </FormLabel>
+                <RadioGroup
+                  onChange={togglePaletteSelected}
+                  style={{ display: 'inline' }}
+                  value={paletteSelected.toString()}
+                >
+                  <FormControlLabel
+                    value={'true'}
+                    control={<Radio />}
+                    label="Primary"
+                  />
+                  <FormControlLabel
+                    value={'false'}
+                    control={<Radio />}
+                    label="Accent"
+                  />
+                </RadioGroup>
+              </FormControl>
             </Grid>
-          </Grid>
 
-          <Grid container justify={'center'} alignItems={'center'} spacing={24}>
             <Grid item lg>
               {[row1, row2, row3, row4].map((row, index) => (
                 <Grid key={index} container alignItems={'center'} spacing={8}>
@@ -177,14 +176,7 @@ class Theme extends PureComponent {
                 </Grid>
               ))}
             </Grid>
-          </Grid>
 
-          <Grid
-            container
-            justify={'space-between'}
-            alignItems={'center'}
-            spacing={24}
-          >
             <Grid item lg>
               <div>
                 <FormControl>
@@ -210,7 +202,7 @@ class Theme extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  availableThemes: state.theme.available,
+  themes: state.theme.available,
   open: state.layout.themeDrawerOpen,
   paletteSelected: state.theme.paletteSelected,
   type: state.theme.type
