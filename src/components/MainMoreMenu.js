@@ -5,7 +5,7 @@ import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
 import { ListItemIcon, ListItemText } from 'material-ui/List';
 import Tooltip from 'material-ui/Tooltip';
-import { toggleTheme } from '../modules/themeActions';
+import { openCloseDrawer } from '../modules/themeActions';
 import {
   aboutOpen,
   clearMoreMenuAnchorEl,
@@ -50,11 +50,11 @@ const MainMoreMenu = props => {
           </ListItemIcon>
           <ListItemText inset primary="Export" />
         </MenuItem>
-        <MenuItem onClick={props.toggleTheme}>
+        <MenuItem onClick={props.openCloseDrawer}>
           <ListItemIcon>
             <Icon>color_lens</Icon>
           </ListItemIcon>
-          <ListItemText inset primary="Theme Color" />
+          <ListItemText inset primary="Theme Colors" />
         </MenuItem>
         <MenuItem onClick={props.aboutOpen}>
           <ListItemIcon>
@@ -82,9 +82,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(clearMoreMenuAnchorEl());
     dispatch(aboutOpen());
   },
-  toggleTheme: () => {
+  openCloseDrawer: () => {
     dispatch(clearMoreMenuAnchorEl());
-    dispatch(toggleTheme());
+    dispatch(openCloseDrawer());
   },
   logout: () => {
     dispatch(clearMoreMenuAnchorEl());

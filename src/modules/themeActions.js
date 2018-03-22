@@ -1,17 +1,26 @@
 import {
-  THEME_CHANGE_PALETTE_TYPE,
-  THEME_TOGGLE,
+  THEME_ADD_AVAILABLE,
+  THEME_DARK_MODE,
+  THEME_OPEN_CLOSE_DRAWER,
+  THEME_PALETTE_SELECTED,
   THEME_SET_PRIMARY,
   THEME_SET_SECONDARY
 } from './constants';
 
-export const togglePaletteType = () => dispatch =>
-  dispatch({ type: THEME_CHANGE_PALETTE_TYPE });
+export const addAvailable = theme => dispatch =>
+  dispatch({ type: THEME_ADD_AVAILABLE, payload: theme });
 
-export const toggleTheme = () => dispatch => dispatch({ type: THEME_TOGGLE });
+export const openCloseDrawer = () => dispatch =>
+  dispatch({ type: THEME_OPEN_CLOSE_DRAWER });
 
 export const setPrimaryTheme = color => dispatch =>
   dispatch({ type: THEME_SET_PRIMARY, payload: color });
 
 export const setSecondaryTheme = color => dispatch =>
   dispatch({ type: THEME_SET_SECONDARY, payload: color });
+
+export const toggleDarkMode = () => dispatch =>
+  dispatch({ type: THEME_DARK_MODE });
+
+export const togglePaletteSelected = () => dispatch =>
+  dispatch({ type: THEME_PALETTE_SELECTED });

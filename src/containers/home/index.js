@@ -14,8 +14,6 @@ import Icon from 'material-ui/Icon';
 import List from 'material-ui/List';
 import { createMuiTheme, MuiThemeProvider } from 'material-ui/styles';
 import { withStyles } from 'material-ui/styles';
-import { THEME_LIGHT } from '../../modules/constants';
-import { togglePaletteType } from '../../modules/themeActions';
 import {
   changeTab,
   toggleAddUser,
@@ -181,24 +179,6 @@ const Home = props => {
         </Typography>
         <AppSearch />
         <Tooltip
-          id="appbar-theme"
-          title="Toggle light/dark theme"
-          enterDelay={300}
-        >
-          <IconButton
-            aria-label="Toggle light/dark theme"
-            color="inherit"
-            onClick={props.togglePaletteType}
-            aria-labelledby="appbar-theme"
-          >
-            {props.theme.type === THEME_LIGHT ? (
-              <Icon>lightbulb_outline</Icon>
-            ) : (
-              <Icon>highlight</Icon>
-            )}
-          </IconButton>
-        </Tooltip>
-        <Tooltip
           id="appbar-user"
           title="Add a new family member"
           enterDelay={300}
@@ -232,7 +212,6 @@ const Home = props => {
             <About />
             <Theme />
             <AddUser open={props.addUserOpen} />
-
             <Card>
               <CardContent>
                 <Tabs
@@ -272,8 +251,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   toggleAddUser: () => dispatch(toggleAddUser()),
   toggleDrawer: () => dispatch(toggleDrawer()),
-  changeTab: (event, tab) => dispatch(changeTab(tab)),
-  togglePaletteType: () => dispatch(togglePaletteType())
+  changeTab: (event, tab) => dispatch(changeTab(tab))
 });
 
 export default withStyles(styles)(
