@@ -13,6 +13,26 @@ import {
 } from '../modules/layoutActions';
 import { logout } from '../modules/authActions';
 
+const mapStateToProps = state => ({
+    moreMenuAnchorEl: state.layout.moreMenuAnchorEl
+  }),
+  mapDispatchToProps = dispatch => ({
+    aboutOpen: () => {
+      dispatch(clearMoreMenuAnchorEl());
+      dispatch(aboutOpen());
+    },
+    openCloseThemeDrawer: () => {
+      dispatch(clearMoreMenuAnchorEl());
+      dispatch(openCloseThemeDrawer());
+    },
+    logout: () => {
+      dispatch(clearMoreMenuAnchorEl());
+      dispatch(logout());
+    },
+    clearMoreMenuAnchorEl: () => dispatch(clearMoreMenuAnchorEl()),
+    setMoreMenuAnchorEl: element => dispatch(setMoreMenuAnchorEl(element))
+  });
+
 const MainMoreMenu = props => {
   const { moreMenuAnchorEl } = props,
     MORE_MENU_ID = 'moreMenuId',
@@ -72,26 +92,5 @@ const MainMoreMenu = props => {
     </section>
   );
 };
-
-const mapStateToProps = state => ({
-  moreMenuAnchorEl: state.layout.moreMenuAnchorEl
-});
-
-const mapDispatchToProps = dispatch => ({
-  aboutOpen: () => {
-    dispatch(clearMoreMenuAnchorEl());
-    dispatch(aboutOpen());
-  },
-  openCloseThemeDrawer: () => {
-    dispatch(clearMoreMenuAnchorEl());
-    dispatch(openCloseThemeDrawer());
-  },
-  logout: () => {
-    dispatch(clearMoreMenuAnchorEl());
-    dispatch(logout());
-  },
-  clearMoreMenuAnchorEl: () => dispatch(clearMoreMenuAnchorEl()),
-  setMoreMenuAnchorEl: element => dispatch(setMoreMenuAnchorEl(element))
-});
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainMoreMenu);

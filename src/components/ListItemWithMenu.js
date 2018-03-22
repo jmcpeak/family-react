@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withStyles } from 'material-ui/styles';
 import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
@@ -19,7 +18,17 @@ import {
   setListMenuAnchorEl
 } from '../modules/layoutActions';
 import { LAYOUT_HIDDEN } from '../modules/constants';
-const styles = () => ({});
+
+const mapStateToProps = state => ({
+    userMenus: state.layout.userMenus,
+    listMenuAnchorEl: state.layout.listMenuAnchorEl
+  }),
+  mapDispatchToProps = dispatch => ({
+    hideUserMenu: position => dispatch(hideUserMenu(position)),
+    showUserMenu: position => dispatch(showUserMenu(position)),
+    clearListMenuAnchorEl: () => dispatch(clearListMenuAnchorEl()),
+    setListMenuAnchorEl: element => dispatch(setListMenuAnchorEl(element))
+  });
 
 const ListItemWithMenu = props => {
   const { listMenuAnchorEl, position, primary, secondary } = props,
@@ -76,24 +85,10 @@ const ListItemWithMenu = props => {
   );
 };
 
-const mapStateToProps = state => ({
-  userMenus: state.layout.userMenus,
-  listMenuAnchorEl: state.layout.listMenuAnchorEl
-});
-
-const mapDispatchToProps = dispatch => ({
-  hideUserMenu: position => dispatch(hideUserMenu(position)),
-  showUserMenu: position => dispatch(showUserMenu(position)),
-  clearListMenuAnchorEl: () => dispatch(clearListMenuAnchorEl()),
-  setListMenuAnchorEl: element => dispatch(setListMenuAnchorEl(element))
-});
-
 ListItemWithMenu.propTypes = {
   position: PropTypes.number.isRequired,
   primary: PropTypes.string.isRequired,
   secondary: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(
-  connect(mapStateToProps, mapDispatchToProps)(ListItemWithMenu)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(ListItemWithMenu);
