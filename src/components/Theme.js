@@ -49,7 +49,21 @@ const mainThemeColorKey = '500',
     'brown',
     'grey',
     'blueGrey'
-  ];
+  ],
+  mapStateToProps = state => ({
+    themes: state.theme.available,
+    open: state.layout.themeDrawerOpen,
+    paletteSelected: state.theme.paletteSelected,
+    type: state.theme.type
+  }),
+  mapDispatchToProps = dispatch => ({
+    setAvailable: theme => dispatch(setAvailable(theme)),
+    openCloseThemeDrawer: () => dispatch(openCloseThemeDrawer()),
+    setPrimaryTheme: color => dispatch(setPrimaryTheme(color)),
+    setSecondaryTheme: color => dispatch(setSecondaryTheme(color)),
+    toggleDarkMode: () => dispatch(toggleDarkMode()),
+    togglePaletteSelected: () => dispatch(togglePaletteSelected())
+  });
 
 class Theme extends PureComponent {
   constructor() {
@@ -171,7 +185,6 @@ class Theme extends PureComponent {
                 </RadioGroup>
               </FormControl>
             </Grid>
-
             <Grid item lg>
               {rows.map((row, index) => (
                 <Grid key={index} container alignItems={'center'} spacing={8}>
@@ -181,7 +194,6 @@ class Theme extends PureComponent {
                 </Grid>
               ))}
             </Grid>
-
             <Grid item lg>
               <div>
                 <FormControl>
@@ -205,21 +217,5 @@ class Theme extends PureComponent {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  themes: state.theme.available,
-  open: state.layout.themeDrawerOpen,
-  paletteSelected: state.theme.paletteSelected,
-  type: state.theme.type
-});
-
-const mapDispatchToProps = dispatch => ({
-  setAvailable: theme => dispatch(setAvailable(theme)),
-  openCloseThemeDrawer: () => dispatch(openCloseThemeDrawer()),
-  setPrimaryTheme: color => dispatch(setPrimaryTheme(color)),
-  setSecondaryTheme: color => dispatch(setSecondaryTheme(color)),
-  toggleDarkMode: () => dispatch(toggleDarkMode()),
-  togglePaletteSelected: () => dispatch(togglePaletteSelected())
-});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Theme);
