@@ -210,7 +210,7 @@ const Home = props => {
           >
             <div className={classes.drawerHeader} />
             <About />
-            <Theme />
+            <Theme rows={5} columns={4} />
             <AddUser open={props.addUserOpen} />
             <Card>
               <CardContent>

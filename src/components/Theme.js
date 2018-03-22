@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import AppBar from 'material-ui/AppBar';
 import Button from 'material-ui/Button';
@@ -22,14 +23,7 @@ import {
 } from '../modules/themeActions';
 
 const mainThemeColorKey = '500',
-  swatchRows = [
-    { start: 0, end: 4 },
-    { start: 4, end: 8 },
-    { start: 8, end: 12 },
-    { start: 12, end: 16 },
-    { start: 16, end: 19 }
-  ],
-  themeColors = [
+  orderedThemeColors = [
     'red',
     'pink',
     'purple',
@@ -66,9 +60,37 @@ const mainThemeColorKey = '500',
   });
 
 class Theme extends PureComponent {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.themes = [];
+    this.swatchRows = [
+      { start: 0, end: 4 },
+      { start: 4, end: 8 },
+      { start: 8, end: 12 },
+      { start: 12, end: 16 },
+      { start: 16, end: 19 }
+    ];
+
+    if (this.props.rows && this.props.columns) {
+      this.swatchRows = new Array(this.props.rows)
+        .fill(null)
+        .map((row, index) => {
+          let retVal = { start: 0, end: 0 };
+
+          if (index !== 0) {
+            retVal.start = index * this.props.columns;
+            retVal.end =
+              index !== this.props.rows - 1
+                ? retVal.start + this.props.columns
+                : orderedThemeColors.length;
+          } else {
+            retVal.end = this.props.columns;
+          }
+
+          return retVal;
+        });
+    }
   }
 
   addTheme = async name => {
@@ -76,9 +98,9 @@ class Theme extends PureComponent {
       .then(theme => {
         this.themes.push({ name: name, theme: theme });
 
-        if (this.themes.length === themeColors.length)
+        if (this.themes.length === orderedThemeColors.length)
           this.props.setAvailable({
-            order: themeColors,
+            order: orderedThemeColors,
             themes: this.themes
           });
       })
@@ -86,8 +108,8 @@ class Theme extends PureComponent {
   };
 
   async componentDidMount() {
-    if (this.props.themes.length !== themeColors.length)
-      themeColors.map(async theme => await this.addTheme(theme));
+    if (this.props.themes.length !== orderedThemeColors.length)
+      orderedThemeColors.map(async theme => await this.addTheme(theme));
   }
 
   render() {
@@ -128,7 +150,7 @@ class Theme extends PureComponent {
         <ThemeButton key={index} theme={theme} index={index} />
       );
 
-    swatchRows.forEach(row => {
+    this.swatchRows.forEach(row => {
       rows.push(
         themes
           .filter((theme, index) => index >= row.start && index < row.end)
@@ -217,5 +239,10 @@ class Theme extends PureComponent {
     );
   }
 }
+
+Theme.propTypes = {
+  column: PropTypes.number,
+  row: PropTypes.number
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Theme);
