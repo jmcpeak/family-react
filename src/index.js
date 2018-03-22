@@ -7,6 +7,7 @@ import store, { history } from './store';
 import App from './containers/app';
 import registerServiceWorker from './registerServiceWorker';
 import { saveState } from './localStorage';
+import { initialState as layoutInitialState } from './modules/layoutReducer';
 import 'sanitize.css/sanitize.css';
 import './index.css';
 import AWS from 'aws-sdk';
@@ -32,7 +33,11 @@ store.subscribe(
   throttle(() => {
     saveState({
       authorization: store.getState().authorization,
-      theme: store.getState().theme
+      theme: store.getState().theme,
+      layout: {
+        ...layoutInitialState,
+        drawerOpen: store.getState().layout.drawerOpen
+      }
     });
   }, 1000)
 );

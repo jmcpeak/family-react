@@ -16,7 +16,7 @@ import {
   LAYOUT_ADD_USER_TOGGLE
 } from './constants';
 
-const initialState = {
+export const initialState = {
   aboutOpen: false,
   activeTab: 0,
   addUserOpen: false,
