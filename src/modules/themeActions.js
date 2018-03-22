@@ -1,13 +1,13 @@
 import {
-  THEME_ADD_AVAILABLE,
+  THEME_SET_AVAILABLE,
   THEME_DARK_MODE,
   THEME_PALETTE_SELECTED,
   THEME_SET_PRIMARY,
   THEME_SET_SECONDARY
 } from './constants';
 
-export const addAvailable = theme => dispatch =>
-  dispatch({ type: THEME_ADD_AVAILABLE, payload: theme });
+export const setAvailable = theme => dispatch =>
+  dispatch({ type: THEME_SET_AVAILABLE, payload: theme });
 
 export const setPrimaryTheme = color => dispatch =>
   dispatch({ type: THEME_SET_PRIMARY, payload: color });

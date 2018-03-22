@@ -3,7 +3,7 @@ import brown from 'material-ui/colors/brown';
 import {
   THEME_DARK,
   THEME_LIGHT,
-  THEME_ADD_AVAILABLE,
+  THEME_SET_AVAILABLE,
   THEME_DARK_MODE,
   THEME_PALETTE_SELECTED,
   THEME_SET_PRIMARY,
@@ -20,10 +20,16 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case THEME_ADD_AVAILABLE:
+    case THEME_SET_AVAILABLE:
+      // The method populating the payload is asynchronous - order is not
+      // guaranteed - sort themes by the order provided
       return {
         ...state,
-        available: [...state.available, action.payload.default]
+        available: action.payload.order.map(
+          name =>
+            action.payload.themes.filter(theme => theme.name === name)[0].theme
+              .default
+        )
       };
 
     case THEME_DARK_MODE:
