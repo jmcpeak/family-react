@@ -11,9 +11,9 @@ import Typography from 'material-ui/Typography';
 import Radio, { RadioGroup } from 'material-ui/Radio';
 import Switch from 'material-ui/Switch';
 import { THEME_DARK } from '../modules/constants';
+import { openCloseThemeDrawer } from '../modules/layoutActions';
 import {
   addAvailable,
-  openCloseDrawer,
   setPrimaryTheme,
   setSecondaryTheme,
   toggleDarkMode,
@@ -59,7 +59,7 @@ class Theme extends PureComponent {
     const {
       availableThemes,
       open,
-      openCloseDrawer,
+      openCloseThemeDrawer,
       paletteSelected,
       setPrimaryTheme,
       setSecondaryTheme,
@@ -78,7 +78,7 @@ class Theme extends PureComponent {
             <IconButton
               color="inherit"
               aria-label="Close"
-              onClick={openCloseDrawer}
+              onClick={openCloseThemeDrawer}
             >
               <Icon>close</Icon>
             </IconButton>
@@ -147,14 +147,14 @@ class Theme extends PureComponent {
 
 const mapStateToProps = state => ({
   availableThemes: state.theme.available,
-  open: state.theme.open,
+  open: state.layout.themeDrawerOpen,
   paletteSelected: state.theme.paletteSelected,
   type: state.theme.type
 });
 
 const mapDispatchToProps = dispatch => ({
   addAvailable: theme => dispatch(addAvailable(theme)),
-  openCloseDrawer: () => dispatch(openCloseDrawer()),
+  openCloseThemeDrawer: () => dispatch(openCloseThemeDrawer()),
   setPrimaryTheme: color => dispatch(setPrimaryTheme(color)),
   setSecondaryTheme: color => dispatch(setSecondaryTheme(color)),
   toggleDarkMode: () => dispatch(toggleDarkMode()),

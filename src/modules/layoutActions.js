@@ -7,6 +7,7 @@ import {
   LAYOUT_LIST_MENU_CLEAR_ANCHOR_EL,
   LAYOUT_MORE_MENU_CLEAR_ANCHOR_EL,
   LAYOUT_MORE_MENU_SET_ANCHOR_EL,
+  LAYOUT_OPEN_CLOSE_THEME_DRAWER,
   LAYOUT_ABOUT_CLOSE,
   LAYOUT_ABOUT_OPEN,
   LAYOUT_CHANGE_TAB,
@@ -47,3 +48,6 @@ export const changeTab = tab => dispatch =>
 
 export const toggleAddUser = () => dispatch =>
   dispatch({ type: LAYOUT_ADD_USER_TOGGLE });
+
+export const openCloseThemeDrawer = () => dispatch =>
+  dispatch({ type: LAYOUT_OPEN_CLOSE_THEME_DRAWER });

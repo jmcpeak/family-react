@@ -7,6 +7,7 @@ import {
   LAYOUT_LIST_MENU_CLEAR_ANCHOR_EL,
   LAYOUT_MORE_MENU_CLEAR_ANCHOR_EL,
   LAYOUT_MORE_MENU_SET_ANCHOR_EL,
+  LAYOUT_OPEN_CLOSE_THEME_DRAWER,
   LAYOUT_HIDDEN,
   LAYOUT_VISIBLE,
   LAYOUT_ABOUT_CLOSE,
@@ -20,9 +21,10 @@ const initialState = {
   activeTab: 0,
   addUserOpen: false,
   drawerOpen: true,
-  userMenus: [],
   listMenuAnchorEl: null,
-  moreMenuAnchorEl: null
+  moreMenuAnchorEl: null,
+  themeDrawerOpen: false,
+  userMenus: []
 };
 
 export default (state = initialState, action) => {
@@ -103,6 +105,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         addUserOpen: !state.addUserOpen
+      };
+
+    case LAYOUT_OPEN_CLOSE_THEME_DRAWER:
+      return {
+        ...state,
+        themeDrawerOpen: !state.themeDrawerOpen
       };
 
     default:

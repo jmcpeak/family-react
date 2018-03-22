@@ -5,7 +5,6 @@ import {
   THEME_LIGHT,
   THEME_ADD_AVAILABLE,
   THEME_DARK_MODE,
-  THEME_OPEN_CLOSE_DRAWER,
   THEME_PALETTE_SELECTED,
   THEME_SET_PRIMARY,
   THEME_SET_SECONDARY
@@ -14,7 +13,6 @@ import {
 const initialState = {
   available: [],
   type: THEME_LIGHT,
-  open: false,
   paletteSelected: true,
   primary: blue,
   secondary: brown
@@ -32,12 +30,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         type: state.type === THEME_LIGHT ? THEME_DARK : THEME_LIGHT
-      };
-
-    case THEME_OPEN_CLOSE_DRAWER:
-      return {
-        ...state,
-        open: !state.open
       };
 
     case THEME_SET_PRIMARY:

@@ -1,7 +1,6 @@
 import {
   THEME_ADD_AVAILABLE,
   THEME_DARK_MODE,
-  THEME_OPEN_CLOSE_DRAWER,
   THEME_PALETTE_SELECTED,
   THEME_SET_PRIMARY,
   THEME_SET_SECONDARY
@@ -9,9 +8,6 @@ import {
 
 export const addAvailable = theme => dispatch =>
   dispatch({ type: THEME_ADD_AVAILABLE, payload: theme });
-
-export const openCloseDrawer = () => dispatch =>
-  dispatch({ type: THEME_OPEN_CLOSE_DRAWER });
 
 export const setPrimaryTheme = color => dispatch =>
   dispatch({ type: THEME_SET_PRIMARY, payload: color });
