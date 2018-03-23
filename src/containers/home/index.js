@@ -22,12 +22,34 @@ import MainMoreMenu from '../../components/MainMoreMenu';
 import About from '../../components/About';
 import AddUser from '../../components/AddUser';
 import AppSearch from '../../components/AppSearch';
+import ErrorSnackbar from '../../components/ErrorSnackbar';
 import Theme from '../../components/Theme';
 import UserList from '../../components/UserList';
 import './index.css';
 export const HOME_PATH = '/';
 
 const drawerWidth = 320,
+  getTheme = theme =>
+    createMuiTheme({
+      palette: {
+        primary: theme.primary,
+        secondary: theme.secondary,
+        type: theme.type
+      }
+    }),
+  mapDispatchToProps = dispatch => ({
+    toggleAddUser: () => dispatch(toggleAddUser()),
+    toggleDrawer: () => dispatch(toggleDrawer()),
+    changeTab: (event, tab) => dispatch(changeTab(tab))
+  }),
+  mapStateToProps = state => ({
+    activeTab: state.layout.activeTab,
+    addUserOpen: state.layout.addUserOpen,
+    drawerOpen: state.layout.drawerOpen,
+    theme: state.theme,
+    userMenuVisibility: state.layout.userMenuVisibility,
+    user: { name: 'Jason & Sheila McPeak' }
+  }),
   styles = theme => ({
     root: {
       flexGrow: 1
@@ -99,15 +121,7 @@ const drawerWidth = 320,
     'contentShift-left': {
       marginLeft: 0
     }
-  }),
-  getTheme = theme =>
-    createMuiTheme({
-      palette: {
-        primary: theme.primary,
-        secondary: theme.secondary,
-        type: theme.type
-      }
-    });
+  });
 
 const Home = props => {
   const { activeTab, classes, drawerOpen, user } = props,
@@ -217,24 +231,10 @@ const Home = props => {
           </main>
         </div>
       </div>
+      <ErrorSnackbar />
     </MuiThemeProvider>
   );
 };
-
-const mapStateToProps = state => ({
-  activeTab: state.layout.activeTab,
-  addUserOpen: state.layout.addUserOpen,
-  drawerOpen: state.layout.drawerOpen,
-  theme: state.theme,
-  userMenuVisibility: state.layout.userMenuVisibility,
-  user: { name: 'Jason & Sheila McPeak' }
-});
-
-const mapDispatchToProps = dispatch => ({
-  toggleAddUser: () => dispatch(toggleAddUser()),
-  toggleDrawer: () => dispatch(toggleDrawer()),
-  changeTab: (event, tab) => dispatch(changeTab(tab))
-});
 
 export default withStyles(styles)(
   connect(mapStateToProps, mapDispatchToProps)(Home)

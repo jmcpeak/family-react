@@ -28,6 +28,26 @@ AWS.config.update({
     IdentityPoolId: awsmobile.aws_cognito_identity_pool_id
   })
 });
+//
+// // Initialize the Amazon Cognito credentials provider
+// AWS.config.region = 'us-east-1';
+// AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+//   AccountId: '754934490052',
+//   IdentityPoolId: 'us-east-1:0531f9e8-90fb-442c-9488-066f62d9a150',
+//   RoleArn: 'arn:aws:iam::754934490052:role/Cognito_mcpeakfamilyUnauth_DefaultRole',
+//   RoleSessionName: 'web'
+// });
+
+// AWS.config.update({
+//   region: 'us-east-1',
+//   credentials: new AWS.CognitoIdentityCredentials({
+//     AccountId: '754934490052',
+//     IdentityPoolId: 'us-east-1:0531f9e8-90fb-442c-9488-066f62d9a150',
+//     RoleArn:
+//       'arn:aws:iam::754934490052:role/Cognito_mcpeakfamilyUnauth_DefaultRole',
+//     RoleSessionName: 'web'
+//   })
+// });
 
 store.subscribe(
   throttle(() => {
