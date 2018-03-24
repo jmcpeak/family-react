@@ -96,7 +96,7 @@ class Theme extends PureComponent {
   addTheme = async name => {
     import(`material-ui/colors/${name}.js`)
       .then(theme => {
-        this.themes.push({ name: name, theme: theme });
+        this.themes.push({ name, theme });
 
         if (this.themes.length === orderedThemeColors.length)
           this.props.setAvailable({

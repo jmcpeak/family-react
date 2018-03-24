@@ -1,3 +1,4 @@
+import { API } from 'aws-amplify';
 import { getUser, getUsers } from './awsWrappers';
 import {
   DATA_CLEAR_ERROR,
@@ -18,7 +19,7 @@ export const user = id => async dispatch => {
   }
 };
 
-export const users = () => async dispatch => {
+export const usersOrg = () => async dispatch => {
   try {
     const data = await getUsers();
     dispatch({ type: DATA_USERS, data });
@@ -26,3 +27,14 @@ export const users = () => async dispatch => {
     dispatch({ type: DATA_ERROR, err });
   }
 };
+
+export const users = () => async dispatch => {
+  try {
+    const data = await API.get('todosCRUD', `/todos/React`);
+    dispatch({ type: DATA_USERS, data });
+  } catch (err) {
+    dispatch({ type: DATA_ERROR, err });
+  }
+};
+
+// await API.post('todosCRUD', '/todos', { body: newTodo });

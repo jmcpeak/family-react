@@ -12,6 +12,11 @@ import 'sanitize.css/sanitize.css';
 import './index.css';
 import AWS from 'aws-sdk';
 import awsmobile from './aws-exports';
+import Amplify, { Analytics } from 'aws-amplify';
+import aws_exports from './aws-exports';
+
+Amplify.configure(aws_exports);
+Analytics.record('myCustomEvent');
 
 /**
  * AWS - huh?

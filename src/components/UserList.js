@@ -24,8 +24,8 @@ class UserList extends PureComponent {
             <UserListItemWithMenu
               key={index}
               position={index}
-              primary={user.primary}
-              secondary={user.secondary}
+              primary={user.team}
+              secondary={user.text}
             />
           ))}
         </List>

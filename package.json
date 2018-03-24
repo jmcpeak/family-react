@@ -4,6 +4,8 @@
   "private": true,
   "homepage": "https://d182zizp92qmd.cloudfront.net/",
   "dependencies": {
+    "aws-amplify": "^0.2.11",
+    "aws-amplify-react": "^0.1.36",
     "aws-sdk": "^2.205.0",
     "classnames": "^2.2.5",
     "fetch-jsonp": "^1.1.3",
@@ -44,6 +46,6 @@
     "eject": "react-scripts eject",
     "serve": "serve -s build",
     "predeploy": "react-scripts build",
-    "deploy": "aws s3 cp build s3://familyreact-hosting-mobilehub-1016334214 --recursive"
+    "deploy": "aws s3 cp build s3://familyreact-hosting-mobilehub-150587892 --recursive"
   }
 }
