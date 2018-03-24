@@ -8,23 +8,23 @@ import App from './containers/app';
 import registerServiceWorker from './registerServiceWorker';
 import { saveState } from './localStorage';
 import { initialState as layoutInitialState } from './modules/layoutReducer';
-import 'sanitize.css/sanitize.css';
-import './index.css';
 import AWS from 'aws-sdk';
 import awsmobile from './aws-exports';
 import Amplify, { Analytics } from 'aws-amplify';
 import aws_exports from './aws-exports';
+import 'sanitize.css/sanitize.css';
+import './index.css';
 
 Amplify.configure(aws_exports);
-Analytics.record('myCustomEvent');
+// Analytics.record('myCustomEvent');
 
 /**
  * AWS - huh?
  * aws-config.js is used by browser sessions to configure the SDK.
- * aws-exports.js is used by SPA applications that are packed (by Webpack, Browserify, or similar tools) to configure the SDK.
+ * aws-exports.js is used by SPA applications that are packed (by Webpack) to configure the SDK.
  */
 
-/*
+/**
  * Configure the SDK to use anonymous identity
  */
 AWS.config.update({
@@ -33,26 +33,6 @@ AWS.config.update({
     IdentityPoolId: awsmobile.aws_cognito_identity_pool_id
   })
 });
-//
-// // Initialize the Amazon Cognito credentials provider
-// AWS.config.region = 'us-east-1';
-// AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-//   AccountId: '754934490052',
-//   IdentityPoolId: 'us-east-1:0531f9e8-90fb-442c-9488-066f62d9a150',
-//   RoleArn: 'arn:aws:iam::754934490052:role/Cognito_mcpeakfamilyUnauth_DefaultRole',
-//   RoleSessionName: 'web'
-// });
-
-// AWS.config.update({
-//   region: 'us-east-1',
-//   credentials: new AWS.CognitoIdentityCredentials({
-//     AccountId: '754934490052',
-//     IdentityPoolId: 'us-east-1:0531f9e8-90fb-442c-9488-066f62d9a150',
-//     RoleArn:
-//       'arn:aws:iam::754934490052:role/Cognito_mcpeakfamilyUnauth_DefaultRole',
-//     RoleSessionName: 'web'
-//   })
-// });
 
 store.subscribe(
   throttle(() => {
@@ -64,7 +44,7 @@ store.subscribe(
         drawerOpen: store.getState().layout.drawerOpen
       }
     });
-  }, 1000)
+  }, 1500)
 );
 
 render(
