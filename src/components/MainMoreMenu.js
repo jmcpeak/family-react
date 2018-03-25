@@ -58,18 +58,6 @@ const MainMoreMenu = props => {
         open={Boolean(moreMenuAnchorEl)}
         onClose={menuClose}
       >
-        <MenuItem>
-          <ListItemIcon>
-            <Icon>email</Icon>
-          </ListItemIcon>
-          <ListItemText inset primary="Email" />
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <Icon>file_download</Icon>
-          </ListItemIcon>
-          <ListItemText inset primary="Export" />
-        </MenuItem>
         <MenuItem onClick={props.openCloseThemeDrawer}>
           <ListItemIcon>
             <Icon>color_lens</Icon>
