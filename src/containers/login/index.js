@@ -6,7 +6,7 @@ import { reduxForm, Field } from 'redux-form';
 import { TextField } from 'redux-form-material-ui';
 import clover from '../../assets/clover.png';
 import './index.css';
-import { clear } from '../../actions/authActions';
+import { clear } from '../../actions/auth';
 // import Icon from 'material-ui/Icon';
 // import { InputAdornment } from 'material-ui/Input';
 
@@ -47,8 +47,8 @@ const LoginForm = reduxForm({
 })(Login);
 
 const mapStateToProps = state => ({
-  isError: state.authorization.isError,
-  errorMessage: state.authorization.errorMessage
+  isError: state.auth.isError,
+  errorMessage: state.auth.errorMessage
 });
 
 const mapDispatchToProps = dispatch => ({

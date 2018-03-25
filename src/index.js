@@ -7,7 +7,7 @@ import store, { history } from './store';
 import App from './containers/app';
 import registerServiceWorker from './registerServiceWorker';
 import { saveState } from './constants/localStorage';
-import { initialState as layoutInitialState } from './reducers/layoutReducer';
+import { initialState as layoutInitialState } from './reducers/layout';
 import AWS from 'aws-sdk';
 import awsmobile from './aws-exports';
 import Amplify, { Analytics } from 'aws-amplify';
@@ -41,7 +41,7 @@ AWS.config.update({
 store.subscribe(
   throttle(() => {
     saveState({
-      authorization: store.getState().authorization,
+      auth: store.getState().auth,
       theme: store.getState().theme,
       layout: {
         ...layoutInitialState,

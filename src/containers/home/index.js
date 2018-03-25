@@ -13,11 +13,7 @@ import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
 import { createMuiTheme, MuiThemeProvider } from 'material-ui/styles';
 import { withStyles } from 'material-ui/styles';
-import {
-  changeTab,
-  toggleAddUser,
-  toggleDrawer
-} from '../../actions/layoutActions';
+import { changeTab, toggleAddUser, toggleDrawer } from '../../actions/layout';
 import MainMoreMenu from '../../components/MainMoreMenu';
 import About from '../../components/About';
 import AddUser from '../../components/AddUser';
@@ -48,7 +44,7 @@ const drawerWidth = 320,
     drawerOpen: state.layout.drawerOpen,
     theme: state.theme,
     userMenuVisibility: state.layout.userMenuVisibility,
-    user: { name: 'Jason & Sheila McPeak' }
+    user: state.data.user
   }),
   styles = theme => ({
     root: {

@@ -6,10 +6,10 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import HomeContainer, { HOME_PATH } from '../home';
 import LoginContainer, { LOGIN_PATH } from '../login';
 import MemberContainer, { MEMBER_PATH } from '../member';
-import { login } from '../../actions/authActions';
+import { login } from '../../actions/auth';
 
 const PrivateRoute = connect(state => ({
-  isAuthenticated: state.authorization.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated
 }))(
   props =>
     props.isAuthenticated ? <props.component /> : <Redirect to={LOGIN_PATH} />

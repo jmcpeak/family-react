@@ -13,14 +13,14 @@ import Typography from 'material-ui/Typography';
 import Radio, { RadioGroup } from 'material-ui/Radio';
 import Switch from 'material-ui/Switch';
 import { THEME_DARK } from '../constants/constants';
-import { openCloseThemeDrawer } from '../actions/layoutActions';
+import { openCloseThemeDrawer } from '../actions/layout';
 import {
   setAvailable,
   setPrimaryTheme,
   setSecondaryTheme,
   toggleDarkMode,
   togglePaletteSelected
-} from '../actions/themeActions';
+} from '../actions/theme';
 
 const mainThemeColorKey = '500',
   orderedThemeColors = [

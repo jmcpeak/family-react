@@ -6,7 +6,7 @@ import Dialog, {
   DialogContent,
   DialogTitle
 } from 'material-ui/Dialog';
-import { aboutClose } from '../actions/layoutActions';
+import { aboutClose } from '../actions/layout';
 import clover from '../assets/clover.png';
 
 const mapStateToProps = state => ({

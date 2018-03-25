@@ -7,7 +7,7 @@ import Icon from 'material-ui/Icon';
 import IconButton from 'material-ui/IconButton';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
-import { toggleAddUser } from '../actions/layoutActions';
+import { toggleAddUser } from '../actions/layout';
 
 const mapStateToProps = state => ({
     open: state.layout.addUserOpen

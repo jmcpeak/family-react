@@ -10,8 +10,8 @@ import {
   clearMoreMenuAnchorEl,
   openCloseThemeDrawer,
   setMoreMenuAnchorEl
-} from '../actions/layoutActions';
-import { logout } from '../actions/authActions';
+} from '../actions/layout';
+import { logout } from '../actions/auth';
 
 const mapStateToProps = state => ({
     moreMenuAnchorEl: state.layout.moreMenuAnchorEl

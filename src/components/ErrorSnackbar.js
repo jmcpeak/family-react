@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { clearError } from '../actions/dataActions';
+import { clearError } from '../actions/data';
 import Icon from 'material-ui/Icon';
 import IconButton from 'material-ui/IconButton';
 import Snackbar from 'material-ui/Snackbar';
