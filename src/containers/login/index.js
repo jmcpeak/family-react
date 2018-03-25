@@ -1,16 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
+import { CircularProgress } from 'material-ui/Progress';
+import { InputAdornment } from 'material-ui/Input';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { TextField } from 'redux-form-material-ui';
 import clover from '../../assets/clover.png';
 import './index.css';
 import { clear } from '../../actions/auth';
-// import Icon from 'material-ui/Icon';
-// import { InputAdornment } from 'material-ui/Input';
 
-export const LOGIN_PATH = '/login';
+export const LOGIN_PATH = '/login',
+  PROGRESS = {
+    endAdornment: (
+      <InputAdornment position="start">
+        <CircularProgress />
+      </InputAdornment>
+    )
+  };
 
 const Login = props => (
   <div>
@@ -21,21 +28,22 @@ const Login = props => (
         autoFocus
         className={'question'}
         component={TextField}
+        disabled={props.disabled}
         error={props.isError}
         helperText={props.errorMessage}
-        // InputProps={{
-        //   startAdornment: (
-        //     <InputAdornment position="start">
-        //       <Icon>location_city</Icon>
-        //     </InputAdornment>
-        //   )
-        // }}
+        InputProps={props.busy ? PROGRESS : undefined}
         label="What city is the Family Reunion usually held in?"
         margin="normal"
         name="question"
         onChange={props.clear}
       />
-      <Button size="small" variant="raised" color="primary" type="submit">
+      <Button
+        color="primary"
+        disabled={props.disabled}
+        size="small"
+        type="submit"
+        variant="raised"
+      >
         Login
       </Button>
     </form>
@@ -47,6 +55,8 @@ const LoginForm = reduxForm({
 })(Login);
 
 const mapStateToProps = state => ({
+  busy: state.auth.busy,
+  disabled: state.auth.disabled,
   isError: !!state.auth.error,
   errorMessage:
     state.auth.error && state.auth.error.response

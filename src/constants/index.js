@@ -1,4 +1,6 @@
-const AUTH_CLEAR = 'auth/CLEAR',
+const AUTH_BUSY = 'auth/BUSY',
+  AUTH_CLEAR = 'auth/CLEAR',
+  AUTH_DISABLED = 'auth/DISABLED',
   AUTH_DISCARD = 'auth/DISCARD',
   AUTH_FAIL = 'auth/FAIL',
   AUTH_SUCCESS = 'auth/SUCCESS',
@@ -31,6 +33,7 @@ const AUTH_CLEAR = 'auth/CLEAR',
   THEME_PALETTE_SELECTED = 'theme/PALETTE_SELECTED',
   THEME_SET_PRIMARY = 'theme/SET_PRIMARY',
   THEME_SET_SECONDARY = 'theme/SET_SECONDARY',
+  BUSY_DELAY = 400,
   HASH_CODE = str => {
     let hash = 0,
       len = str.length,
@@ -47,7 +50,9 @@ const AUTH_CLEAR = 'auth/CLEAR',
   };
 
 export {
+  AUTH_BUSY,
   AUTH_CLEAR,
+  AUTH_DISABLED,
   AUTH_DISCARD,
   AUTH_FAIL,
   AUTH_SUCCESS,
@@ -77,5 +82,6 @@ export {
   THEME_PALETTE_SELECTED,
   THEME_SET_PRIMARY,
   THEME_SET_SECONDARY,
+  BUSY_DELAY,
   HASH_CODE
 };
