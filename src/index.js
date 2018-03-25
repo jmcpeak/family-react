@@ -16,7 +16,7 @@ import 'sanitize.css/sanitize.css';
 import './index.css';
 
 Amplify.configure(aws_exports);
-// Analytics.record('myCustomEvent');
+Analytics.record('myCustomEvent');
 
 /**
  * AWS - huh?

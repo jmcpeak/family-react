@@ -25,7 +25,11 @@ const ErrorSnackbar = props => (
     autoHideDuration={null}
     message={
       <Typography variant="body1" color="error">
-        {props.error.message} &nbsp; "{props.error.code}"
+        {props.error && props.error.message
+          ? props.error.message
+          : 'Error not properly formatted'}{' '}
+        &nbsp;
+        {props.error && props.error.code ? `code: ${props.error.code}` : ''}
       </Typography>
     }
     open={props.open}

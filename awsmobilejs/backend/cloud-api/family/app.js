@@ -15,16 +15,16 @@ AWS.config.update({ region: process.env.REGION });
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 const mhprefix = process.env.MOBILE_HUB_DYNAMIC_PREFIX;
-let tableName = 'todos';
+let tableName = 'family';
 const hasDynamicPrefix = true;
 
 const userIdPresent = false;
-const partitionKeyName = 'team';
+const partitionKeyName = 'id';
 const partitionKeyType = 'S';
-const sortKeyName = 'todoId';
-const sortKeyType = 'N';
-const hasSortKey = true;
-const path = '/todos';
+const sortKeyName = '';
+const sortKeyType = '';
+const hasSortKey = false;
+const path = '/family';
 
 const awsmobile = {};
 
@@ -63,7 +63,7 @@ const convertUrlType = (param, type) => {
  * HTTP Get method for list objects *
  ********************************/
 
-app.get('/todos/:team', function(req, res) {
+app.get('/family/:id', function(req, res) {
   var condition = {};
   condition[partitionKeyName] = {
     ComparisonOperator: 'EQ'
@@ -83,19 +83,12 @@ app.get('/todos/:team', function(req, res) {
     }
   }
 
-  const minLengthId = 1;
-
   let queryParams = {
-    TableName: tableName
-    // KeyConditions: condition
-    //   ,
-    // FilterExpression: 'size(id) > :size',
-    // ExpressionAttributeValues: {
-    //   ':size': { N: minLengthId.toString() }
-    // }
+    TableName: tableName,
+    KeyConditions: condition
   };
 
-  dynamodb.scan(queryParams, (err, data) => {
+  dynamodb.query(queryParams, (err, data) => {
     if (err) {
       res.json({ error: 'Could not load items: ' + err });
     } else {
@@ -108,7 +101,7 @@ app.get('/todos/:team', function(req, res) {
  * HTTP Get method for get single object *
  *****************************************/
 
-app.get('/todos/object/:team/:todoId', function(req, res) {
+app.get('/family/object/:id', function(req, res) {
   var params = {};
   if (userIdPresent && req.apiGateway) {
     params[partitionKeyName] =
@@ -203,7 +196,7 @@ app.post(path, function(req, res) {
  * HTTP remove method to delete object *
  ***************************************/
 
-app.delete('/todos/object/:team/:todoId', function(req, res) {
+app.delete('/family/object/:id', function(req, res) {
   var params = {};
   if (userIdPresent && req.apiGateway) {
     params[partitionKeyName] =

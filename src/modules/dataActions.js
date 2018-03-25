@@ -30,8 +30,13 @@ export const usersOrg = () => async dispatch => {
 
 export const users = () => async dispatch => {
   try {
-    const data = await API.get('todosCRUD', `/todos/React`);
-    dispatch({ type: DATA_USERS, data });
+    const data = await API.get('todosCRUD', `/todos/uh`);
+
+    if (!Array.isArray(data) && data.error) {
+      dispatch({ type: DATA_ERROR, err: { message: data.error } });
+    } else {
+      dispatch({ type: DATA_USERS, data });
+    }
   } catch (err) {
     dispatch({ type: DATA_ERROR, err });
   }
