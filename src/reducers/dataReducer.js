@@ -3,7 +3,7 @@ import {
   DATA_ERROR,
   DATA_USER,
   DATA_USERS
-} from './constants';
+} from '../constants/constants';
 
 const initialState = {
   error: {},

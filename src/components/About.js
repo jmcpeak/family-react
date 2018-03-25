@@ -6,8 +6,8 @@ import Dialog, {
   DialogContent,
   DialogTitle
 } from 'material-ui/Dialog';
-import { aboutClose } from '../modules/layoutActions';
-import clover from '../containers/login/clover.png';
+import { aboutClose } from '../actions/layoutActions';
+import clover from '../assets/clover.png';
 
 const mapStateToProps = state => ({
     open: state.layout.aboutOpen

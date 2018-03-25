@@ -6,9 +6,9 @@ import {
   AUTH_SUCCESS,
   AUTH_HASH,
   HASH_CODE
-} from './constants';
-import { HOME_PATH } from '../containers/home';
-import { LOGIN_PATH } from '../containers/login';
+} from '../constants/constants';
+import { HOME_PATH } from '../containers/home/index';
+import { LOGIN_PATH } from '../containers/login/index';
 
 export const login = () => (dispatch, state) => {
   let values = state().form.loginForm.values,

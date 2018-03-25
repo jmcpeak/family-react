@@ -17,7 +17,7 @@ import {
   changeTab,
   toggleAddUser,
   toggleDrawer
-} from '../../modules/layoutActions';
+} from '../../actions/layoutActions';
 import MainMoreMenu from '../../components/MainMoreMenu';
 import About from '../../components/About';
 import AddUser from '../../components/AddUser';

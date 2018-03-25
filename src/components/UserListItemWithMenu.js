@@ -16,8 +16,8 @@ import {
   showUserMenu,
   clearListMenuAnchorEl,
   setListMenuAnchorEl
-} from '../modules/layoutActions';
-import { LAYOUT_HIDDEN } from '../modules/constants';
+} from '../actions/layoutActions';
+import { LAYOUT_HIDDEN } from '../constants/constants';
 
 const mapStateToProps = state => ({
     userMenus: state.layout.userMenus,

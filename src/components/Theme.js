@@ -12,15 +12,15 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Radio, { RadioGroup } from 'material-ui/Radio';
 import Switch from 'material-ui/Switch';
-import { THEME_DARK } from '../modules/constants';
-import { openCloseThemeDrawer } from '../modules/layoutActions';
+import { THEME_DARK } from '../constants/constants';
+import { openCloseThemeDrawer } from '../actions/layoutActions';
 import {
   setAvailable,
   setPrimaryTheme,
   setSecondaryTheme,
   toggleDarkMode,
   togglePaletteSelected
-} from '../modules/themeActions';
+} from '../actions/themeActions';
 
 const mainThemeColorKey = '500',
   orderedThemeColors = [

@@ -14,7 +14,7 @@ import {
   LAYOUT_ABOUT_OPEN,
   LAYOUT_CHANGE_TAB,
   LAYOUT_ADD_USER_TOGGLE
-} from './constants';
+} from '../constants/constants';
 
 export const initialState = {
   aboutOpen: false,

@@ -1,4 +1,9 @@
-import { AUTH_CLEAR, AUTH_DISCARD, AUTH_FAIL, AUTH_SUCCESS } from './constants';
+import {
+  AUTH_CLEAR,
+  AUTH_DISCARD,
+  AUTH_FAIL,
+  AUTH_SUCCESS
+} from '../constants/constants';
 
 const initialState = {
   isAuthenticated: false,

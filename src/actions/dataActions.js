@@ -1,11 +1,11 @@
 import { API } from 'aws-amplify';
-import { getUser, getUsers } from './awsWrappers';
+import { getUser, getUsers } from '../constants/awsWrappers';
 import {
   DATA_CLEAR_ERROR,
   DATA_ERROR,
   DATA_USER,
   DATA_USERS
-} from './constants';
+} from '../constants/constants';
 
 export const clearError = () => dispatch =>
   dispatch({ type: DATA_CLEAR_ERROR });

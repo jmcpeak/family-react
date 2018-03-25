@@ -6,8 +6,8 @@ import { ConnectedRouter } from 'react-router-redux';
 import store, { history } from './store';
 import App from './containers/app';
 import registerServiceWorker from './registerServiceWorker';
-import { saveState } from './localStorage';
-import { initialState as layoutInitialState } from './modules/layoutReducer';
+import { saveState } from './constants/localStorage';
+import { initialState as layoutInitialState } from './reducers/layoutReducer';
 import AWS from 'aws-sdk';
 import awsmobile from './aws-exports';
 import Amplify, { Analytics } from 'aws-amplify';
@@ -34,6 +34,10 @@ AWS.config.update({
   })
 });
 
+/**
+ * Subscribe to all store events
+ * Only every 1.5 seconds are they stored in localStorage
+ */
 store.subscribe(
   throttle(() => {
     saveState({

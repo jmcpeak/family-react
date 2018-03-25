@@ -4,9 +4,9 @@ import Button from 'material-ui/Button';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { TextField } from 'redux-form-material-ui';
-import clover from './clover.png';
+import clover from '../../assets/clover.png';
 import './index.css';
-import { clear } from '../../modules/authActions';
+import { clear } from '../../actions/authActions';
 // import Icon from 'material-ui/Icon';
 // import { InputAdornment } from 'material-ui/Input';
 

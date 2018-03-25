@@ -6,7 +6,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import HomeContainer, { HOME_PATH } from '../home';
 import LoginContainer, { LOGIN_PATH } from '../login';
 import MemberContainer, { MEMBER_PATH } from '../member';
-import { login } from '../../modules/authActions';
+import { login } from '../../actions/authActions';
 
 const PrivateRoute = connect(state => ({
   isAuthenticated: state.authorization.isAuthenticated

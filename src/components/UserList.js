@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { users } from '../modules/dataActions';
+import { users } from '../actions/dataActions';
 import List from 'material-ui/List';
 import UserListItemWithMenu from './UserListItemWithMenu';
 

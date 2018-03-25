@@ -4,7 +4,7 @@ import {
   THEME_PALETTE_SELECTED,
   THEME_SET_PRIMARY,
   THEME_SET_SECONDARY
-} from './constants';
+} from '../constants/constants';
 
 export const setAvailable = theme => dispatch =>
   dispatch({ type: THEME_SET_AVAILABLE, payload: theme });
