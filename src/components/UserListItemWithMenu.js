@@ -17,6 +17,7 @@ import {
   clearListMenuAnchorEl,
   setListMenuAnchorEl
 } from '../actions/layout';
+import { user } from '../actions/data';
 import { LAYOUT_HIDDEN } from '../constants/constants';
 
 const mapStateToProps = state => ({
@@ -24,6 +25,7 @@ const mapStateToProps = state => ({
     listMenuAnchorEl: state.layout.listMenuAnchorEl
   }),
   mapDispatchToProps = dispatch => ({
+    setSelectedUser: data => dispatch(user(data)),
     hideUserMenu: position => dispatch(hideUserMenu(position)),
     showUserMenu: position => dispatch(showUserMenu(position)),
     clearListMenuAnchorEl: () => dispatch(clearListMenuAnchorEl()),
@@ -31,19 +33,25 @@ const mapStateToProps = state => ({
   });
 
 const UserListItemWithMenu = props => {
-  const { listMenuAnchorEl, position, primary, secondary } = props,
+  const { listMenuAnchorEl, position, user } = props,
     MENU_ID = 'listMenu',
     mouseOut = () => props.hideUserMenu(position),
     mouseOver = () => props.showUserMenu(position),
     menuClose = () => props.clearListMenuAnchorEl(),
-    menuOpen = event => props.setListMenuAnchorEl(event.currentTarget);
+    menuOpen = event => props.setListMenuAnchorEl(event.currentTarget),
+    setUser = () => props.setSelectedUser(user);
 
   return (
-    <ListItem button={true} onMouseOver={mouseOver} onMouseOut={mouseOut}>
+    <ListItem
+      button={true}
+      onClick={setUser}
+      onMouseOver={mouseOver}
+      onMouseOut={mouseOut}
+    >
       <Avatar>
         <Icon>face</Icon>
       </Avatar>
-      <ListItemText primary={primary} secondary={secondary} />
+      <ListItemText primary={user.team} secondary={user.text} />
       <ListItemSecondaryAction
         style={{
           visibility: props.userMenus[position]
@@ -87,8 +95,7 @@ const UserListItemWithMenu = props => {
 
 UserListItemWithMenu.propTypes = {
   position: PropTypes.number.isRequired,
-  primary: PropTypes.string.isRequired,
-  secondary: PropTypes.string.isRequired
+  user: PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(

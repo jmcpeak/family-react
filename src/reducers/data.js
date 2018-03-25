@@ -5,14 +5,10 @@ import {
   DATA_USERS
 } from '../constants/constants';
 
-const initialState = {
+export const initialState = {
   error: {},
   user: {},
-  users: [
-    // { primary: 'Jason & Sheila McPeak', secondary: 'Gaithersburg, MD' },
-    // { primary: 'Shannon & Tara McPeak', secondary: 'Fremont, WI' },
-    // { primary: 'Marta & Matt Behrens', secondary: 'Verona, WI' }
-  ]
+  users: []
 };
 
 export default (state = initialState, action) => {

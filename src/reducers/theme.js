@@ -10,7 +10,7 @@ import {
   THEME_SET_SECONDARY
 } from '../constants/constants';
 
-const initialState = {
+export const initialState = {
   available: [],
   type: THEME_LIGHT,
   paletteSelected: true,

@@ -8,6 +8,7 @@ import App from './containers/app';
 import registerServiceWorker from './registerServiceWorker';
 import { saveState } from './constants/localStorage';
 import { initialState as layoutInitialState } from './reducers/layout';
+import { initialState as dataInitialState } from './reducers/data';
 import AWS from 'aws-sdk';
 import awsmobile from './aws-exports';
 import Amplify, { Analytics } from 'aws-amplify';
@@ -42,11 +43,15 @@ store.subscribe(
   throttle(() => {
     saveState({
       auth: store.getState().auth,
-      theme: store.getState().theme,
+      data: {
+        ...dataInitialState,
+        user: store.getState().data.user
+      },
       layout: {
         ...layoutInitialState,
         drawerOpen: store.getState().layout.drawerOpen
-      }
+      },
+      theme: store.getState().theme
     });
   }, 1500)
 );

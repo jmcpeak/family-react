@@ -146,7 +146,9 @@ const Home = props => {
             <Icon>menu</Icon>
           </IconButton>
           <Typography variant="title" color="inherit" className={classes.flex}>
-            {user.name}
+            {user
+              ? `${user.team} ${user.text ? '&' : ''} ${user.text}`
+              : 'Select a user'}
           </Typography>
           <AppSearch />
           <Tooltip

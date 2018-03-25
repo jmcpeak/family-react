@@ -21,12 +21,7 @@ class UserList extends PureComponent {
       <span>
         <List>
           {this.props.users.map((user, index) => (
-            <UserListItemWithMenu
-              key={index}
-              position={index}
-              primary={user.team}
-              secondary={user.text}
-            />
+            <UserListItemWithMenu key={index} position={index} user={user} />
           ))}
         </List>
       </span>

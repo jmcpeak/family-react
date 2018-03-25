@@ -5,7 +5,7 @@ import {
   AUTH_SUCCESS
 } from '../constants/constants';
 
-const initialState = {
+export const initialState = {
   isAuthenticated: false,
   isError: false,
   errorMessage: ''
