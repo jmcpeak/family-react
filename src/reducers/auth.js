@@ -3,12 +3,10 @@ import {
   AUTH_DISCARD,
   AUTH_FAIL,
   AUTH_SUCCESS
-} from '../constants/constants';
+} from '../constants';
 
 export const initialState = {
-  isAuthenticated: false,
-  isError: false,
-  errorMessage: ''
+  isAuthenticated: false
 };
 
 export default (state = initialState, action) => {
@@ -17,8 +15,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: false,
-        isError: action.isError,
-        errorMessage: action.errorMessage
+        error: undefined
       };
 
     case AUTH_DISCARD:
@@ -27,17 +24,14 @@ export default (state = initialState, action) => {
     case AUTH_SUCCESS:
       return {
         ...state,
-        isAuthenticated: true,
-        isError: action.isError,
-        errorMessage: action.errorMessage
+        isAuthenticated: true
       };
 
     case AUTH_FAIL:
       return {
         ...state,
         isAuthenticated: false,
-        isError: action.isError,
-        errorMessage: action.errorMessage
+        error: action.error
       };
 
     default:

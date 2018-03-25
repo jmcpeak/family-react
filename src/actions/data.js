@@ -5,7 +5,7 @@ import {
   DATA_ERROR,
   DATA_USER,
   DATA_USERS
-} from '../constants/constants';
+} from '../constants';
 
 export const clearError = () => dispatch =>
   dispatch({ type: DATA_CLEAR_ERROR });

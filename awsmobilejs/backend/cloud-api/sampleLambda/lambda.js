@@ -6,11 +6,11 @@ or in the "license" file accompanying this file. This file is distributed on an 
 See the License for the specific language governing permissions and limitations under the License.
 */
 
-const awsServerlessExpress = require('aws-serverless-express')
-const app = require('./app')
-const server = awsServerlessExpress.createServer(app)
+const awsServerlessExpress = require('aws-serverless-express');
+const app = require('./app');
+const server = awsServerlessExpress.createServer(app);
 
 exports.handler = (event, context) => {
-   console.log("EVENT: " + JSON.stringify(event));
-   awsServerlessExpress.proxy(server, event, context)
-}
+  console.log('EVENT: ' + JSON.stringify(event));
+  awsServerlessExpress.proxy(server, event, context);
+};

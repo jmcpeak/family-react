@@ -47,8 +47,11 @@ const LoginForm = reduxForm({
 })(Login);
 
 const mapStateToProps = state => ({
-  isError: state.auth.isError,
-  errorMessage: state.auth.errorMessage
+  isError: !!state.auth.error,
+  errorMessage:
+    state.auth.error && state.auth.error.response
+      ? state.auth.error.response.data.error
+      : ''
 });
 
 const mapDispatchToProps = dispatch => ({

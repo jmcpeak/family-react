@@ -10,6 +10,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const AWS = require('aws-sdk');
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware');
+// const secret = require('./secret.js').default;
 
 AWS.config.update({ region: process.env.REGION });
 const dynamodb = new AWS.DynamoDB.DocumentClient();
@@ -25,8 +26,9 @@ const sortKeyName = '';
 const sortKeyType = '';
 const hasSortKey = false;
 const path = '/family';
-
 const awsmobile = {};
+const AUTH_HASH = 463258776;
+const AUTH_HASH_GUEST = 98708952;
 
 if (hasDynamicPrefix) {
   tableName = mhprefix + '-' + tableName;
@@ -59,12 +61,43 @@ const convertUrlType = (param, type) => {
   }
 };
 
-/********************************
+/******************************************
+ * HTTP Get method for token verification *
+ ******************************************/
+
+app.get('/family/token/:id', function(req, res) {
+  const getError = (token, err) =>
+    err
+      ? JSON.stringify(err)
+      : token ? 'That is not the right city' : 'You must enter a city name';
+
+  let token;
+
+  try {
+    token = Number.parseInt(req.params[partitionKeyName]);
+
+    // let auth = secret.AUTH_HASH;
+    //
+    // auth.filter(authToken => authToken === token);
+    //
+    // if (auth) {
+
+    if (AUTH_HASH === token || AUTH_HASH_GUEST === token) {
+      res.json({ success: true });
+    } else {
+      res.status(401).send({ error: getError(token) });
+    }
+  } catch (e) {
+    res.status(500).send({ error: getError(token, e) });
+  }
+});
+
+/************************************
  * HTTP Get method for list objects *
- ********************************/
+ ************************************/
 
 app.get('/family/:id', function(req, res) {
-  var condition = {};
+  let condition = {};
   condition[partitionKeyName] = {
     ComparisonOperator: 'EQ'
   };
@@ -102,7 +135,7 @@ app.get('/family/:id', function(req, res) {
  *****************************************/
 
 app.get('/family/object/:id', function(req, res) {
-  var params = {};
+  let params = {};
   if (userIdPresent && req.apiGateway) {
     params[partitionKeyName] =
       req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
@@ -146,7 +179,7 @@ app.get('/family/object/:id', function(req, res) {
   });
 });
 
-/************************************
+/*************************************
  * HTTP put method for insert object *
  *************************************/
 
@@ -160,6 +193,7 @@ app.put(path, function(req, res) {
     TableName: tableName,
     Item: req.body
   };
+
   dynamodb.put(putItemParams, (err, data) => {
     if (err) {
       res.json({ error: err, url: req.url, body: req.body });
@@ -169,9 +203,9 @@ app.put(path, function(req, res) {
   });
 });
 
-/************************************
+/**************************************
  * HTTP post method for insert object *
- *************************************/
+ **************************************/
 
 app.post(path, function(req, res) {
   if (userIdPresent) {
@@ -192,12 +226,13 @@ app.post(path, function(req, res) {
   });
 });
 
-/**************************************
+/***************************************
  * HTTP remove method to delete object *
  ***************************************/
 
 app.delete('/family/object/:id', function(req, res) {
-  var params = {};
+  let params = {};
+
   if (userIdPresent && req.apiGateway) {
     params[partitionKeyName] =
       req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
@@ -212,6 +247,7 @@ app.delete('/family/object/:id', function(req, res) {
       res.json({ error: 'Wrong column type ' + err });
     }
   }
+
   if (hasSortKey) {
     try {
       params[sortKeyName] = convertUrlType(
@@ -227,6 +263,7 @@ app.delete('/family/object/:id', function(req, res) {
     TableName: tableName,
     Key: params
   };
+
   dynamodb.delete(removeItemParams, (err, data) => {
     if (err) {
       res.json({ error: err, url: req.url });

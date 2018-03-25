@@ -1,42 +1,40 @@
+import { API } from 'aws-amplify';
 import { push } from 'react-router-redux';
 import {
   AUTH_CLEAR,
   AUTH_DISCARD,
   AUTH_FAIL,
   AUTH_SUCCESS,
-  AUTH_HASH,
   HASH_CODE
-} from '../constants/constants';
+} from '../constants';
 import { HOME_PATH } from '../containers/home/index';
 import { LOGIN_PATH } from '../containers/login/index';
 
-export const login = () => (dispatch, state) => {
-  let values = state().form.loginForm.values,
-    question = values ? values.question : '',
-    input = HASH_CODE(question.toLowerCase()),
-    isError = true,
-    errorMessage = question.length
-      ? 'That is not the right city'
-      : 'You must enter a city name',
-    path = LOGIN_PATH,
-    type = AUTH_FAIL;
+const API_NAME = 'familyCRUD',
+  PREFIX = '/family',
+  TOKEN = '/token/';
 
-  if (AUTH_HASH === input) {
-    type = AUTH_SUCCESS;
-    path = HOME_PATH;
-    isError = false;
-    errorMessage = '';
+export const clear = () => dispatch => dispatch({ type: AUTH_CLEAR });
+
+export const login = () => async (dispatch, state) => {
+  const values = state().form.loginForm.values,
+    question = values ? values.question.toLowerCase() : '',
+    userInputAsHash = HASH_CODE(question);
+
+  try {
+    const data = await API.get(API_NAME, `${PREFIX}${TOKEN}${userInputAsHash}`);
+
+    if (data && data.success === true) {
+      dispatch({ type: AUTH_SUCCESS });
+      dispatch(push(HOME_PATH));
+    }
+  } catch (error) {
+    dispatch({ type: AUTH_FAIL, error });
+    dispatch(push(LOGIN_PATH));
   }
-
-  dispatch({ type, isError, errorMessage });
-  dispatch(push(path));
 };
 
 export const logout = () => dispatch => {
   dispatch({ type: AUTH_DISCARD });
   dispatch(push(LOGIN_PATH));
-};
-
-export const clear = () => dispatch => {
-  dispatch({ type: AUTH_CLEAR, isError: false, errorMessage: '' });
 };

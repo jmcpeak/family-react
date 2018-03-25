@@ -12,7 +12,7 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Radio, { RadioGroup } from 'material-ui/Radio';
 import Switch from 'material-ui/Switch';
-import { THEME_DARK } from '../constants/constants';
+import { THEME_DARK } from '../constants';
 import { openCloseThemeDrawer } from '../actions/layout';
 import {
   setAvailable,

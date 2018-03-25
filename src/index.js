@@ -7,8 +7,9 @@ import store, { history } from './store';
 import App from './containers/app';
 import registerServiceWorker from './registerServiceWorker';
 import { saveState } from './constants/localStorage';
-import { initialState as layoutInitialState } from './reducers/layout';
+import { initialState as authInitialState } from './reducers/auth';
 import { initialState as dataInitialState } from './reducers/data';
+import { initialState as layoutInitialState } from './reducers/layout';
 import AWS from 'aws-sdk';
 import awsmobile from './aws-exports';
 import Amplify, { Analytics } from 'aws-amplify';
@@ -42,7 +43,10 @@ AWS.config.update({
 store.subscribe(
   throttle(() => {
     saveState({
-      auth: store.getState().auth,
+      auth: {
+        ...authInitialState,
+        isAuthenticated: store.getState().auth.isAuthenticated
+      },
       data: {
         ...dataInitialState,
         user: store.getState().data.user

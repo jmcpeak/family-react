@@ -8,7 +8,7 @@ import {
   THEME_PALETTE_SELECTED,
   THEME_SET_PRIMARY,
   THEME_SET_SECONDARY
-} from '../constants/constants';
+} from '../constants';
 
 export const initialState = {
   available: [],
