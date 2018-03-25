@@ -79,13 +79,13 @@ const UserListItemWithMenu = props => {
             <ListItemIcon>
               <Icon>launch</Icon>
             </ListItemIcon>
-            <ListItemText inset primary="View" />
+            <ListItemText inset primary="View (no-op)" />
           </MenuItem>
           <MenuItem onClose={menuClose}>
             <ListItemIcon>
               <Icon>delete</Icon>
             </ListItemIcon>
-            <ListItemText inset primary="Delete" />
+            <ListItemText inset primary="Delete (no-op)" />
           </MenuItem>
         </Menu>
       </ListItemSecondaryAction>
