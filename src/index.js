@@ -57,7 +57,7 @@ store.subscribe(
       },
       theme: store.getState().theme
     });
-  }, 1500)
+  }, 1000)
 );
 
 render(
