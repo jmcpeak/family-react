@@ -20,7 +20,7 @@ const API_NAME = 'familyCRUD',
 export const clear = () => dispatch => dispatch({ type: AUTH_CLEAR });
 
 export const login = () => async (dispatch, state) => {
-  const values = state().form.loginForm.values,
+  const values = state().form.login.values,
     question = values ? values.question.toLowerCase() : '',
     userInputAsHash = HASH_CODE(question);
 

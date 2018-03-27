@@ -12,9 +12,9 @@ import clover from '../assets/clover.png';
 const mapStateToProps = state => ({
     open: state.layout.aboutOpen
   }),
-  mapDispatchToProps = dispatch => ({
-    close: () => dispatch(aboutClose())
-  });
+  mapDispatchToProps = {
+    close: aboutClose
+  };
 
 const About = props => (
   <Dialog

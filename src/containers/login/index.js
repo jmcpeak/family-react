@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
 import { CircularProgress } from 'material-ui/Progress';
 import { InputAdornment } from 'material-ui/Input';
@@ -8,7 +7,7 @@ import { reduxForm, Field } from 'redux-form';
 import { TextField } from 'redux-form-material-ui';
 import clover from '../../assets/clover.png';
 import './index.css';
-import { clear } from '../../actions/auth';
+import { clear, login } from '../../actions/auth';
 
 export const LOGIN_PATH = '/login',
   PROGRESS = {
@@ -17,6 +16,18 @@ export const LOGIN_PATH = '/login',
         <CircularProgress />
       </InputAdornment>
     )
+  },
+  mapStateToProps = state => ({
+    busy: state.auth.busy,
+    disabled: state.auth.disabled,
+    isError: !!state.auth.error,
+    errorMessage:
+      state.auth.error && state.auth.error.response
+        ? state.auth.error.response.data.error
+        : ''
+  }),
+  mapDispatchToProps = {
+    clear: clear
   };
 
 const Login = props => (
@@ -51,25 +62,8 @@ const Login = props => (
 );
 
 const LoginForm = reduxForm({
-  form: 'loginForm'
+  form: 'login',
+  onSubmit: (values, dispatch) => dispatch(login(values))
 })(Login);
-
-const mapStateToProps = state => ({
-  busy: state.auth.busy,
-  disabled: state.auth.disabled,
-  isError: !!state.auth.error,
-  errorMessage:
-    state.auth.error && state.auth.error.response
-      ? state.auth.error.response.data.error
-      : ''
-});
-
-const mapDispatchToProps = dispatch => ({
-  clear: () => dispatch(clear())
-});
-
-LoginForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

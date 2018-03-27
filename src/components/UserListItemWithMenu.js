@@ -17,20 +17,21 @@ import {
   clearListMenuAnchorEl,
   setListMenuAnchorEl
 } from '../actions/layout';
-import { user } from '../actions/data';
+import { user, remove } from '../actions/data';
 import { LAYOUT_HIDDEN } from '../constants';
 
 const mapStateToProps = state => ({
     userMenus: state.layout.userMenus,
     listMenuAnchorEl: state.layout.listMenuAnchorEl
   }),
-  mapDispatchToProps = dispatch => ({
-    setSelectedUser: data => dispatch(user(data)),
-    hideUserMenu: position => dispatch(hideUserMenu(position)),
-    showUserMenu: position => dispatch(showUserMenu(position)),
-    clearListMenuAnchorEl: () => dispatch(clearListMenuAnchorEl()),
-    setListMenuAnchorEl: element => dispatch(setListMenuAnchorEl(element))
-  });
+  mapDispatchToProps = {
+    setUser: user,
+    hideUserMenu: hideUserMenu,
+    showUserMenu: showUserMenu,
+    clearListMenuAnchorEl: clearListMenuAnchorEl,
+    setListMenuAnchorEl: setListMenuAnchorEl,
+    remove: remove
+  };
 
 const UserListItemWithMenu = props => {
   const { listMenuAnchorEl, position, user } = props,
@@ -39,7 +40,17 @@ const UserListItemWithMenu = props => {
     mouseOver = () => props.showUserMenu(position),
     menuClose = () => props.clearListMenuAnchorEl(),
     menuOpen = event => props.setListMenuAnchorEl(event.currentTarget),
-    setUser = () => props.setSelectedUser(user);
+    setUser = () => props.setUser(user),
+    removeUser = () => {
+      // todo - fix - user is not available
+      props.remove(user);
+      props.clearListMenuAnchorEl();
+    },
+    setUserAndClose = () => {
+      // todo - fix - user is not available
+      props.setUser(user);
+      props.clearListMenuAnchorEl();
+    };
 
   return (
     <ListItem
@@ -75,17 +86,17 @@ const UserListItemWithMenu = props => {
           open={Boolean(listMenuAnchorEl)}
           onClose={menuClose}
         >
-          <MenuItem onClose={menuClose}>
+          <MenuItem onClick={setUserAndClose} onClose={menuClose}>
             <ListItemIcon>
               <Icon>launch</Icon>
             </ListItemIcon>
-            <ListItemText inset primary="View (no-op)" />
+            <ListItemText inset primary="View" />
           </MenuItem>
-          <MenuItem onClose={menuClose}>
+          <MenuItem onClick={removeUser} onClose={menuClose}>
             <ListItemIcon>
               <Icon>delete</Icon>
             </ListItemIcon>
-            <ListItemText inset primary="Delete (no-op)" />
+            <ListItemText inset primary="Delete" />
           </MenuItem>
         </Menu>
       </ListItemSecondaryAction>

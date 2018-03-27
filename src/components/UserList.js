@@ -7,9 +7,9 @@ import UserListItemWithMenu from './UserListItemWithMenu';
 const mapStateToProps = state => ({
     users: state.data.users
   }),
-  mapDispatchToProps = dispatch => ({
-    getUsers: () => dispatch(users())
-  });
+  mapDispatchToProps = {
+    getUsers: users
+  };
 
 class UserList extends PureComponent {
   componentDidMount() {

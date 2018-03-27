@@ -1,6 +1,8 @@
 import {
   DATA_CLEAR_ERROR,
   DATA_ERROR,
+  DATA_ADD_USER,
+  DATA_REMOVE_USER,
   DATA_USER,
   DATA_USERS
 } from '../constants';
@@ -17,6 +19,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         user: action.data
+      };
+
+    case DATA_ADD_USER:
+      return {
+        ...state,
+        users: [...state.users, action.data]
+      };
+
+    case DATA_REMOVE_USER:
+      return {
+        ...state,
+        users: [...state.users] // todo - find and delete
       };
 
     case DATA_USERS:

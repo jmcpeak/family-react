@@ -11,7 +11,7 @@ features:
           sdk-generation-stage-name: Development
         paths:
           /family: !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/family-20180325172740.zip
+            codeFilename: uploads/family-20180326122747.zip
             description: 'Handler for calls to resource path : /family/{proxy+}'
             enableCORS: true
             environment: {}
@@ -24,7 +24,7 @@ features:
             timeout: '3'
             version: WzrWEOrraBPfeeJ64gUfCLWefbKLHh2L
           '/family/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/family-20180325172740.zip
+            codeFilename: uploads/family-20180326122747.zip
             description: 'Handler for calls to resource path : /family/{proxy+}'
             enableCORS: true
             environment: {}
@@ -43,7 +43,7 @@ features:
           sdk-generation-stage-name: Development
         paths:
           /items: !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/sampleLambda-20180325172740.zip
+            codeFilename: uploads/sampleLambda-20180326122747.zip
             description: 'Handler for calls to resource path : /items/{proxy+}'
             enableCORS: true
             environment: {}
@@ -56,7 +56,7 @@ features:
             timeout: '3'
             version: buYBE6pTRWvjNuj3mXV9amM3O.IdRnVp
           '/items/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/sampleLambda-20180325172740.zip
+            codeFilename: uploads/sampleLambda-20180326122747.zip
             description: 'Handler for calls to resource path : /items/{proxy+}'
             enableCORS: true
             environment: {}
@@ -75,7 +75,7 @@ features:
           sdk-generation-stage-name: Development
         paths:
           /todos: !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/todos-20180325164806.zip
+            codeFilename: uploads/todos-20180326122747.zip
             description: 'Handler for calls to resource path : /todos/{proxy+}'
             enableCORS: true
             environment: {}
@@ -88,7 +88,7 @@ features:
             timeout: '3'
             version: X8hOhgtk5GIEFEUsKhdFbUYSPNdmEAMf
           '/todos/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/todos-20180325164806.zip
+            codeFilename: uploads/todos-20180326122747.zip
             description: 'Handler for calls to resource path : /todos/{proxy+}'
             enableCORS: true
             environment: {}

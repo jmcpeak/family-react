@@ -13,6 +13,7 @@ import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
 import { createMuiTheme, MuiThemeProvider } from 'material-ui/styles';
 import { withStyles } from 'material-ui/styles';
+import { add } from '../../actions/data';
 import { changeTab, toggleAddUser, toggleDrawer } from '../../actions/layout';
 import MainMoreMenu from '../../components/MainMoreMenu';
 import About from '../../components/About';
@@ -36,7 +37,8 @@ const drawerWidth = 320,
   mapDispatchToProps = dispatch => ({
     toggleAddUser: () => dispatch(toggleAddUser()),
     toggleDrawer: () => dispatch(toggleDrawer()),
-    changeTab: (event, tab) => dispatch(changeTab(tab))
+    changeTab: (event, tab) => dispatch(changeTab(tab)),
+    addUser: () => dispatch(add())
   }),
   mapStateToProps = state => ({
     activeTab: state.layout.activeTab,
@@ -210,7 +212,7 @@ const Home = props => {
             <div className={classes.drawerHeader} />
             <About />
             <Theme rows={5} columns={4} />
-            <AddUser open={props.addUserOpen} />
+            <AddUser />
             <Card>
               <CardContent>
                 <Tabs

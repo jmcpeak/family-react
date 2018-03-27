@@ -11,9 +11,9 @@ const mapStateToProps = state => ({
     error: state.data.error,
     open: Object.keys(state.data.error).length !== 0
   }),
-  mapDispatchToProps = dispatch => ({
-    close: () => dispatch(clearError())
-  });
+  mapDispatchToProps = {
+    close: clearError
+  };
 
 const ErrorSnackbar = props => (
   <Snackbar

@@ -50,14 +50,14 @@ const mainThemeColorKey = '500',
     paletteSelected: state.theme.paletteSelected,
     type: state.theme.type
   }),
-  mapDispatchToProps = dispatch => ({
-    setAvailable: theme => dispatch(setAvailable(theme)),
-    openCloseThemeDrawer: () => dispatch(openCloseThemeDrawer()),
-    setPrimaryTheme: color => dispatch(setPrimaryTheme(color)),
-    setSecondaryTheme: color => dispatch(setSecondaryTheme(color)),
-    toggleDarkMode: () => dispatch(toggleDarkMode()),
-    togglePaletteSelected: () => dispatch(togglePaletteSelected())
-  });
+  mapDispatchToProps = {
+    setAvailable: setAvailable,
+    openCloseThemeDrawer: openCloseThemeDrawer,
+    setPrimaryTheme: setPrimaryTheme,
+    setSecondaryTheme: setSecondaryTheme,
+    toggleDarkMode: toggleDarkMode,
+    togglePaletteSelected: togglePaletteSelected
+  };
 
 class Theme extends PureComponent {
   constructor(props) {

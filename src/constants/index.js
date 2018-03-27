@@ -7,6 +7,8 @@ const AUTH_BUSY = 'auth/BUSY',
   // Data Constants
   DATA_CLEAR_ERROR = 'data/CLEAR_ERROR',
   DATA_ERROR = 'data/ERROR',
+  DATA_ADD_USER = 'data/ADD_USER',
+  DATA_REMOVE_USER = 'data/REMOVE_USER',
   DATA_USER = 'data/USER',
   DATA_USERS = 'data/USERS',
   // Layout Constants
@@ -58,6 +60,8 @@ export {
   AUTH_SUCCESS,
   DATA_CLEAR_ERROR,
   DATA_ERROR,
+  DATA_ADD_USER,
+  DATA_REMOVE_USER,
   DATA_USER,
   DATA_USERS,
   LAYOUT_DRAWER_CLOSED,

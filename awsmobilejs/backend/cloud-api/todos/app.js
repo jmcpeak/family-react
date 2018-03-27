@@ -63,28 +63,28 @@ const convertUrlType = (param, type) => {
  * HTTP Get method for list objects *
  ********************************/
 
-app.get('/todos/:team', function(req, res) {
-  var condition = {};
-  condition[partitionKeyName] = {
-    ComparisonOperator: 'EQ'
-  };
-
-  if (userIdPresent && req.apiGateway) {
-    condition[partitionKeyName]['AttributeValueList'] = [
-      req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH
-    ];
-  } else {
-    try {
-      condition[partitionKeyName]['AttributeValueList'] = [
-        convertUrlType(req.params[partitionKeyName], partitionKeyType)
-      ];
-    } catch (err) {
-      res.json({ error: 'Wrong column type ' + err });
-    }
-  }
-
-  const minLengthId = 1;
-
+app.get('/todos', function(req, res) {
+  // var condition = {};
+  // condition[partitionKeyName] = {
+  //   ComparisonOperator: 'EQ'
+  // };
+  //
+  // if (userIdPresent && req.apiGateway) {
+  //   condition[partitionKeyName]['AttributeValueList'] = [
+  //     req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH
+  //   ];
+  // } else {
+  //   try {
+  //     condition[partitionKeyName]['AttributeValueList'] = [
+  //       convertUrlType(req.params[partitionKeyName], partitionKeyType)
+  //     ];
+  //   } catch (err) {
+  //     res.json({ error: 'Wrong column type ' + err });
+  //   }
+  // }
+  //
+  // const minLengthId = 1;
+  //
   let queryParams = {
     TableName: tableName
     // KeyConditions: condition
