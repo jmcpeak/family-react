@@ -49,7 +49,8 @@ store.subscribe(
       },
       data: {
         ...dataInitialState,
-        user: store.getState().data.user
+        user: store.getState().data.user,
+        users: store.getState().data.users
       },
       layout: {
         ...layoutInitialState,
