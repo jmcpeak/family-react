@@ -14,7 +14,6 @@ import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
 import { createMuiTheme, MuiThemeProvider } from 'material-ui/styles';
 import { withStyles } from 'material-ui/styles';
-import { add } from '../../actions/data';
 import { changeTab, toggleDrawer } from '../../actions/layout';
 import MainMoreMenu from '../../components/MainMoreMenu';
 import About, { PATH as ABOUT_PATH } from '../../components/About';
@@ -37,12 +36,10 @@ const PATH = '/',
     }),
   mapDispatchToProps = dispatch => ({
     toggleDrawer: () => dispatch(toggleDrawer()),
-    changeTab: (event, tab) => dispatch(changeTab(tab)),
-    addUser: () => dispatch(add())
+    changeTab: (event, tab) => dispatch(changeTab(tab))
   }),
   mapStateToProps = state => ({
     activeTab: state.layout.activeTab,
-    addUserOpen: state.layout.addUserOpen,
     drawerOpen: state.layout.drawerOpen,
     theme: state.theme,
     userMenuVisibility: state.layout.userMenuVisibility,

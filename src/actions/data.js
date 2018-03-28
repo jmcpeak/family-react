@@ -1,6 +1,7 @@
 import { API } from 'aws-amplify';
 import { getUsers } from '../constants/awsWrappers';
 import {
+  ADD_USER_FORM_NAME,
   DATA_CLEAR_ERROR,
   DATA_ERROR,
   DATA_ADD_USER,
@@ -44,16 +45,16 @@ export const users = () => async dispatch => {
   }
 };
 
-export const add = () => async (dispatch, state) => {
+export const add = successCallback => async (dispatch, state) => {
   try {
-    const values = state().form.add.values;
+    const values = state().form[ADD_USER_FORM_NAME].values;
 
     values.todoId = state().data.users.length;
 
     await API.post('todosCRUD', '/todos', { body: values });
 
     dispatch({ type: DATA_ADD_USER, data: values });
-    // todo - navigate to home
+    successCallback();
   } catch (err) {
     dispatch({ type: DATA_ERROR, err });
   }

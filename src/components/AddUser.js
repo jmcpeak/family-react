@@ -9,6 +9,8 @@ import Typography from 'material-ui/Typography';
 import { reduxForm, Field } from 'redux-form';
 import { TextField } from 'redux-form-material-ui';
 import { add } from '../actions/data';
+import { PATH as HOME_PATH } from '../containers/home';
+import { ADD_USER_FORM_NAME } from '../constants';
 
 const PATH = '/add',
   AddUser = props => (
@@ -21,7 +23,7 @@ const PATH = '/add',
           <IconButton
             color="inherit"
             aria-label="Close Add User"
-            onClick={() => props.history.push('/')}
+            onClick={() => props.history.push(HOME_PATH)}
           >
             <Icon>close</Icon>
           </IconButton>
@@ -46,8 +48,9 @@ const PATH = '/add',
   );
 
 const AddUserForm = reduxForm({
-  form: 'add',
-  onSubmit: (values, dispatch) => dispatch(add(values))
+  form: ADD_USER_FORM_NAME,
+  onSubmit: (values, dispatch, props) =>
+    dispatch(add(props.history.push(HOME_PATH)))
 })(AddUser);
 
 export { PATH };
