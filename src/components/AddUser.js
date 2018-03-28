@@ -50,7 +50,7 @@ const PATH = '/add',
 const AddUserForm = reduxForm({
   form: ADD_USER_FORM_NAME,
   onSubmit: (values, dispatch, props) =>
-    dispatch(add(props.history.push(HOME_PATH)))
+    dispatch(add(props.history.push, HOME_PATH))
 })(AddUser);
 
 export { PATH };

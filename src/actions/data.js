@@ -47,17 +47,18 @@ export const users = () => async dispatch => {
   }
 };
 
-export const add = successCallback => async (dispatch, state) => {
+export const add = (successCallback, argument) => async (dispatch, state) => {
+  const user = state().form[ADD_USER_FORM_NAME].values;
+
+  user.todoId = state().data.users.length;
+
+  dispatch({ type: DATA_ADD_USER, data: user });
+  successCallback(argument);
+
   try {
-    const values = state().form[ADD_USER_FORM_NAME].values;
-
-    values.todoId = state().data.users.length;
-
-    await API.post('todosCRUD', '/todos', { body: values });
-
-    dispatch({ type: DATA_ADD_USER, data: values });
-    successCallback();
+    await API.post('todosCRUD', '/todos', { body: user });
   } catch (err) {
+    dispatch({ type: DATA_REMOVE_USER, user });
     dispatch({ type: DATA_ERROR, err });
   }
 };
