@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import AppBar from 'material-ui/AppBar';
@@ -14,18 +15,18 @@ import Icon from 'material-ui/Icon';
 import { createMuiTheme, MuiThemeProvider } from 'material-ui/styles';
 import { withStyles } from 'material-ui/styles';
 import { add } from '../../actions/data';
-import { changeTab, toggleAddUser, toggleDrawer } from '../../actions/layout';
+import { changeTab, toggleDrawer } from '../../actions/layout';
 import MainMoreMenu from '../../components/MainMoreMenu';
-import About from '../../components/About';
-import AddUser from '../../components/AddUser';
+import About, { PATH as ABOUT_PATH } from '../../components/About';
+import AddUser, { PATH as ADD_USER_PATH } from '../../components/AddUser';
 import AppSearch from '../../components/AppSearch';
 import ErrorSnackbar from '../../components/ErrorSnackbar';
-import Theme from '../../components/Theme';
+import Theme, { PATH as THEME_PATH } from '../../components/Theme';
 import UserList from '../../components/UserList';
 import './index.css';
-export const HOME_PATH = '/';
 
-const drawerWidth = 320,
+const PATH = '/',
+  drawerWidth = 320,
   getTheme = theme =>
     createMuiTheme({
       palette: {
@@ -35,7 +36,6 @@ const drawerWidth = 320,
       }
     }),
   mapDispatchToProps = dispatch => ({
-    toggleAddUser: () => dispatch(toggleAddUser()),
     toggleDrawer: () => dispatch(toggleDrawer()),
     changeTab: (event, tab) => dispatch(changeTab(tab)),
     addUser: () => dispatch(add())
@@ -123,6 +123,9 @@ const drawerWidth = 320,
 
 const Home = props => {
   const { activeTab, classes, drawerOpen, user } = props,
+    openAddUser = () => {
+      props.history.push(ADD_USER_PATH);
+    },
     theme = getTheme({
       primary: props.theme.primary,
       secondary: props.theme.secondary,
@@ -161,7 +164,7 @@ const Home = props => {
             <IconButton
               color="inherit"
               aria-label="Add User"
-              onClick={props.toggleAddUser}
+              onClick={openAddUser}
             >
               <Icon>person_add</Icon>
             </IconButton>
@@ -210,9 +213,6 @@ const Home = props => {
             })}
           >
             <div className={classes.drawerHeader} />
-            <About />
-            <Theme rows={5} columns={4} />
-            <AddUser />
             <Card>
               <CardContent>
                 <Tabs
@@ -229,6 +229,9 @@ const Home = props => {
               </CardContent>
             </Card>
           </main>
+          <Route path={ABOUT_PATH} component={About} />
+          <Route path={THEME_PATH} component={Theme} />
+          <Route path={ADD_USER_PATH} component={AddUser} />
         </div>
       </div>
       <ErrorSnackbar />
@@ -236,6 +239,7 @@ const Home = props => {
   );
 };
 
+export { PATH };
 export default withStyles(styles)(
-  connect(mapStateToProps, mapDispatchToProps)(Home)
+  withRouter(connect(mapStateToProps, mapDispatchToProps)(Home))
 );

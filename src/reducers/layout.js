@@ -7,19 +7,13 @@ import {
   LAYOUT_LIST_MENU_CLEAR_ANCHOR_EL,
   LAYOUT_MORE_MENU_CLEAR_ANCHOR_EL,
   LAYOUT_MORE_MENU_SET_ANCHOR_EL,
-  LAYOUT_OPEN_CLOSE_THEME_DRAWER,
   LAYOUT_HIDDEN,
   LAYOUT_VISIBLE,
-  LAYOUT_ABOUT_CLOSE,
-  LAYOUT_ABOUT_OPEN,
-  LAYOUT_CHANGE_TAB,
-  LAYOUT_ADD_USER_TOGGLE
+  LAYOUT_CHANGE_TAB
 } from '../constants';
 
 export const initialState = {
-  aboutOpen: false,
   activeTab: 0,
-  addUserOpen: false,
   drawerOpen: true,
   listMenuAnchorEl: null,
   moreMenuAnchorEl: null,
@@ -83,34 +77,10 @@ export default (state = initialState, action) => {
         moreMenuAnchorEl: action.payload
       };
 
-    case LAYOUT_ABOUT_CLOSE:
-      return {
-        ...state,
-        aboutOpen: false
-      };
-
-    case LAYOUT_ABOUT_OPEN:
-      return {
-        ...state,
-        aboutOpen: true
-      };
-
     case LAYOUT_CHANGE_TAB:
       return {
         ...state,
         activeTab: action.payload
-      };
-
-    case LAYOUT_ADD_USER_TOGGLE:
-      return {
-        ...state,
-        addUserOpen: !state.addUserOpen
-      };
-
-    case LAYOUT_OPEN_CLOSE_THEME_DRAWER:
-      return {
-        ...state,
-        themeDrawerOpen: !state.themeDrawerOpen
       };
 
     default:

@@ -1,30 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
 import { ListItemIcon, ListItemText } from 'material-ui/List';
 import Tooltip from 'material-ui/Tooltip';
-import {
-  aboutOpen,
-  clearMoreMenuAnchorEl,
-  openCloseThemeDrawer,
-  setMoreMenuAnchorEl
-} from '../actions/layout';
+import { clearMoreMenuAnchorEl, setMoreMenuAnchorEl } from '../actions/layout';
 import { logout } from '../actions/auth';
+import { PATH as ABOUT_PATH } from './About';
+import { PATH as THEME_PATH } from './Theme';
 
 const mapStateToProps = state => ({
     moreMenuAnchorEl: state.layout.moreMenuAnchorEl
   }),
   mapDispatchToProps = dispatch => ({
-    aboutOpen: () => {
-      dispatch(clearMoreMenuAnchorEl());
-      dispatch(aboutOpen());
-    },
-    openCloseThemeDrawer: () => {
-      dispatch(clearMoreMenuAnchorEl());
-      dispatch(openCloseThemeDrawer());
-    },
     logout: () => {
       dispatch(clearMoreMenuAnchorEl());
       dispatch(logout());
@@ -34,10 +24,18 @@ const mapStateToProps = state => ({
   });
 
 const MainMoreMenu = props => {
-  const { moreMenuAnchorEl } = props,
+  const { logout, moreMenuAnchorEl } = props,
     MORE_MENU_ID = 'moreMenuId',
     menuClose = () => props.clearMoreMenuAnchorEl(),
-    menuOpen = event => props.setMoreMenuAnchorEl(event.currentTarget);
+    menuOpen = event => props.setMoreMenuAnchorEl(event.currentTarget),
+    about = () => {
+      props.history.push(ABOUT_PATH);
+      menuClose();
+    },
+    theme = () => {
+      props.history.push(THEME_PATH);
+      menuClose();
+    };
 
   return (
     <section>
@@ -58,19 +56,19 @@ const MainMoreMenu = props => {
         open={Boolean(moreMenuAnchorEl)}
         onClose={menuClose}
       >
-        <MenuItem onClick={props.openCloseThemeDrawer}>
+        <MenuItem onClick={theme}>
           <ListItemIcon>
             <Icon>color_lens</Icon>
           </ListItemIcon>
           <ListItemText inset primary="Theme Colors" />
         </MenuItem>
-        <MenuItem onClick={props.aboutOpen}>
+        <MenuItem onClick={about}>
           <ListItemIcon>
             <Icon>speaker_notes</Icon>
           </ListItemIcon>
           <ListItemText inset primary="About" />
         </MenuItem>
-        <MenuItem onClick={props.logout}>
+        <MenuItem onClick={logout}>
           <ListItemIcon>
             <Icon>exit_to_app</Icon>
           </ListItemIcon>
@@ -81,4 +79,6 @@ const MainMoreMenu = props => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainMoreMenu);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(MainMoreMenu)
+);

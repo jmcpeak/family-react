@@ -9,8 +9,8 @@ import clover from '../../assets/clover.png';
 import './index.css';
 import { clear, login } from '../../actions/auth';
 
-export const LOGIN_PATH = '/login',
-  PROGRESS = {
+const PATH = '/login',
+  progress = {
     endAdornment: (
       <InputAdornment position="start">
         <CircularProgress />
@@ -42,7 +42,7 @@ const Login = props => (
         disabled={props.disabled}
         error={props.isError}
         helperText={props.errorMessage}
-        InputProps={props.busy ? PROGRESS : undefined}
+        InputProps={props.busy ? progress : undefined}
         label="What city is the Family Reunion usually held in?"
         margin="normal"
         name="question"
@@ -66,4 +66,5 @@ const LoginForm = reduxForm({
   onSubmit: (values, dispatch) => dispatch(login(values))
 })(Login);
 
+export { PATH };
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

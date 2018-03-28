@@ -12,8 +12,8 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Radio, { RadioGroup } from 'material-ui/Radio';
 import Switch from 'material-ui/Switch';
+import { PATH as HOME_PATH } from '../containers/home';
 import { THEME_DARK } from '../constants';
-import { openCloseThemeDrawer } from '../actions/layout';
 import {
   setAvailable,
   setPrimaryTheme,
@@ -22,7 +22,8 @@ import {
   togglePaletteSelected
 } from '../actions/theme';
 
-const mainThemeColorKey = '500',
+const PATH = '/theme',
+  mainThemeColorKey = '500',
   orderedThemeColors = [
     'red',
     'pink',
@@ -52,7 +53,6 @@ const mainThemeColorKey = '500',
   }),
   mapDispatchToProps = {
     setAvailable: setAvailable,
-    openCloseThemeDrawer: openCloseThemeDrawer,
     setPrimaryTheme: setPrimaryTheme,
     setSecondaryTheme: setSecondaryTheme,
     toggleDarkMode: toggleDarkMode,
@@ -114,9 +114,8 @@ class Theme extends PureComponent {
 
   render() {
     const {
+      history,
       themes,
-      open,
-      openCloseThemeDrawer,
       paletteSelected,
       setPrimaryTheme,
       setSecondaryTheme,
@@ -124,6 +123,7 @@ class Theme extends PureComponent {
       togglePaletteSelected,
       type
     } = this.props;
+
     let rows = [];
 
     const ThemeButton = props => {
@@ -146,6 +146,7 @@ class Theme extends PureComponent {
           </Button>
         );
       },
+      close = () => history.push(HOME_PATH),
       getThemeButton = (theme, index) => (
         <ThemeButton key={index} theme={theme} index={index} />
       );
@@ -161,17 +162,13 @@ class Theme extends PureComponent {
     });
 
     return (
-      <Drawer anchor={'right'} open={open}>
+      <Drawer anchor={'right'} open={true}>
         <AppBar position={'static'} color={'secondary'}>
           <Toolbar>
             <Typography variant="title" color="inherit" style={{ flex: 1 }}>
               {'Theme Color'}
             </Typography>
-            <IconButton
-              color="inherit"
-              aria-label="Close"
-              onClick={openCloseThemeDrawer}
-            >
+            <IconButton color="inherit" aria-label="Close" onClick={close}>
               <Icon>close</Icon>
             </IconButton>
           </Toolbar>
@@ -245,4 +242,5 @@ Theme.propTypes = {
   row: PropTypes.number
 };
 
+export { PATH };
 export default connect(mapStateToProps, mapDispatchToProps)(Theme);

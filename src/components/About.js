@@ -1,25 +1,18 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Button from 'material-ui/Button';
 import Dialog, {
   DialogActions,
   DialogContent,
   DialogTitle
 } from 'material-ui/Dialog';
-import { aboutClose } from '../actions/layout';
+import { PATH as HOME_PATH } from '../containers/home';
 import clover from '../assets/clover.png';
 
-const mapStateToProps = state => ({
-    open: state.layout.aboutOpen
-  }),
-  mapDispatchToProps = {
-    close: aboutClose
-  };
+export const PATH = '/about';
 
-const About = props => (
+export default props => (
   <Dialog
-    open={props.open}
-    onClose={props.close}
+    open={true}
     aria-labelledby="alert-dialog-title"
     aria-describedby="alert-dialog-description"
   >
@@ -66,11 +59,13 @@ const About = props => (
       </div>
     </DialogContent>
     <DialogActions>
-      <Button onClick={props.close} color="primary" autoFocus>
+      <Button
+        onClick={() => props.history.push(HOME_PATH)}
+        color="primary"
+        autoFocus
+      >
         Close
       </Button>
     </DialogActions>
   </Dialog>
 );
-
-export default connect(mapStateToProps, mapDispatchToProps)(About);

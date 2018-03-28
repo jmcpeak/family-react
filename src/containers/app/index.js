@@ -1,25 +1,25 @@
 import React from 'react';
-import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { Redirect, Route, Switch } from 'react-router-dom';
-
-import HomeContainer, { HOME_PATH } from '../home';
-import LoginContainer, { LOGIN_PATH } from '../login';
-import MemberContainer, { MEMBER_PATH } from '../member';
+import { withRouter, Route, Switch, Redirect } from 'react-router';
+import HomeContainer, { PATH as HOME_PATH } from '../home';
+import LoginContainer, { PATH as LOGIN_PATH } from '../login';
 
 const PrivateRoute = connect(state => ({
   isAuthenticated: state.auth.isAuthenticated
 }))(
   props =>
-    props.isAuthenticated ? <props.component /> : <Redirect to={LOGIN_PATH} />
+    props.isAuthenticated ? (
+      <props.component {...props} />
+    ) : (
+      <Redirect to={LOGIN_PATH} {...props} />
+    )
 );
 
-const Section = props => (
+const App = props => (
   <Switch>
     <Route path={LOGIN_PATH} component={LoginContainer} />
     <PrivateRoute path={HOME_PATH} component={HomeContainer} />
-    <PrivateRoute path={MEMBER_PATH} component={MemberContainer} />
   </Switch>
 );
 
-export default withRouter(Section);
+export default withRouter(App);
