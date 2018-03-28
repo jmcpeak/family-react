@@ -62,10 +62,9 @@ export const add = successCallback => async (dispatch, state) => {
 
 export const remove = user => async dispatch => {
   try {
-    // todo - implement delete here
-    await API.get('todosCRUD', '/todos/' + user.todoId);
+    await API.del('todosCRUD', `/todos/object/${user.team}/${user.todoId}`);
 
-    dispatch({ type: DATA_REMOVE_USER, data: user });
+    dispatch({ type: DATA_REMOVE_USER, user });
   } catch (err) {
     dispatch({ type: DATA_ERROR, err });
   }

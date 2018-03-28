@@ -30,7 +30,7 @@ export default (state = initialState, action) => {
     case DATA_REMOVE_USER:
       return {
         ...state,
-        users: [...state.users] // todo - find and delete
+        users: state.users.filter(item => item !== action.user)
       };
 
     case DATA_USERS:

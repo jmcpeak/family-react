@@ -186,10 +186,11 @@ app.post(path, function(req, res) {
       req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
   }
 
-  let putItemParams = {
+  const putItemParams = {
     TableName: tableName,
     Item: req.body
   };
+
   dynamodb.put(putItemParams, (err, data) => {
     if (err) {
       res.json({ error: err, url: req.url, body: req.body });
@@ -205,6 +206,7 @@ app.post(path, function(req, res) {
 
 app.delete('/todos/object/:team/:todoId', function(req, res) {
   var params = {};
+
   if (userIdPresent && req.apiGateway) {
     params[partitionKeyName] =
       req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
