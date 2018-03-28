@@ -123,9 +123,6 @@ const PATH = '/',
 
 const Home = props => {
   const { activeTab, classes, drawerOpen, user } = props,
-    openAddUser = () => {
-      props.history.push(ADD_USER_PATH);
-    },
     theme = getTheme({
       primary: props.theme.primary,
       secondary: props.theme.secondary,
@@ -164,7 +161,7 @@ const Home = props => {
             <IconButton
               color="inherit"
               aria-label="Add User"
-              onClick={openAddUser}
+              onClick={() => props.history.push(ADD_USER_PATH)}
             >
               <Icon>person_add</Icon>
             </IconButton>
