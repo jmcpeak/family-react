@@ -7,11 +7,7 @@ import {
   LAYOUT_LIST_MENU_CLEAR_ANCHOR_EL,
   LAYOUT_MORE_MENU_CLEAR_ANCHOR_EL,
   LAYOUT_MORE_MENU_SET_ANCHOR_EL,
-  LAYOUT_OPEN_CLOSE_THEME_DRAWER,
-  LAYOUT_ABOUT_CLOSE,
-  LAYOUT_ABOUT_OPEN,
-  LAYOUT_CHANGE_TAB,
-  LAYOUT_ADD_USER_TOGGLE
+  LAYOUT_CHANGE_TAB
 } from '../constants';
 
 export const toggleDrawer = () => (dispatch, getState) => {
@@ -37,17 +33,5 @@ export const clearMoreMenuAnchorEl = () => dispatch =>
 export const setMoreMenuAnchorEl = element => dispatch =>
   dispatch({ type: LAYOUT_MORE_MENU_SET_ANCHOR_EL, payload: element });
 
-export const aboutClose = () => dispatch =>
-  dispatch({ type: LAYOUT_ABOUT_CLOSE });
-
-export const aboutOpen = () => dispatch =>
-  dispatch({ type: LAYOUT_ABOUT_OPEN });
-
 export const changeTab = tab => dispatch =>
   dispatch({ type: LAYOUT_CHANGE_TAB, payload: tab });
-
-export const toggleAddUser = () => dispatch =>
-  dispatch({ type: LAYOUT_ADD_USER_TOGGLE });
-
-export const openCloseThemeDrawer = () => dispatch =>
-  dispatch({ type: LAYOUT_OPEN_CLOSE_THEME_DRAWER });

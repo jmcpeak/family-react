@@ -6,8 +6,7 @@ import {
   DATA_ADD_USER,
   DATA_REMOVE_USER,
   DATA_USER,
-  DATA_USERS,
-  LAYOUT_ADD_USER_TOGGLE
+  DATA_USERS
 } from '../constants';
 
 export const clearError = () => dispatch =>
@@ -54,7 +53,7 @@ export const add = () => async (dispatch, state) => {
     await API.post('todosCRUD', '/todos', { body: values });
 
     dispatch({ type: DATA_ADD_USER, data: values });
-    dispatch({ type: LAYOUT_ADD_USER_TOGGLE });
+    // todo - navigate to home
   } catch (err) {
     dispatch({ type: DATA_ERROR, err });
   }

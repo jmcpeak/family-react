@@ -10,8 +10,8 @@ import {
   BUSY_DELAY,
   HASH_CODE
 } from '../constants';
-import { HOME_PATH } from '../containers/home/index';
-import { LOGIN_PATH } from '../containers/login/index';
+import { PATH as HOME_PATH } from '../containers/home/index';
+import { PATH as LOGIN_PATH } from '../containers/login/index';
 
 const API_NAME = 'familyCRUD',
   PREFIX = '/family',
