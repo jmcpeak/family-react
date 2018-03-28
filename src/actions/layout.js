@@ -24,8 +24,8 @@ export const showUserMenu = position => dispatch =>
 export const clearListMenuAnchorEl = () => dispatch =>
   dispatch({ type: LAYOUT_LIST_MENU_CLEAR_ANCHOR_EL });
 
-export const setListMenuAnchorEl = element => dispatch =>
-  dispatch({ type: LAYOUT_LIST_MENU_SET_ANCHOR_EL, payload: element });
+export const setListMenuAnchorEl = (element, user) => dispatch =>
+  dispatch({ type: LAYOUT_LIST_MENU_SET_ANCHOR_EL, element, user });
 
 export const clearMoreMenuAnchorEl = () => dispatch =>
   dispatch({ type: LAYOUT_MORE_MENU_CLEAR_ANCHOR_EL });

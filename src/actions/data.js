@@ -59,13 +59,12 @@ export const add = () => async (dispatch, state) => {
   }
 };
 
-export const remove = id => async dispatch => {
+export const remove = user => async dispatch => {
   try {
-    console.log('before remove: ', id.todoId);
-    // todo - fix me
-    await API.delete('todosCRUD', '/todos/' + id.todoId);
+    // todo - implement delete here
+    await API.get('todosCRUD', '/todos/' + user.todoId);
 
-    dispatch({ type: DATA_REMOVE_USER, data: id });
+    dispatch({ type: DATA_REMOVE_USER, data: user });
   } catch (err) {
     dispatch({ type: DATA_ERROR, err });
   }

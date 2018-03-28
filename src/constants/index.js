@@ -32,6 +32,7 @@ const AUTH_BUSY = 'auth/BUSY',
   THEME_SET_PRIMARY = 'theme/SET_PRIMARY',
   THEME_SET_SECONDARY = 'theme/SET_SECONDARY',
   BUSY_DELAY = 400,
+  USER_MENU_ID = 'userMenu',
   HASH_CODE = str => {
     let hash = 0,
       len = str.length,
@@ -79,5 +80,6 @@ export {
   THEME_SET_PRIMARY,
   THEME_SET_SECONDARY,
   BUSY_DELAY,
+  USER_MENU_ID,
   HASH_CODE
 };

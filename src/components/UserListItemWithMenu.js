@@ -4,21 +4,19 @@ import { connect } from 'react-redux';
 import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
-import Menu, { MenuItem } from 'material-ui/Menu';
 import {
   ListItem,
-  ListItemIcon,
   ListItemText,
   ListItemSecondaryAction
 } from 'material-ui/List';
+
 import {
   hideUserMenu,
   showUserMenu,
-  clearListMenuAnchorEl,
   setListMenuAnchorEl
 } from '../actions/layout';
-import { user, remove } from '../actions/data';
-import { LAYOUT_HIDDEN } from '../constants';
+import { user } from '../actions/data';
+import { LAYOUT_HIDDEN, USER_MENU_ID } from '../constants';
 
 const mapStateToProps = state => ({
     userMenus: state.layout.userMenus,
@@ -28,29 +26,15 @@ const mapStateToProps = state => ({
     setUser: user,
     hideUserMenu: hideUserMenu,
     showUserMenu: showUserMenu,
-    clearListMenuAnchorEl: clearListMenuAnchorEl,
-    setListMenuAnchorEl: setListMenuAnchorEl,
-    remove: remove
+    setListMenuAnchorEl: setListMenuAnchorEl
   };
 
 const UserListItemWithMenu = props => {
   const { listMenuAnchorEl, position, user } = props,
-    MENU_ID = 'listMenu',
+    ICON_BUTTON_ID = `iconButtonMenu${position}`,
     mouseOut = () => props.hideUserMenu(position),
     mouseOver = () => props.showUserMenu(position),
-    menuClose = () => props.clearListMenuAnchorEl(),
-    menuOpen = event => props.setListMenuAnchorEl(event.currentTarget),
-    setUser = () => props.setUser(user),
-    removeUser = () => {
-      // todo - fix - user is not available
-      props.remove(user);
-      props.clearListMenuAnchorEl();
-    },
-    setUserAndClose = () => {
-      // todo - fix - user is not available
-      props.setUser(user);
-      props.clearListMenuAnchorEl();
-    };
+    setUser = () => props.setUser(user);
 
   return (
     <ListItem
@@ -71,34 +55,18 @@ const UserListItemWithMenu = props => {
         }}
       >
         <IconButton
+          id={ICON_BUTTON_ID}
+          aria-label="Menu"
+          aria-owns={listMenuAnchorEl ? USER_MENU_ID : null}
+          aria-haspopup="true"
           onMouseOver={mouseOver}
           onMouseOut={mouseOut}
-          aria-label="Menu"
-          aria-owns={listMenuAnchorEl ? MENU_ID : null}
-          aria-haspopup="true"
-          onClick={menuOpen}
+          onClick={event =>
+            props.setListMenuAnchorEl(event.currentTarget, user)
+          }
         >
           <Icon>more_vert</Icon>
         </IconButton>
-        <Menu
-          id={MENU_ID}
-          anchorEl={listMenuAnchorEl}
-          open={Boolean(listMenuAnchorEl)}
-          onClose={menuClose}
-        >
-          <MenuItem onClick={setUserAndClose} onClose={menuClose}>
-            <ListItemIcon>
-              <Icon>launch</Icon>
-            </ListItemIcon>
-            <ListItemText inset primary="View" />
-          </MenuItem>
-          <MenuItem onClick={removeUser} onClose={menuClose}>
-            <ListItemIcon>
-              <Icon>delete</Icon>
-            </ListItemIcon>
-            <ListItemText inset primary="Delete" />
-          </MenuItem>
-        </Menu>
       </ListItemSecondaryAction>
     </ListItem>
   );

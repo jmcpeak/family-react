@@ -62,7 +62,8 @@ export default (state = initialState, action) => {
     case LAYOUT_LIST_MENU_SET_ANCHOR_EL:
       return {
         ...state,
-        listMenuAnchorEl: action.payload
+        listMenuAnchorEl: action.element,
+        user: action.user
       };
 
     case LAYOUT_MORE_MENU_CLEAR_ANCHOR_EL:
