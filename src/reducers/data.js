@@ -6,14 +6,16 @@ import {
   DATA_REMOVE_USER,
   DATA_UNDO_REMOVE_USER,
   DATA_USER,
-  DATA_USERS
+  DATA_USERS,
+  DATA_USERS_BUSY
 } from '../constants';
 
 export const initialState = {
   error: {},
   undo: {},
   user: {},
-  users: []
+  users: [],
+  usersBusy: false
 };
 
 export default (state = initialState, action) => {
@@ -62,13 +64,21 @@ export default (state = initialState, action) => {
     case DATA_USERS:
       return {
         ...state,
-        users: action.data
+        users: action.data,
+        usersBusy: false
+      };
+
+    case DATA_USERS_BUSY:
+      return {
+        ...state,
+        usersBusy: true
       };
 
     case DATA_ERROR:
       return {
         ...state,
-        error: action.err
+        error: action.err,
+        usersBusy: false
       };
 
     case DATA_CLEAR_ERROR:

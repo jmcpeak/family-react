@@ -31,12 +31,14 @@ export const login = () => async (dispatch, state) => {
     const data = await API.get(API_NAME, `${PREFIX}${TOKEN}${userInputAsHash}`);
 
     if (data && data.success === true) {
-      dispatch({ type: AUTH_SUCCESS, timer });
+      dispatch({ type: AUTH_SUCCESS });
       dispatch(push(HOME_PATH));
     }
+    clearTimeout(timer);
   } catch (error) {
-    dispatch({ type: AUTH_FAIL, error, timer });
+    dispatch({ type: AUTH_FAIL, error });
     dispatch(push(LOGIN_PATH));
+    clearTimeout(timer);
   }
 };
 

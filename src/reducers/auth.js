@@ -36,7 +36,6 @@ export default (state = initialState, action) => {
       return {};
 
     case AUTH_SUCCESS:
-      clearTimeout(action.timer);
       return {
         ...state,
         busy: false,
@@ -45,7 +44,6 @@ export default (state = initialState, action) => {
       };
 
     case AUTH_FAIL:
-      clearTimeout(action.timer);
       return {
         ...state,
         busy: false,

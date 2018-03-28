@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import AppBar from 'material-ui/AppBar';
 import Card, { CardContent } from 'material-ui/Card';
+import { CircularProgress } from 'material-ui/Progress';
 import Drawer from 'material-ui/Drawer';
 import Grid from 'material-ui/Grid';
 import Tabs, { Tab } from 'material-ui/Tabs';
@@ -44,7 +45,8 @@ const PATH = '/',
     drawerOpen: state.layout.drawerOpen,
     theme: state.theme,
     userMenuVisibility: state.layout.userMenuVisibility,
-    user: state.data.user
+    user: state.data.user,
+    usersBusy: state.data.usersBusy
   }),
   styles = theme => ({
     root: {
@@ -147,7 +149,9 @@ const Home = props => {
           </IconButton>
           <Typography variant="title" color="inherit" className={classes.flex}>
             {user
-              ? `${user.team} ${user.text ? '&' : ''} ${user.text}`
+              ? `${user.team} ${user.text ? '&' : ''} ${
+                  user.text ? user.text : ''
+                }`
               : 'Select a user'}
           </Typography>
           <AppSearch />
@@ -187,6 +191,7 @@ const Home = props => {
               </Typography>
             </Grid>
           </Grid>
+          {props.usersBusy && <CircularProgress style={{ paddingTop: 5 }} />}
           <IconButton onClick={props.toggleDrawer}>
             <Icon>chevron_left</Icon>
           </IconButton>

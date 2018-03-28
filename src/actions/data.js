@@ -2,6 +2,7 @@ import { API } from 'aws-amplify';
 import { getUsers } from '../constants/awsWrappers';
 import {
   ADD_USER_FORM_NAME,
+  BUSY_DELAY,
   DATA_CLEAR_ERROR,
   DATA_CLEAR_UNDO,
   DATA_ERROR,
@@ -9,7 +10,8 @@ import {
   DATA_REMOVE_USER,
   DATA_UNDO_REMOVE_USER,
   DATA_USER,
-  DATA_USERS
+  DATA_USERS,
+  DATA_USERS_BUSY
 } from '../constants';
 
 export const clearError = () => dispatch =>
@@ -34,6 +36,11 @@ export const usersOrg = () => async dispatch => {
 };
 
 export const users = () => async dispatch => {
+  const timer = setTimeout(
+    () => dispatch({ type: DATA_USERS_BUSY }),
+    BUSY_DELAY
+  );
+
   try {
     const data = await API.get('todosCRUD', `/todos`);
 
@@ -42,8 +49,10 @@ export const users = () => async dispatch => {
     } else {
       dispatch({ type: DATA_USERS, data });
     }
+    clearTimeout(timer);
   } catch (err) {
     dispatch({ type: DATA_ERROR, err });
+    clearTimeout(timer);
   }
 };
 
