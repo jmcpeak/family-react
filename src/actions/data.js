@@ -3,9 +3,11 @@ import { getUsers } from '../constants/awsWrappers';
 import {
   ADD_USER_FORM_NAME,
   DATA_CLEAR_ERROR,
+  DATA_CLEAR_UNDO,
   DATA_ERROR,
   DATA_ADD_USER,
   DATA_REMOVE_USER,
+  DATA_UNDO_REMOVE_USER,
   DATA_USER,
   DATA_USERS
 } from '../constants';
@@ -60,11 +62,17 @@ export const add = successCallback => async (dispatch, state) => {
   }
 };
 
-export const remove = user => async dispatch => {
+export const remove = user => async dispatch =>
+  dispatch({ type: DATA_REMOVE_USER, user });
+
+export const undoRemove = user => async dispatch =>
+  dispatch({ type: DATA_UNDO_REMOVE_USER, user });
+
+export const actuallyRemove = user => async dispatch => {
+  dispatch({ type: DATA_CLEAR_UNDO });
+
   try {
     await API.del('todosCRUD', `/todos/object/${user.team}/${user.todoId}`);
-
-    dispatch({ type: DATA_REMOVE_USER, user });
   } catch (err) {
     dispatch({ type: DATA_ERROR, err });
   }

@@ -21,6 +21,7 @@ import AddUser, { PATH as ADD_USER_PATH } from '../../components/AddUser';
 import AppSearch from '../../components/AppSearch';
 import ErrorSnackbar from '../../components/ErrorSnackbar';
 import Theme, { PATH as THEME_PATH } from '../../components/Theme';
+import UndoSnackbar from '../../components/UndoSnackbar';
 import UserList from '../../components/UserList';
 import './index.css';
 
@@ -229,6 +230,7 @@ const Home = props => {
         </div>
       </div>
       <ErrorSnackbar />
+      <UndoSnackbar />
     </MuiThemeProvider>
   );
 };
