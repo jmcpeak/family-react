@@ -36,6 +36,7 @@ const PATH = '/',
   mapStateToProps = state => ({
     drawerOpen: state.layout.drawerOpen,
     theme: state.theme,
+    user: state.data.user,
     usersBusy: state.data.usersBusy
   }),
   styles = theme => ({
@@ -60,16 +61,35 @@ const PATH = '/',
       justifyContent: 'flex-end',
       padding: '0 8px',
       ...theme.mixins.toolbar
+    },
+    center: {
+      float: 'left',
+      position: 'relative',
+      left: '50%',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      opacity: 0.35
     }
   });
 
 const Home = props => {
-  const { classes, drawerOpen } = props,
+  const { classes, drawerOpen, user } = props,
     theme = getTheme({
       primary: props.theme.primary,
       secondary: props.theme.secondary,
       type: props.theme.type
     }),
+    empty = (
+      <div>
+        <Typography
+          variant="display1"
+          color="textSecondary"
+          className={classes.center}
+        >
+          No Family Member Selected
+        </Typography>
+      </div>
+    ),
     drawer = (
       <Drawer
         variant="persistent"
@@ -104,7 +124,7 @@ const Home = props => {
         <div className={classes.appFrame}>
           {drawer}
 
-          <User />
+          {Object.keys(user).length ? <User /> : empty}
 
           <Route path={ABOUT_PATH} component={About} />
           <Route path={THEME_PATH} component={Theme} />

@@ -39,6 +39,7 @@ export default (state = initialState, action) => {
           if (item === action.user) action.user.position = index;
           return item !== action.user;
         }),
+        user: initialState.user,
         undo: action.user
       };
 
@@ -52,6 +53,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         users: newUsers,
+        user: action.user,
         undo: initialState.undo
       };
 
