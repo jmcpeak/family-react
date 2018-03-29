@@ -34,3 +34,4 @@ awsmobilejs/backend/cloud-api/sampleLambda/node_modules
 awsmobilejs/backend/cloud-api/todos/node_modules
 ~awsmobilejs-*/
 /awsmobilejs/backend/cloud-api/family/secret.js
+/Invalidate CloudFront cache cmd
