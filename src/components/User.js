@@ -91,6 +91,17 @@ const PATH = '/:team/:id',
 class User extends React.Component {
   currentUserParams = {};
 
+  constructor(props) {
+    super(props);
+
+    const { params } = props.match;
+
+    if (this.currentUserParams.id !== params.id) {
+      props.getUser(params.team, params.id);
+      this.currentUserParams = params;
+    }
+  }
+
   componentDidUpdate() {
     const { params } = this.props.match;
 

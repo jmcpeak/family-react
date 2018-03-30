@@ -15,6 +15,7 @@ export const initialState = {
   undo: {},
   user: {},
   users: [],
+  cachedUsers: [],
   usersBusy: false
 };
 
@@ -23,7 +24,8 @@ export default (state = initialState, action) => {
     case DATA_USER:
       return {
         ...state,
-        user: action.data
+        user: action.data,
+        cachedUsers: [...state.cachedUsers, action.data]
       };
 
     case DATA_ADD_USER:

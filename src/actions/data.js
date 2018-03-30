@@ -19,8 +19,17 @@ export const clearError = () => dispatch =>
 
 export const user = (team, id) => async (dispatch, state) => {
   try {
-    const data = await API.get('todosCRUD', `/todos/object/${team}/${id}`);
-    dispatch({ type: DATA_USER, data });
+    // Has this users data already been loaded this session?
+    let cachedUser = state().data.cachedUsers.filter(
+      user => user.team === team && user.todoId === Number(id)
+    );
+
+    if (cachedUser.length) {
+      dispatch({ type: DATA_USER, data: cachedUser[0] });
+    } else {
+      const data = await API.get('todosCRUD', `/todos/object/${team}/${id}`);
+      dispatch({ type: DATA_USER, data });
+    }
   } catch (err) {
     dispatch({ type: DATA_ERROR, err });
   }
