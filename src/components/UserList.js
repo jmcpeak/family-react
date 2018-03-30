@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { users } from '../actions/data';
+import Hidden from 'material-ui/Hidden';
 import Icon from 'material-ui/Icon';
 import List, { ListItemIcon, ListItemText } from 'material-ui/List';
+import ListSubheader from 'material-ui/List/ListSubheader';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import UserListItemWithMenu from './UserListItemWithMenu';
 import { USER_MENU_ID } from '../constants';
@@ -49,6 +51,9 @@ class UserList extends PureComponent {
     return (
       <span>
         <List>
+          <Hidden smUp>
+            <ListSubheader>ToDo - Search Bar</ListSubheader>
+          </Hidden>
           {users.map((user, index) => (
             <UserListItemWithMenu key={index} position={index} user={user} />
           ))}

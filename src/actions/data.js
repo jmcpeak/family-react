@@ -17,9 +17,9 @@ import {
 export const clearError = () => dispatch =>
   dispatch({ type: DATA_CLEAR_ERROR });
 
-export const user = data => async dispatch => {
+export const user = (team, id) => async (dispatch, state) => {
   try {
-    // const data = await getUser(id);
+    const data = await API.get('todosCRUD', `/todos/object/${team}/${id}`);
     dispatch({ type: DATA_USER, data });
   } catch (err) {
     dispatch({ type: DATA_ERROR, err });

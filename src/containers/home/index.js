@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { CircularProgress } from 'material-ui/Progress';
 import Drawer from 'material-ui/Drawer';
 import Grid from 'material-ui/Grid';
+import Hidden from 'material-ui/Hidden';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
@@ -90,6 +91,7 @@ const Home = props => {
         </Typography>
       </div>
     ),
+    // ToDo move this out
     drawer = (
       <Drawer
         variant="persistent"
@@ -110,9 +112,11 @@ const Home = props => {
             </Grid>
           </Grid>
           {props.usersBusy && <CircularProgress style={{ paddingTop: 5 }} />}
-          <IconButton onClick={props.toggleDrawer}>
-            <Icon>chevron_left</Icon>
-          </IconButton>
+          <Hidden smDown>
+            <IconButton onClick={props.toggleDrawer}>
+              <Icon>chevron_left</Icon>
+            </IconButton>
+          </Hidden>
         </Toolbar>
         <UserList />
       </Drawer>
@@ -124,12 +128,14 @@ const Home = props => {
         <div className={classes.appFrame}>
           {drawer}
 
-          {Object.keys(user).length ? <User /> : empty}
+          <Hidden smDown>
+            {Object.keys(user).length === 0 && empty}
+            <Route path={USER_PATH} component={User} />
+          </Hidden>
 
           <Route path={ABOUT_PATH} component={About} />
           <Route path={THEME_PATH} component={Theme} />
           <Route path={ADD_USER_PATH} component={AddUser} />
-          <Route path={USER_PATH} component={User} />
         </div>
       </div>
       <ErrorSnackbar />

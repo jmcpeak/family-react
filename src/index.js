@@ -1,15 +1,11 @@
 import React from 'react';
-import throttle from 'lodash/throttle';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
-import store, { history } from './store';
+import { PersistGate } from 'redux-persist/integration/react';
+import store, { history, persistor } from './store';
 import App from './containers/app';
 import registerServiceWorker from './registerServiceWorker';
-import { saveState } from './constants/localStorage';
-import { initialState as authInitialState } from './reducers/auth';
-import { initialState as dataInitialState } from './reducers/data';
-import { initialState as layoutInitialState } from './reducers/layout';
 import AWS from 'aws-sdk';
 import awsmobile from './aws-exports';
 import Amplify, { Analytics } from 'aws-amplify';
@@ -36,36 +32,13 @@ AWS.config.update({
   })
 });
 
-/**
- * Subscribe to all store events
- * Only every 1.5 seconds are they stored in localStorage
- */
-store.subscribe(
-  throttle(() => {
-    saveState({
-      auth: {
-        ...authInitialState,
-        isAuthenticated: store.getState().auth.isAuthenticated
-      },
-      data: {
-        ...dataInitialState,
-        user: store.getState().data.user,
-        users: store.getState().data.users
-      },
-      layout: {
-        ...layoutInitialState,
-        drawerOpen: store.getState().layout.drawerOpen
-      },
-      theme: store.getState().theme
-    });
-  }, 1000)
-);
-
 render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <App />
-    </ConnectedRouter>
+    <PersistGate loading={null} persistor={persistor}>
+      <ConnectedRouter history={history}>
+        <App />
+      </ConnectedRouter>
+    </PersistGate>
   </Provider>,
   document.querySelector('#root')
 );

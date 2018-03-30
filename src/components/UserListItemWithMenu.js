@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
@@ -15,7 +16,6 @@ import {
   showUserMenu,
   setListMenuAnchorEl
 } from '../actions/layout';
-import { user } from '../actions/data';
 import { LAYOUT_HIDDEN, USER_MENU_ID } from '../constants';
 
 const mapStateToProps = state => ({
@@ -23,7 +23,6 @@ const mapStateToProps = state => ({
     listMenuAnchorEl: state.layout.listMenuAnchorEl
   }),
   mapDispatchToProps = {
-    setUser: user,
     hideUserMenu: hideUserMenu,
     showUserMenu: showUserMenu,
     setListMenuAnchorEl: setListMenuAnchorEl
@@ -34,7 +33,7 @@ const UserListItemWithMenu = props => {
     ICON_BUTTON_ID = `iconButtonMenu${position}`,
     mouseOut = () => props.hideUserMenu(position),
     mouseOver = () => props.showUserMenu(position),
-    setUser = () => props.setUser(user);
+    setUser = () => props.history.push(`/${user.team}/${user.todoId}`);
 
   return (
     <ListItem
@@ -77,6 +76,6 @@ UserListItemWithMenu.propTypes = {
   user: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  UserListItemWithMenu
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(UserListItemWithMenu)
 );

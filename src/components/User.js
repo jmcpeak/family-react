@@ -11,16 +11,18 @@ import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
 import { withStyles } from 'material-ui/styles';
+import { user } from '../actions/data';
 import { changeTab, toggleDrawer } from '../actions/layout';
 import MainMoreMenu from '../components/MainMoreMenu';
 import { PATH as ADD_USER_PATH } from '../components/AddUser';
 import AppSearch from '../components/AppSearch';
 
-const PATH = '/user',
+const PATH = '/:team/:id',
   drawerWidth = 320,
   mapDispatchToProps = dispatch => ({
-    toggleDrawer: () => dispatch(toggleDrawer()),
-    changeTab: (event, tab) => dispatch(changeTab(tab))
+    getUser: (team, id) => dispatch(user(team, id)),
+    changeTab: (event, tab) => dispatch(changeTab(tab)),
+    toggleDrawer: () => dispatch(toggleDrawer())
   }),
   mapStateToProps = state => ({
     activeTab: state.layout.activeTab,
@@ -86,82 +88,103 @@ const PATH = '/user',
     }
   });
 
-const User = props => {
-  const { activeTab, classes, drawerOpen, user } = props,
-    appBar = (
-      <AppBar
-        className={classNames(classes.appBar, {
-          [classes.appBarShift]: drawerOpen,
-          [classes[`appBarShift-left`]]: drawerOpen
-        })}
-      >
-        <Toolbar disableGutters={!drawerOpen}>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={props.toggleDrawer}
-            className={classNames(
-              classes.menuButton,
-              drawerOpen && classes.hide
-            )}
-          >
-            <Icon>menu</Icon>
-          </IconButton>
-          <Typography variant="title" color="inherit" className={classes.flex}>
-            {user
-              ? `${user.team} ${user.text ? '&' : ''} ${
-                  user.text ? user.text : ''
-                }`
-              : 'Select a user'}
-          </Typography>
-          <AppSearch />
-          <Tooltip
-            id="appbar-user"
-            title="Add a new family member"
-            enterDelay={300}
-          >
+class User extends React.Component {
+  currentUserParams = {};
+
+  componentDidUpdate() {
+    const { params } = this.props.match;
+
+    if (this.currentUserParams.id !== params.id) {
+      this.props.getUser(params.team, params.id);
+      this.currentUserParams = params;
+    }
+  }
+
+  render() {
+    const {
+        activeTab,
+        changeTab,
+        classes,
+        drawerOpen,
+        history,
+        toggleDrawer,
+        user
+      } = this.props,
+      appBar = (
+        <AppBar
+          className={classNames(classes.appBar, {
+            [classes.appBarShift]: drawerOpen,
+            [classes[`appBarShift-left`]]: drawerOpen
+          })}
+        >
+          <Toolbar disableGutters={!drawerOpen}>
             <IconButton
               color="inherit"
-              aria-label="Add User"
-              onClick={() => props.history.push(ADD_USER_PATH)}
+              aria-label="open drawer"
+              onClick={toggleDrawer}
+              className={classNames(
+                classes.menuButton,
+                drawerOpen && classes.hide
+              )}
             >
-              <Icon>person_add</Icon>
+              <Icon>menu</Icon>
             </IconButton>
-          </Tooltip>
-          <MainMoreMenu />
-        </Toolbar>
-      </AppBar>
-    );
-
-  return (
-    <span>
-      {appBar}
-      <main
-        className={classNames(classes.content, classes['content-left'], {
-          [classes.contentShift]: drawerOpen,
-          [classes['contentShift-left']]: drawerOpen
-        })}
-      >
-        <div className={classes.drawerHeader} />
-        <Card>
-          <CardContent>
-            <Tabs
-              value={activeTab}
-              textColor="primary"
-              onChange={props.changeTab}
+            <Typography
+              variant="title"
+              color="inherit"
+              className={classes.flex}
             >
-              <Tab label="Family Member" />
-              <Tab label="Address" />
-              <Tab label="Spouse" />
-              <Tab label="Dates | Places" />
-              <Tab label="Children | Pets" />
-            </Tabs>
-          </CardContent>
-        </Card>
-      </main>
-    </span>
-  );
-};
+              {user
+                ? `${user.team} ${user.text ? '&' : ''} ${
+                    user.text ? user.text : ''
+                  }`
+                : 'Select a user'}
+            </Typography>
+            <AppSearch />
+            <Tooltip
+              id="appbar-user"
+              title="Add a new family member"
+              enterDelay={300}
+            >
+              <IconButton
+                color="inherit"
+                aria-label="Add User"
+                onClick={() => history.push(ADD_USER_PATH)}
+              >
+                <Icon>person_add</Icon>
+              </IconButton>
+            </Tooltip>
+            <MainMoreMenu />
+          </Toolbar>
+        </AppBar>
+      );
+
+    return (
+      <span>
+        {appBar}
+        <main
+          className={classNames(classes.content, classes['content-left'], {
+            [classes.contentShift]: drawerOpen,
+            [classes['contentShift-left']]: drawerOpen
+          })}
+        >
+          <div className={classes.drawerHeader} />
+          <Card>
+            <CardContent>
+              <Tabs value={activeTab} textColor="primary" onChange={changeTab}>
+                <Tab label="Family Member" />
+                <Tab label="Address" />
+                <Tab label="Spouse" />
+                <Tab label="Dates | Places" />
+                <Tab label="Children | Pets" />
+              </Tabs>
+            </CardContent>
+          </Card>
+        </main>
+      </span>
+    );
+  }
+}
 
 export { PATH };
 export default withStyles(styles)(
