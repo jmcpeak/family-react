@@ -6,6 +6,7 @@ import {
   DATA_REMOVE_USER,
   DATA_UNDO_REMOVE_USER,
   DATA_USER,
+  DATA_USER_CACHED,
   DATA_USERS,
   DATA_USERS_BUSY
 } from '../constants';
@@ -22,6 +23,12 @@ export const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case DATA_USER:
+      return {
+        ...state,
+        user: action.data
+      };
+
+    case DATA_USER_CACHED:
       return {
         ...state,
         user: action.data,

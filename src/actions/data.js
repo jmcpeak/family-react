@@ -10,6 +10,7 @@ import {
   DATA_REMOVE_USER,
   DATA_UNDO_REMOVE_USER,
   DATA_USER,
+  DATA_USER_CACHED,
   DATA_USERS,
   DATA_USERS_BUSY
 } from '../constants';
@@ -28,7 +29,7 @@ export const user = (team, id) => async (dispatch, state) => {
       dispatch({ type: DATA_USER, data: cachedUser[0] });
     } else {
       const data = await API.get('todosCRUD', `/todos/object/${team}/${id}`);
-      dispatch({ type: DATA_USER, data });
+      dispatch({ type: DATA_USER_CACHED, data });
     }
   } catch (err) {
     dispatch({ type: DATA_ERROR, err });
