@@ -3,7 +3,7 @@ import Button from 'material-ui/Button';
 import { reduxForm, Field } from 'redux-form';
 import { TextField } from 'redux-form-material-ui';
 import { add } from '../../../actions/data';
-import { PATH as HOME_PATH } from '../../../containers/home';
+import { PATH as HOME_PATH } from '../../Home';
 import { ADD_USER_FORM_NAME } from '../../../constants';
 
 const Form = props => (

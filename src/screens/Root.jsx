@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route, Switch, Redirect } from 'react-router';
 import CssBaseline from 'material-ui/CssBaseline';
-import HomeContainer, { PATH as HOME_PATH } from '../containers/home';
+import HomeContainer, { PATH as HOME_PATH } from '../components/Home';
 import LoginContainer, { PATH as LOGIN_PATH } from '../components/Login';
 
 const PrivateRoute = connect(state => ({

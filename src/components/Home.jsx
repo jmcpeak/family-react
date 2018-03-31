@@ -5,16 +5,14 @@ import Hidden from 'material-ui/Hidden';
 import Typography from 'material-ui/Typography';
 import { createMuiTheme, MuiThemeProvider } from 'material-ui/styles';
 import { withStyles } from 'material-ui/styles';
-import About, { PATH as ABOUT_PATH } from '../../components/About';
-import UserDrawer, {
-  PATH as USER_DRAWER_PATH
-} from '../../components/User/Drawer';
-import ErrorSnackbar from '../../components/ErrorSnackbar';
-import Theme, { PATH as THEME_PATH } from '../../components/Theme';
-import UndoSnackbar from '../../components/UndoSnackbar';
-import User, { PATH as USER_PATH } from '../../components/User/User';
-import UserListDrawer from '../../components/User/ListDrawer';
-import './index.css';
+import About, { PATH as ABOUT_PATH } from './About';
+import UserDrawer, { PATH as USER_DRAWER_PATH } from './User/Drawer';
+import ErrorSnackbar from './ErrorSnackbar';
+import Theme, { PATH as THEME_PATH } from './Theme';
+import UndoSnackbar from './UndoSnackbar';
+import User, { PATH as USER_PATH } from './User/User';
+import UserListDrawer from './User/ListDrawer';
+import './Home.css';
 
 const PATH = '/',
   getTheme = theme =>
