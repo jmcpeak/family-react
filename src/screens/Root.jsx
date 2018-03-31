@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter, Route, Switch, Redirect } from 'react-router';
 import CssBaseline from 'material-ui/CssBaseline';
 import HomeContainer, { PATH as HOME_PATH } from '../containers/home';
-import LoginContainer, { PATH as LOGIN_PATH } from '../containers/login';
+import LoginContainer, { PATH as LOGIN_PATH } from '../components/Login';
 
 const PrivateRoute = connect(state => ({
   isAuthenticated: state.auth.isAuthenticated

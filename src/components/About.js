@@ -5,10 +5,9 @@ import Dialog, {
   DialogContent,
   DialogTitle
 } from 'material-ui/Dialog';
-import { PATH as HOME_PATH } from '../containers/home';
 import clover from '../assets/clover.png';
 
-export const PATH = '/about';
+export const PATH = '*/about';
 
 export default props => (
   <Dialog
@@ -59,11 +58,7 @@ export default props => (
       </div>
     </DialogContent>
     <DialogActions>
-      <Button
-        onClick={() => props.history.push(HOME_PATH)}
-        color="primary"
-        autoFocus
-      >
+      <Button onClick={props.history.goBack} color="primary" autoFocus>
         Close
       </Button>
     </DialogActions>

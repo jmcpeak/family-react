@@ -5,9 +5,9 @@ import { InputAdornment } from 'material-ui/Input';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { TextField } from 'redux-form-material-ui';
-import clover from '../../assets/clover.png';
-import './index.css';
-import { clear, login } from '../../actions/auth';
+import clover from '../assets/clover.png';
+import './Login.css';
+import { clear, login } from '../actions/auth';
 
 const PATH = '/login',
   progress = {

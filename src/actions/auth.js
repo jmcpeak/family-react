@@ -11,7 +11,7 @@ import {
   HASH_CODE
 } from '../constants';
 import { PATH as HOME_PATH } from '../containers/home/index';
-import { PATH as LOGIN_PATH } from '../containers/login/index';
+import { PATH as LOGIN_PATH } from '../components/Login';
 
 const API_NAME = 'familyCRUD',
   PREFIX = '/family',
