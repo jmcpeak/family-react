@@ -12,7 +12,7 @@ import UserDrawer, {
 import ErrorSnackbar from '../../components/ErrorSnackbar';
 import Theme, { PATH as THEME_PATH } from '../../components/Theme';
 import UndoSnackbar from '../../components/UndoSnackbar';
-import User, { PATH as USER_PATH } from '../../components/User';
+import User, { PATH as USER_PATH } from '../../components/User/User';
 import UserListDrawer from '../../components/User/ListDrawer';
 import './index.css';
 
@@ -83,10 +83,12 @@ const Home = props => {
           </Hidden>
 
           <Route path={ABOUT_PATH} component={About} />
-          <Route path={THEME_PATH} component={Theme} />
+
           <Route path={USER_DRAWER_PATH} component={UserDrawer} />
         </div>
       </div>
+
+      <Route path={THEME_PATH} component={Theme} />
       <ErrorSnackbar />
       <UndoSnackbar />
       {/*</React.StrictMode>*/}

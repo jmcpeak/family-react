@@ -15,8 +15,8 @@ import {
   hideUserMenu,
   showUserMenu,
   setListMenuAnchorEl
-} from '../actions/layout';
-import { LAYOUT_HIDDEN, USER_MENU_ID } from '../constants';
+} from '../../actions/layout';
+import { LAYOUT_HIDDEN, USER_MENU_ID } from '../../constants/index';
 
 const mapStateToProps = state => ({
     userMenus: state.layout.userMenus,
@@ -33,7 +33,7 @@ const UserListItemWithMenu = props => {
     ICON_BUTTON_ID = `iconButtonMenu${position}`,
     mouseOut = () => props.hideUserMenu(position),
     mouseOver = () => props.showUserMenu(position),
-    setUser = () => props.history.push(`/${user.team}/${user.todoId}`);
+    setUser = () => props.history.push(`/${user.team}/${user.todoId}/`);
 
   return (
     <ListItem

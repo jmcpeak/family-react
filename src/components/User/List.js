@@ -6,7 +6,7 @@ import Icon from 'material-ui/Icon';
 import List, { ListItemIcon, ListItemText } from 'material-ui/List';
 import ListSubheader from 'material-ui/List/ListSubheader';
 import Menu, { MenuItem } from 'material-ui/Menu';
-import UserListItemWithMenu from '../UserListItemWithMenu';
+import UserListItemWithMenu from './UserListItemWithMenu';
 import { USER_MENU_ID } from '../../constants/index';
 import { user, remove } from '../../actions/data';
 import { clearListMenuAnchorEl } from '../../actions/layout';

@@ -11,11 +11,11 @@ import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
 import { withStyles } from 'material-ui/styles';
-import { user } from '../actions/data';
-import { changeTab, toggleDrawer } from '../actions/layout';
-import MainMoreMenu from '../components/MainMoreMenu';
-import { PATH as USER_DRAWER_PATH } from '../components/User/Drawer';
-import AppSearch from '../components/AppSearch';
+import { user } from '../../actions/data';
+import { changeTab, toggleDrawer } from '../../actions/layout';
+import MainMoreMenu from '../MainMoreMenu';
+import { PATH as USER_DRAWER_PATH } from './Drawer';
+import AppSearch from '../AppSearch';
 
 const PATH = '/:team/:id',
   drawerWidth = 320,

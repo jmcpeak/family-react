@@ -12,7 +12,6 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Radio, { RadioGroup } from 'material-ui/Radio';
 import Switch from 'material-ui/Switch';
-import { PATH as HOME_PATH } from '../containers/home';
 import { THEME_DARK } from '../constants';
 import {
   setAvailable,
@@ -22,7 +21,7 @@ import {
   togglePaletteSelected
 } from '../actions/theme';
 
-const PATH = '/theme',
+const PATH = '*/theme',
   mainThemeColorKey = '500',
   orderedThemeColors = [
     'red',
@@ -146,7 +145,6 @@ class Theme extends PureComponent {
           </Button>
         );
       },
-      close = () => history.push(HOME_PATH),
       getThemeButton = (theme, index) => (
         <ThemeButton key={index} theme={theme} index={index} />
       );
@@ -168,7 +166,11 @@ class Theme extends PureComponent {
             <Typography variant="title" color="inherit" style={{ flex: 1 }}>
               {'Theme Color'}
             </Typography>
-            <IconButton color="inherit" aria-label="Close" onClick={close}>
+            <IconButton
+              color="inherit"
+              aria-label="Close"
+              onClick={history.goBack}
+            >
               <Icon>close</Icon>
             </IconButton>
           </Toolbar>
