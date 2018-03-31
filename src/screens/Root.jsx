@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route, Switch, Redirect } from 'react-router';
 import CssBaseline from 'material-ui/CssBaseline';
-import HomeContainer, { PATH as HOME_PATH } from '../home';
-import LoginContainer, { PATH as LOGIN_PATH } from '../login';
+import HomeContainer, { PATH as HOME_PATH } from '../containers/home';
+import LoginContainer, { PATH as LOGIN_PATH } from '../containers/login';
 
 const PrivateRoute = connect(state => ({
   isAuthenticated: state.auth.isAuthenticated
@@ -18,11 +18,11 @@ const PrivateRoute = connect(state => ({
   </React.Fragment>
 ));
 
-const App = props => (
+const ScreenRoot = () => (
   <Switch>
     <Route path={LOGIN_PATH} component={LoginContainer} />
     <PrivateRoute path={HOME_PATH} component={HomeContainer} />
   </Switch>
 );
 
-export default withRouter(App);
+export default withRouter(ScreenRoot);

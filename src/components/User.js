@@ -14,7 +14,7 @@ import { withStyles } from 'material-ui/styles';
 import { user } from '../actions/data';
 import { changeTab, toggleDrawer } from '../actions/layout';
 import MainMoreMenu from '../components/MainMoreMenu';
-import { PATH as ADD_USER_PATH } from '../components/AddUser';
+import { PATH as USER_DRAWER_PATH } from '../components/User/Drawer';
 import AppSearch from '../components/AppSearch';
 
 const PATH = '/:team/:id',
@@ -160,7 +160,7 @@ class User extends React.Component {
               <IconButton
                 color="inherit"
                 aria-label="Add User"
-                onClick={() => history.push(ADD_USER_PATH)}
+                onClick={() => history.push(USER_DRAWER_PATH)}
               >
                 <Icon>person_add</Icon>
               </IconButton>

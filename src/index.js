@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import store, { history, persistor } from './store';
-import App from './containers/app';
+import ScreenRoot from './screens/Root';
 import registerServiceWorker from './registerServiceWorker';
 import AWS from 'aws-sdk';
 import awsmobile from './aws-exports';
@@ -36,7 +36,7 @@ render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <ConnectedRouter history={history}>
-        <App />
+        <ScreenRoot />
       </ConnectedRouter>
     </PersistGate>
   </Provider>,
