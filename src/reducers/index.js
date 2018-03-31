@@ -16,7 +16,9 @@ const authFilter = createFilter('auth', ['isAuthenticated']),
   layoutFilter = createFilter('layout', ['drawerOpen']),
   dataTransform = createTransform(
     (inboundState, key) =>
-      key === 'cachedUsers' || key === 'users' ? inboundState : undefined
+      key === 'cachedUsers' || key === 'user' || key === 'users'
+        ? inboundState
+        : undefined
   ),
   rootPersistConfig = {
     key: 'root',

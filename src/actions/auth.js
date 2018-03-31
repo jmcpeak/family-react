@@ -31,8 +31,12 @@ export const login = () => async (dispatch, state) => {
     const data = await API.get(API_NAME, `${PREFIX}${TOKEN}${userInputAsHash}`);
 
     if (data && data.success === true) {
+      const user = state().data.user;
+
       dispatch({ type: AUTH_SUCCESS });
-      dispatch(push(HOME_PATH));
+      dispatch(
+        push(Object.keys(user) ? `/${user.team}/${user.todoId}` : HOME_PATH)
+      );
     }
     clearTimeout(timer);
   } catch (error) {
