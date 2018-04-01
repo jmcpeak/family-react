@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { actuallyRemove, undoRemove } from '../actions/data';
 import Button from 'material-ui/Button';
 import Snackbar from 'material-ui/Snackbar';
-import Slide from 'material-ui/transitions/Slide';
 import Typography from 'material-ui/Typography';
 
 const mapStateToProps = state => ({
@@ -34,7 +33,6 @@ const ErrorSnackbar = props => {
       }
       onClose={onClose}
       open={props.open}
-      transition={props => <Slide direction="up" {...props} />}
     />
   );
 };

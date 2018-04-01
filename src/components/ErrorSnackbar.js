@@ -4,7 +4,6 @@ import { clearError } from '../actions/data';
 import Icon from 'material-ui/Icon';
 import IconButton from 'material-ui/IconButton';
 import Snackbar from 'material-ui/Snackbar';
-import Slide from 'material-ui/transitions/Slide';
 import Typography from 'material-ui/Typography';
 
 const mapStateToProps = state => ({
@@ -33,7 +32,6 @@ const ErrorSnackbar = props => (
       </Typography>
     }
     open={props.open}
-    transition={props => <Slide direction="up" {...props} />}
   />
 );
 
