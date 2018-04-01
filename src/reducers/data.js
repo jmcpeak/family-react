@@ -42,13 +42,20 @@ export default (state = initialState, action) => {
       };
 
     case DATA_REMOVE_USER:
+      state.users.forEach((item, index) => {
+        if (item === action.user) action.user.position = index;
+      });
+
+      const users = state.users.filter(item => item !== action.user),
+        pos =
+          action.user.position >= users.length
+            ? users.length - 1
+            : action.user.position;
+
       return {
         ...state,
-        users: state.users.filter((item, index) => {
-          if (item === action.user) action.user.position = index;
-          return item !== action.user;
-        }),
-        user: initialState.user,
+        users: users,
+        user: users.length ? users[pos] : initialState.user,
         undo: action.user
       };
 
