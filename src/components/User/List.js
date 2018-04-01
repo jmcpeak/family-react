@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { users } from '../../actions/data';
 import Hidden from 'material-ui/Hidden';
 import Icon from 'material-ui/Icon';
@@ -8,18 +9,17 @@ import ListSubheader from 'material-ui/List/ListSubheader';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import UserListItemWithMenu from './UserListItemWithMenu';
 import { USER_MENU_ID } from '../../constants/index';
-import { user, remove } from '../../actions/data';
+import { remove } from '../../actions/data';
 import { clearListMenuAnchorEl } from '../../actions/layout';
 
 const mapStateToProps = state => ({
     listMenuAnchorEl: state.layout.listMenuAnchorEl,
-    userProxy: state.layout.user,
+    user: state.layout.user,
     users: state.data.users
   }),
   mapDispatchToProps = {
     getUsers: users,
     removeUser: remove,
-    setUser: user,
     clearListMenuAnchorEl: clearListMenuAnchorEl
   };
 
@@ -33,18 +33,18 @@ class UserList extends PureComponent {
     const {
         clearListMenuAnchorEl,
         listMenuAnchorEl,
+        history,
         removeUser,
-        setUser,
-        userProxy,
+        user,
         users
       } = this.props,
       menuClose = () => clearListMenuAnchorEl(),
       removeUserAndClose = () => {
-        removeUser(userProxy);
+        removeUser(user);
         menuClose();
       },
       setUserAndClose = () => {
-        setUser(userProxy);
+        history.push(`/${user.team}/${user.todoId}/`);
         menuClose();
       };
 
@@ -83,4 +83,6 @@ class UserList extends PureComponent {
 }
 
 export { USER_MENU_ID };
-export default connect(mapStateToProps, mapDispatchToProps)(UserList);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(UserList)
+);
