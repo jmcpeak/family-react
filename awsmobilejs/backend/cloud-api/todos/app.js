@@ -55,7 +55,7 @@ const convertUrlType = (param, type) => {
     case 'N':
       return Number.parseInt(param);
     default:
-      return param;
+      return decodeURI(param);
   }
 };
 
@@ -110,6 +110,7 @@ app.get('/todos', function(req, res) {
 
 app.get('/todos/object/:team/:todoId', function(req, res) {
   var params = {};
+
   if (userIdPresent && req.apiGateway) {
     params[partitionKeyName] =
       req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;

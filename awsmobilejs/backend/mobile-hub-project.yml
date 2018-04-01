@@ -11,31 +11,31 @@ features:
           sdk-generation-stage-name: Development
         paths:
           /family: !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/family-20180329102646.zip
+            codeFilename: uploads/family-20180401154409.zip
             description: 'Handler for calls to resource path : /family/{proxy+}'
             enableCORS: true
             environment: {}
             handler: lambda.handler
-            hashcode: BM4H635wT1/C1k9DGeFbMacZHL6WMXgkc8KAiO2nz4s=
+            hashcode: 5H5YpD2QL5a96ybIFjd7lAG6gYY1UjNw65epvUlOcQA=
             memorySize: '128'
-            modified: '2018-03-29T14:27:18.253+0000'
+            modified: '2018-04-01T19:45:04.633+0000'
             name: family
             runtime: nodejs6.10
             timeout: '3'
-            version: K3a.9dkQKpjIwsWlYhjNyuWrb37HUV_V
+            version: cQtUogDC1ITVY3Jcr3.tnVut4oChBK2g
           '/family/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/family-20180329102646.zip
+            codeFilename: uploads/family-20180401154409.zip
             description: 'Handler for calls to resource path : /family/{proxy+}'
             enableCORS: true
             environment: {}
             handler: lambda.handler
-            hashcode: BM4H635wT1/C1k9DGeFbMacZHL6WMXgkc8KAiO2nz4s=
+            hashcode: 5H5YpD2QL5a96ybIFjd7lAG6gYY1UjNw65epvUlOcQA=
             memorySize: '128'
-            modified: '2018-03-29T14:27:18.253+0000'
+            modified: '2018-04-01T19:45:04.633+0000'
             name: family
             runtime: nodejs6.10
             timeout: '3'
-            version: v1Yz5wi2RB71VnQoJuG4vQlpCTmINpOf
+            version: tC7kye9fdsW4.oElPxe5yMLfRFzl1tDX
       sampleCloudApi: !com.amazonaws.mobilehub.v0.API 
         attributes:
           name: sampleCloudApi
@@ -43,31 +43,31 @@ features:
           sdk-generation-stage-name: Development
         paths:
           /items: !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/sampleLambda-20180329102646.zip
+            codeFilename: uploads/sampleLambda-20180401154409.zip
             description: 'Handler for calls to resource path : /items/{proxy+}'
             enableCORS: true
             environment: {}
             handler: lambda.handler
-            hashcode: asfRciCBRugDQEMsjBrasRhZ8PKzTveYrqesUfFL1SE=
+            hashcode: gb0AbNRfZ0sg0/LMQfG9MF1vo7PZ/mbiWXK20gP2CH8=
             memorySize: '128'
-            modified: '2018-03-29T14:27:16.334+0000'
+            modified: '2018-04-01T19:45:05.577+0000'
             name: sampleLambda
             runtime: nodejs6.10
             timeout: '3'
-            version: UYimr3wl1VadLqdiMyuJs22W1v3825J_
+            version: hW32xKAdAB1FloRSiJHwt67gUKHKkej3
           '/items/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/sampleLambda-20180329102646.zip
+            codeFilename: uploads/sampleLambda-20180401154409.zip
             description: 'Handler for calls to resource path : /items/{proxy+}'
             enableCORS: true
             environment: {}
             handler: lambda.handler
-            hashcode: asfRciCBRugDQEMsjBrasRhZ8PKzTveYrqesUfFL1SE=
+            hashcode: gb0AbNRfZ0sg0/LMQfG9MF1vo7PZ/mbiWXK20gP2CH8=
             memorySize: '128'
-            modified: '2018-03-29T14:27:16.334+0000'
+            modified: '2018-04-01T19:45:05.577+0000'
             name: sampleLambda
             runtime: nodejs6.10
             timeout: '3'
-            version: NfxkDiK4nc6gUwm7VD_AvJns612l.Fln
+            version: Q33jLiErsoVjq_ps0j_H6bewqQDqKk_u
       todosCRUD: !com.amazonaws.mobilehub.v0.API 
         attributes:
           name: todosCRUD
@@ -75,31 +75,31 @@ features:
           sdk-generation-stage-name: Development
         paths:
           /todos: !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/todos-20180328153007.zip
+            codeFilename: uploads/todos-20180401154409.zip
             description: 'Handler for calls to resource path : /todos/{proxy+}'
             enableCORS: true
             environment: {}
             handler: lambda.handler
-            hashcode: CQrkXaOJmGLPZvIi02RqLkXGo3c4y79QGdZhTyOFlWU=
+            hashcode: pHBsxqr9UzPgO3UiRjT0MexJNUPQLXOf8qx05fZFA8w=
             memorySize: '128'
-            modified: '2018-03-28T19:30:52.655+0000'
+            modified: '2018-04-01T19:45:03.514+0000'
             name: todos
             runtime: nodejs6.10
             timeout: '3'
-            version: iKTx8XJB0uiIKJadFg1o2K.a8nqc2.Jd
+            version: wyoPcYDPGZ6qAJeOQCId67g6UWmL1Aru
           '/todos/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/todos-20180328153007.zip
+            codeFilename: uploads/todos-20180401154409.zip
             description: 'Handler for calls to resource path : /todos/{proxy+}'
             enableCORS: true
             environment: {}
             handler: lambda.handler
-            hashcode: CQrkXaOJmGLPZvIi02RqLkXGo3c4y79QGdZhTyOFlWU=
+            hashcode: pHBsxqr9UzPgO3UiRjT0MexJNUPQLXOf8qx05fZFA8w=
             memorySize: '128'
-            modified: '2018-03-28T19:30:52.655+0000'
+            modified: '2018-04-01T19:45:03.514+0000'
             name: todos
             runtime: nodejs6.10
             timeout: '3'
-            version: 13McdG.aAJaf6wrjFxCwGjUHP0kXYymw
+            version: uKCL7qvLDkJLOhbP909D04JRQqJlLvxl
   content-delivery: !com.amazonaws.mobilehub.v0.ContentDelivery 
     attributes:
       enabled: true
