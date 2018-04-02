@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from 'material-ui/styles';
 import Avatar from 'material-ui/Avatar';
+import Hidden from 'material-ui/Hidden';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
 import {
@@ -86,19 +87,21 @@ const UserListItemWithMenu = props => {
             : LAYOUT_HIDDEN
         }}
       >
-        <IconButton
-          id={ICON_BUTTON_ID}
-          aria-label="Menu"
-          aria-owns={listMenuAnchorEl ? USER_MENU_ID : null}
-          aria-haspopup="true"
-          onMouseOver={mouseOver}
-          onMouseOut={mouseOut}
-          onClick={event =>
-            props.setListMenuAnchorEl(event.currentTarget, user)
-          }
-        >
-          <Icon>more_vert</Icon>
-        </IconButton>
+        <Hidden smDown>
+          <IconButton
+            id={ICON_BUTTON_ID}
+            aria-label="Menu"
+            aria-owns={listMenuAnchorEl ? USER_MENU_ID : null}
+            aria-haspopup="true"
+            onMouseOver={mouseOver}
+            onMouseOut={mouseOut}
+            onClick={event =>
+              props.setListMenuAnchorEl(event.currentTarget, user)
+            }
+          >
+            <Icon>more_vert</Icon>
+          </IconButton>
+        </Hidden>
       </ListItemSecondaryAction>
     </ListItem>
   );
