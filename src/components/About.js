@@ -1,17 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
 import Dialog, {
   DialogActions,
   DialogContent,
-  DialogTitle
+  DialogTitle,
+  withMobileDialog
 } from 'material-ui/Dialog';
 import clover from '../assets/clover.png';
 
 export const PATH = '*/about';
 
-export default props => (
+const About = props => (
   <Dialog
     open={true}
+    fullScreen={props.fullScreen}
     aria-labelledby="alert-dialog-title"
     aria-describedby="alert-dialog-description"
   >
@@ -64,3 +67,9 @@ export default props => (
     </DialogActions>
   </Dialog>
 );
+
+About.propTypes = {
+  fullScreen: PropTypes.bool.isRequired
+};
+
+export default withMobileDialog()(About);
