@@ -13,7 +13,7 @@ import layout from './layout';
 import theme from './theme';
 
 const authFilter = createFilter('auth', ['isAuthenticated']),
-  layoutFilter = createFilter('layout', ['drawerOpen']),
+  layoutFilter = createFilter('layout', ['open']),
   dataTransform = createTransform(
     (inboundState, key) =>
       key === 'cachedUsers' || key === 'user' || key === 'users'

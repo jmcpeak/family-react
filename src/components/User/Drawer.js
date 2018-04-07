@@ -7,8 +7,8 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import UserFormAdd from './Form/Add';
 
-const PATH = '/add',
-  UserDrawer = props => (
+const PATH = '*/add',
+  UserDrawer = ({ history }) => (
     <Drawer anchor="right" open={true}>
       <AppBar position="static" color="secondary">
         <Toolbar>
@@ -18,13 +18,13 @@ const PATH = '/add',
           <IconButton
             color="inherit"
             aria-label="Close Add"
-            onClick={props.history.goBack}
+            onClick={history.goBack}
           >
             <Icon>close</Icon>
           </IconButton>
         </Toolbar>
       </AppBar>
-      <UserFormAdd history={props.history} />
+      <UserFormAdd history={history} />
     </Drawer>
   );
 

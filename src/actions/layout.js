@@ -11,7 +11,7 @@ import {
 } from '../constants';
 
 export const toggleDrawer = () => (dispatch, getState) => {
-  if (getState().layout.drawerOpen) dispatch({ type: LAYOUT_DRAWER_CLOSED });
+  if (getState().layout.open) dispatch({ type: LAYOUT_DRAWER_CLOSED });
   else dispatch({ type: LAYOUT_DRAWER_OPEN });
 };
 
@@ -30,8 +30,11 @@ export const setListMenuAnchorEl = (element, user) => dispatch =>
 export const clearMoreMenuAnchorEl = () => dispatch =>
   dispatch({ type: LAYOUT_MORE_MENU_CLEAR_ANCHOR_EL });
 
-export const setMoreMenuAnchorEl = element => dispatch =>
-  dispatch({ type: LAYOUT_MORE_MENU_SET_ANCHOR_EL, payload: element });
+export const setMoreMenuAnchorEl = event => dispatch =>
+  dispatch({
+    type: LAYOUT_MORE_MENU_SET_ANCHOR_EL,
+    payload: event.currentTarget
+  });
 
 export const changeTab = tab => dispatch =>
   dispatch({ type: LAYOUT_CHANGE_TAB, payload: tab });

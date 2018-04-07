@@ -9,7 +9,8 @@ import clover from '../assets/clover.png';
 import './Login.css';
 import { clear, login } from '../actions/auth';
 
-const PATH = '/login',
+const FORM = 'login',
+  PATH = `/${FORM}`,
   progress = {
     endAdornment: (
       <InputAdornment position="start">
@@ -30,27 +31,34 @@ const PATH = '/login',
     clear: clear
   };
 
-const Login = props => (
+const Login = ({
+  busy,
+  clear,
+  disabled,
+  errorMessage,
+  handleSubmit,
+  isError
+}) => (
   <div>
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <img src={clover} alt="Four leaf clover" />
       <Field
         autoComplete="question"
         autoFocus
         className={'question'}
         component={TextField}
-        disabled={props.disabled}
-        error={props.isError}
-        helperText={props.errorMessage}
-        InputProps={props.busy ? progress : undefined}
+        disabled={disabled}
+        error={isError}
+        helperText={errorMessage}
+        InputProps={busy ? progress : undefined}
         label="What city is the Family Reunion usually held in?"
         margin="normal"
         name="question"
-        onChange={props.clear}
+        onChange={clear}
       />
       <Button
         color="primary"
-        disabled={props.disabled}
+        disabled={disabled}
         size="small"
         type="submit"
         variant="raised"
@@ -62,7 +70,7 @@ const Login = props => (
 );
 
 const LoginForm = reduxForm({
-  form: 'login',
+  form: FORM,
   onSubmit: (values, dispatch) => dispatch(login(values))
 })(Login);
 

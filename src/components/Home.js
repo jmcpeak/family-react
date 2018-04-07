@@ -8,11 +8,13 @@ import { withStyles } from 'material-ui/styles';
 import About, { PATH as ABOUT_PATH } from './About';
 import UserDrawer, { PATH as USER_DRAWER_PATH } from './User/Drawer';
 import ErrorSnackbar from './ErrorSnackbar';
+import MainAppBar from './MainAppBar';
 import Theme, { PATH as THEME_PATH } from './Theme';
 import UndoSnackbar from './UndoSnackbar';
 import User, { PATH as USER_PATH } from './User/User';
 import UserListDrawer from './User/ListDrawer';
 import './Home.css';
+import { toggleDrawer } from '../actions/layout';
 
 const PATH = '/',
   getTheme = theme =>
@@ -23,21 +25,20 @@ const PATH = '/',
         type: theme.type
       }
     }),
+  mapDispatchToProps = dispatch => ({
+    toggleDrawer: () => dispatch(toggleDrawer())
+  }),
   mapStateToProps = state => ({
     theme: state.theme,
     user: state.data.user
   }),
   styles = theme => ({
     root: {
-      flexGrow: 1
-    },
-    appFrame: {
-      height: '100%',
+      flexGrow: 1,
       zIndex: 1,
       overflow: 'hidden',
       position: 'relative',
-      display: 'flex',
-      width: '100%'
+      display: 'flex'
     },
     center: {
       float: 'left',
@@ -70,29 +71,31 @@ const Home = props => {
 
   return (
     <MuiThemeProvider theme={theme}>
-      {/*<React.StrictMode>*/}
       <div className={classes.root}>
-        <div className={classes.appFrame}>
-          <UserListDrawer />
+        <MainAppBar />
+        <UserListDrawer />
 
-          <Hidden smDown>
+        <Hidden smDown>
+          <main className={classes.content}>
+            <div className={classes.toolbar} />
+
             {Object.keys(user).length === 0 && empty}
             <Route path={USER_PATH} component={User} />
-          </Hidden>
+          </main>
+        </Hidden>
 
-          <Route path={ABOUT_PATH} component={About} />
-
-          <Route path={USER_DRAWER_PATH} component={UserDrawer} />
-        </div>
+        <Route path={ABOUT_PATH} component={About} />
+        <Route path={USER_DRAWER_PATH} component={UserDrawer} />
       </div>
 
       <Route path={THEME_PATH} component={Theme} />
       <ErrorSnackbar />
       <UndoSnackbar />
-      {/*</React.StrictMode>*/}
     </MuiThemeProvider>
   );
 };
 
 export { PATH };
-export default withStyles(styles)(connect(mapStateToProps)(Home));
+export default withStyles(styles)(
+  connect(mapStateToProps, mapDispatchToProps)(Home)
+);

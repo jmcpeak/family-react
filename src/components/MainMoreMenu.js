@@ -11,7 +11,8 @@ import { logout } from '../actions/auth';
 import { PATH as ABOUT_PATH } from './About';
 import { PATH as THEME_PATH } from './Theme';
 
-const mapStateToProps = state => ({
+const MORE_MENU_ID = 'moreMenuId',
+  mapStateToProps = state => ({
     moreMenuAnchorEl: state.layout.moreMenuAnchorEl
   }),
   mapDispatchToProps = dispatch => ({
@@ -19,21 +20,23 @@ const mapStateToProps = state => ({
       dispatch(clearMoreMenuAnchorEl());
       dispatch(logout());
     },
-    clearMoreMenuAnchorEl: () => dispatch(clearMoreMenuAnchorEl()),
-    setMoreMenuAnchorEl: element => dispatch(setMoreMenuAnchorEl(element))
+    menuClose: () => dispatch(clearMoreMenuAnchorEl()),
+    menuOpen: event => dispatch(setMoreMenuAnchorEl(event))
   });
 
-const MainMoreMenu = props => {
-  const { logout, moreMenuAnchorEl } = props,
-    MORE_MENU_ID = 'moreMenuId',
-    menuClose = () => props.clearMoreMenuAnchorEl(),
-    menuOpen = event => props.setMoreMenuAnchorEl(event.currentTarget),
-    about = () => {
-      props.history.push(ABOUT_PATH);
+const MainMoreMenu = ({
+  history,
+  logout,
+  menuClose,
+  menuOpen,
+  moreMenuAnchorEl
+}) => {
+  const about = () => {
+      history.push(ABOUT_PATH);
       menuClose();
     },
     theme = () => {
-      props.history.push(THEME_PATH);
+      history.push(THEME_PATH);
       menuClose();
     };
 

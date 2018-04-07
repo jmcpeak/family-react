@@ -14,7 +14,7 @@ import {
 
 export const initialState = {
   activeTab: 0,
-  drawerOpen: true,
+  open: true,
   listMenuAnchorEl: null,
   moreMenuAnchorEl: null,
   themeDrawerOpen: false,
@@ -32,13 +32,13 @@ export default (state = initialState, action) => {
     case LAYOUT_DRAWER_CLOSED:
       return {
         ...state,
-        drawerOpen: false
+        open: false
       };
 
     case LAYOUT_DRAWER_OPEN:
       return {
         ...state,
-        drawerOpen: true
+        open: true
       };
 
     case LAYOUT_LIST_MENU_HIDDEN:

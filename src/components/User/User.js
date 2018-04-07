@@ -2,68 +2,27 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import AppBar from 'material-ui/AppBar';
 import Card, { CardContent } from 'material-ui/Card';
 import Tabs, { Tab } from 'material-ui/Tabs';
-import Toolbar from 'material-ui/Toolbar';
-import Tooltip from 'material-ui/Tooltip';
-import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
-import Icon from 'material-ui/Icon';
 import { withStyles } from 'material-ui/styles';
 import { user } from '../../actions/data';
-import { changeTab, toggleDrawer } from '../../actions/layout';
-import MainMoreMenu from '../MainMoreMenu';
-import { PATH as USER_DRAWER_PATH } from './Drawer';
-import AppSearch from '../AppSearch';
+import { changeTab } from '../../actions/layout';
 
 const PATH = '/:team/:id',
   drawerWidth = 320,
   mapDispatchToProps = dispatch => ({
     getUser: (team, id) => dispatch(user(team, id)),
-    changeTab: (event, tab) => dispatch(changeTab(tab)),
-    toggleDrawer: () => dispatch(toggleDrawer())
+    changeTab: (event, tab) => dispatch(changeTab(tab))
   }),
   mapStateToProps = state => ({
     activeTab: state.layout.activeTab,
-    drawerOpen: state.layout.drawerOpen,
+    open: state.layout.open,
     theme: state.theme,
     user: state.data.user
   }),
   styles = theme => ({
     flex: {
       flex: 1
-    },
-    appBar: {
-      position: 'absolute',
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen
-      })
-    },
-    appBarShift: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen
-      })
-    },
-    'appBarShift-left': {
-      marginLeft: drawerWidth
-    },
-    menuButton: {
-      marginLeft: 12,
-      marginRight: 20
-    },
-    hide: {
-      display: 'none'
-    },
-    drawerHeader: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-end',
-      padding: '0 8px',
-      ...theme.mixins.toolbar
     },
     content: {
       flexGrow: 1,
@@ -85,7 +44,8 @@ const PATH = '/:team/:id',
     },
     'contentShift-left': {
       marginLeft: 0
-    }
+    },
+    toolbar: theme.mixins.toolbar
   });
 
 class User extends React.Component {
@@ -112,76 +72,20 @@ class User extends React.Component {
   }
 
   render() {
-    const {
-        activeTab,
-        changeTab,
-        classes,
-        drawerOpen,
-        history,
-        toggleDrawer,
-        user
-      } = this.props,
-      appBar = (
-        <AppBar
-          className={classNames(classes.appBar, {
-            [classes.appBarShift]: drawerOpen,
-            [classes[`appBarShift-left`]]: drawerOpen
-          })}
-        >
-          <Toolbar disableGutters={!drawerOpen}>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
-              className={classNames(
-                classes.menuButton,
-                drawerOpen && classes.hide
-              )}
-            >
-              <Icon>menu</Icon>
-            </IconButton>
-            <Typography
-              variant="title"
-              color="inherit"
-              className={classes.flex}
-            >
-              {user
-                ? `${user.team} ${user.text ? '&' : ''} ${
-                    user.text ? user.text : ''
-                  }`
-                : 'Select a user'}
-            </Typography>
-            <AppSearch />
-            <Tooltip
-              id="appbar-user"
-              title="Add a new family member"
-              enterDelay={300}
-            >
-              <IconButton
-                color="inherit"
-                aria-label="Add User"
-                onClick={() => history.push(USER_DRAWER_PATH)}
-              >
-                <Icon>person_add</Icon>
-              </IconButton>
-            </Tooltip>
-            <MainMoreMenu />
-          </Toolbar>
-        </AppBar>
-      );
+    const { activeTab, changeTab, classes, open, user } = this.props;
 
     return (
       <span>
-        {appBar}
+        <div className={classes.toolbar} />
         <main
           className={classNames(classes.content, classes['content-left'], {
-            [classes.contentShift]: drawerOpen,
-            [classes['contentShift-left']]: drawerOpen
+            [classes.contentShift]: open,
+            [classes['contentShift-left']]: open
           })}
         >
-          <div className={classes.drawerHeader} />
           <Card>
             <CardContent>
+              {user.team}
               <Tabs value={activeTab} textColor="primary" onChange={changeTab}>
                 <Tab label="Family Member" />
                 <Tab label="Address" />
