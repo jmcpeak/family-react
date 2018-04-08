@@ -77,6 +77,7 @@ const Home = props => {
         <Hidden mdUp>
           <UserList />
           <Route path={USER_DRAWER_PATH} component={UserDrawer} />
+          <Menu />
         </Hidden>
 
         <Hidden smDown>
@@ -89,7 +90,6 @@ const Home = props => {
       </div>
 
       <ErrorSnackbar />
-      <Menu />
       <UndoSnackbar />
 
       <Route path={ABOUT_PATH} component={About} />

@@ -18,11 +18,7 @@ const mapStateToProps = state => ({
   mapDispatchToProps = { logout, toggleMenuDrawer };
 
 const Menu = ({ history, logout, menuOpen, toggleMenuDrawer }) => (
-  <SwipeableDrawer
-    anchor="left"
-    onBackdropClick={toggleMenuDrawer}
-    open={menuOpen}
-  >
+  <SwipeableDrawer onClose={toggleMenuDrawer} open={menuOpen}>
     <Toolbar>
       <div>
         <Typography variant="title" color="inherit" style={{ flex: 1 }}>
