@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import Icon from 'material-ui/Icon';
 import IconButton from 'material-ui/IconButton';

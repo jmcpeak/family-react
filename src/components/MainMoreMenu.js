@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import withWidth, { isWidthUp } from 'material-ui/utils/withWidth';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import IconButton from 'material-ui/IconButton';
@@ -55,65 +55,64 @@ const MainMoreMenu = ({
   menuOpen,
   moreMenuAnchorEl,
   width
-}) => {
-  const about = () => {
-      history.push(ABOUT_PATH);
-      menuClose();
-    },
-    theme = () => {
-      history.push(THEME_PATH);
-      menuClose();
-    };
-
-  return (
-    <div style={{ marginRight: 10 }}>
-      {isWidthUp('sm', width) && (
-        <section>
-          <Tooltip
-            id="appbar-menu"
-            title="More actions available"
-            enterDelay={300}
+}) => (
+  <div style={{ marginRight: 10 }}>
+    {isWidthUp('sm', width) && (
+      <section>
+        <Tooltip
+          id="appbar-menu"
+          title="More actions available"
+          enterDelay={300}
+        >
+          <IconButton
+            color="inherit"
+            aria-label="More Menu"
+            aria-owns={moreMenuAnchorEl ? MORE_MENU_ID : null}
+            aria-haspopup="true"
+            onClick={menuOpen}
           >
-            <IconButton
-              color="inherit"
-              aria-label="More Menu"
-              aria-owns={moreMenuAnchorEl ? MORE_MENU_ID : null}
-              aria-haspopup="true"
-              onClick={menuOpen}
-            >
-              <Icon>more_vert</Icon>
-            </IconButton>
-          </Tooltip>
-          <Menu
-            id={MORE_MENU_ID}
-            anchorEl={moreMenuAnchorEl}
-            open={Boolean(moreMenuAnchorEl)}
-            onClose={menuClose}
+            <Icon>more_vert</Icon>
+          </IconButton>
+        </Tooltip>
+        <Menu
+          id={MORE_MENU_ID}
+          anchorEl={moreMenuAnchorEl}
+          open={Boolean(moreMenuAnchorEl)}
+          onClose={menuClose}
+        >
+          <MenuItem
+            onClick={() => {
+              history.push(ABOUT_PATH);
+              menuClose();
+            }}
           >
-            <MenuItem onClick={theme}>
-              <ListItemIcon>
-                <Icon>color_lens</Icon>
-              </ListItemIcon>
-              <ListItemText inset primary="Theme Colors" />
-            </MenuItem>
-            <MenuItem onClick={about}>
-              <ListItemIcon>
-                <Icon>speaker_notes</Icon>
-              </ListItemIcon>
-              <ListItemText inset primary="About" />
-            </MenuItem>
-            <MenuItem onClick={logout}>
-              <ListItemIcon>
-                <Icon>exit_to_app</Icon>
-              </ListItemIcon>
-              <ListItemText inset primary="Logout" />
-            </MenuItem>
-          </Menu>
-        </section>
-      )}
-    </div>
-  );
-};
+            <ListItemIcon>
+              <Icon>color_lens</Icon>
+            </ListItemIcon>
+            <ListItemText inset primary="Theme Colors" />
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              history.push(THEME_PATH);
+              menuClose();
+            }}
+          >
+            <ListItemIcon>
+              <Icon>speaker_notes</Icon>
+            </ListItemIcon>
+            <ListItemText inset primary="About" />
+          </MenuItem>
+          <MenuItem onClick={logout}>
+            <ListItemIcon>
+              <Icon>exit_to_app</Icon>
+            </ListItemIcon>
+            <ListItemText inset primary="Logout" />
+          </MenuItem>
+        </Menu>
+      </section>
+    )}
+  </div>
+);
 
 export default withRouter(
   compose(withStyles(styles), withWidth())(
