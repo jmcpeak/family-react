@@ -23,7 +23,7 @@ import {
   togglePaletteSelected
 } from '../actions/theme';
 
-const PATH = '*/theme',
+const PATH = 'theme',
   mainThemeColorKey = '500',
   orderedThemeColors = [
     'red',

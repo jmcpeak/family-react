@@ -19,6 +19,7 @@ import './Home.css';
 import { toggleUsersDrawer } from '../actions/layout';
 
 const PATH = '/',
+  WILDCARD = '(.*)',
   getTheme = theme =>
     createMuiTheme({
       palette: {
@@ -92,8 +93,8 @@ const Home = props => {
       <ErrorSnackbar />
       <UndoSnackbar />
 
-      <Route path={ABOUT_PATH} component={About} />
-      <Route path={THEME_PATH} component={Theme} />
+      <Route path={`${WILDCARD}/${ABOUT_PATH}`} component={About} />
+      <Route path={`${WILDCARD}/${THEME_PATH}`} component={Theme} />
     </MuiThemeProvider>
   );
 };

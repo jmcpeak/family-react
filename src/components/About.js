@@ -9,7 +9,7 @@ import Dialog, {
 } from 'material-ui/Dialog';
 import clover from '../assets/clover.png';
 
-const PATH = '*/about',
+const PATH = 'about',
   About = props => (
     <Dialog
       open={true}

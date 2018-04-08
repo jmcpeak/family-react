@@ -8,7 +8,7 @@ import { withStyles } from 'material-ui/styles';
 import { user } from '../../actions/data';
 import { changeTab } from '../../actions/layout';
 
-const PATH = '*/:team/:id',
+const PATH = '/:team/:id',
   drawerWidth = 320,
   mapDispatchToProps = dispatch => ({
     getUser: (team, id) => dispatch(user(team, id)),

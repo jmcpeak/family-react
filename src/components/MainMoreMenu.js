@@ -82,7 +82,7 @@ const MainMoreMenu = ({
         >
           <MenuItem
             onClick={() => {
-              history.push(ABOUT_PATH);
+              history.push(THEME_PATH);
               menuClose();
             }}
           >
@@ -93,7 +93,7 @@ const MainMoreMenu = ({
           </MenuItem>
           <MenuItem
             onClick={() => {
-              history.push(THEME_PATH);
+              history.push(ABOUT_PATH);
               menuClose();
             }}
           >
