@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { toggleUsersDrawer, toggleMenuDrawer } from '../actions/layout';
+import { toggleUsersDrawer } from '../actions/layout';
 import { withStyles } from 'material-ui/styles/index';
 import compose from 'recompose/compose';
 import AppBar from 'material-ui/AppBar';
@@ -13,11 +13,11 @@ import Typography from 'material-ui/Typography';
 import withWidth, { isWidthUp } from 'material-ui/utils/withWidth';
 import AppSearch from './AppSearch';
 import MainMoreMenu from './MainMoreMenu';
+import { PATH as MENU_PATH } from './Menu';
 import { PATH as USER_ADD } from './User/Form/Drawer';
 
 const mapDispatchToProps = {
-    toggleUsersDrawer,
-    toggleMenuDrawer
+    toggleUsersDrawer
   },
   mapStateToProps = state => ({
     open: state.layout.usersOpen,
@@ -58,7 +58,7 @@ const MainAppBar = ({
         aria-label="open drawer"
         onClick={() => {
           if (isWidthUp('sm', width)) toggleUsersDrawer();
-          else toggleMenuDrawer();
+          else history.push(MENU_PATH);
         }}
         className={classes.menuButton}
       >

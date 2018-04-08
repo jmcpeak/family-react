@@ -8,7 +8,7 @@ import { withStyles } from 'material-ui/styles';
 import About, { PATH as ABOUT_PATH } from './About';
 import ErrorSnackbar from './ErrorSnackbar';
 import MainAppBar from './MainAppBar';
-import Menu from './Menu';
+import Menu, { PATH as MENU_PATH } from './Menu';
 import Theme, { PATH as THEME_PATH } from './Theme';
 import UndoSnackbar from './UndoSnackbar';
 import User, { PATH as USER_PATH } from './User/User';
@@ -78,7 +78,7 @@ const Home = props => {
         <Hidden mdUp>
           <UserList />
           <Route path={USER_DRAWER_PATH} component={UserDrawer} />
-          <Menu />
+          <Route path={MENU_PATH} component={Menu} />
         </Hidden>
 
         <Hidden smDown>

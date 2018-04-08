@@ -8,17 +8,15 @@ import SwipeableDrawer from 'material-ui/Drawer';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import { logout } from '../actions/auth';
-import { toggleMenuDrawer } from '../actions/layout';
 import { PATH as ABOUT_PATH } from './About';
 import { PATH as THEME_PATH } from './Theme';
 
-const mapStateToProps = state => ({
-    menuOpen: state.layout.menuOpen
-  }),
-  mapDispatchToProps = { logout, toggleMenuDrawer };
+const PATH = '/menu/',
+  mapStateToProps = () => ({}),
+  mapDispatchToProps = { logout };
 
-const Menu = ({ history, logout, menuOpen, toggleMenuDrawer }) => (
-  <SwipeableDrawer onClose={toggleMenuDrawer} open={menuOpen}>
+const Menu = ({ history, logout }) => (
+  <SwipeableDrawer onClose={history.goBack} open={true}>
     <Toolbar>
       <div>
         <Typography variant="title" color="inherit" style={{ flex: 1 }}>
@@ -28,7 +26,7 @@ const Menu = ({ history, logout, menuOpen, toggleMenuDrawer }) => (
           197 Users
         </Typography>
       </div>
-      <IconButton color="inherit" aria-label="Close" onClick={toggleMenuDrawer}>
+      <IconButton color="inherit" aria-label="Close" onClick={history.goBack}>
         <Icon>keyboard_arrow_left</Icon>
       </IconButton>
     </Toolbar>
@@ -47,7 +45,7 @@ const Menu = ({ history, logout, menuOpen, toggleMenuDrawer }) => (
       </ListItem>
       <ListItem
         onClick={() => {
-          toggleMenuDrawer();
+          history.goBack();
           logout();
         }}
       >
@@ -60,4 +58,5 @@ const Menu = ({ history, logout, menuOpen, toggleMenuDrawer }) => (
   </SwipeableDrawer>
 );
 
+export { PATH };
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Menu));

@@ -1,8 +1,6 @@
 import {
   LAYOUT_DRAWER_USERS_CLOSED,
   LAYOUT_DRAWER_USERS_OPEN,
-  LAYOUT_DRAWER_MENU_CLOSED,
-  LAYOUT_DRAWER_MENU_OPEN,
   LAYOUT_LIST_MENU_HIDDEN,
   LAYOUT_LIST_MENU_VISIBLE,
   LAYOUT_LIST_MENU_SET_ANCHOR_EL,
@@ -17,7 +15,6 @@ import {
 export const initialState = {
   activeTab: 0,
   usersOpen: true,
-  menuOpen: false,
   listMenuAnchorEl: null,
   moreMenuAnchorEl: null,
   themeDrawerOpen: false,
@@ -42,18 +39,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         usersOpen: true
-      };
-
-    case LAYOUT_DRAWER_MENU_CLOSED:
-      return {
-        ...state,
-        menuOpen: false
-      };
-
-    case LAYOUT_DRAWER_MENU_OPEN:
-      return {
-        ...state,
-        menuOpen: true
       };
 
     case LAYOUT_LIST_MENU_HIDDEN:
