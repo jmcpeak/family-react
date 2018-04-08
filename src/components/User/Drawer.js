@@ -1,32 +1,44 @@
 import React from 'react';
+import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
-import Drawer from 'material-ui/Drawer';
 import Icon from 'material-ui/Icon';
 import IconButton from 'material-ui/IconButton';
+import SwipeableDrawer from 'material-ui/Drawer';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
-import UserFormAdd from './Form/Add';
+import User from '../User/User';
 
-const PATH = '*/add',
-  UserDrawer = ({ history }) => (
-    <Drawer anchor="right" open={true}>
+const styles = () => ({
+  drawerPaper: {
+    width: '100%'
+  }
+});
+
+const PATH = '*/drawer/:team/:id',
+  UserDrawer = ({ classes, history, match }) => (
+    <SwipeableDrawer
+      anchor="right"
+      classes={{ paper: classes.drawerPaper }}
+      ModalProps={{ hideBackdrop: true }}
+      open={true}
+    >
       <AppBar position="static" color="secondary">
-        <Toolbar>
-          <Typography variant="title" color="inherit" style={{ flex: 1 }}>
-            Add
-          </Typography>
+        <Toolbar disableGutters>
           <IconButton
             color="inherit"
             aria-label="Close Add"
             onClick={history.goBack}
           >
-            <Icon>close</Icon>
+            <Icon>keyboard_arrow_left</Icon>
           </IconButton>
+          <Typography variant="title" color="inherit" style={{ flex: 1 }}>
+            {match.params.team}
+          </Typography>
         </Toolbar>
       </AppBar>
-      <UserFormAdd history={history} />
-    </Drawer>
+      <User />
+    </SwipeableDrawer>
   );
 
 export { PATH };
-export default UserDrawer;
+export default withStyles(styles)(UserDrawer);

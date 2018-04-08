@@ -1,6 +1,8 @@
 import {
-  LAYOUT_DRAWER_CLOSED,
-  LAYOUT_DRAWER_OPEN,
+  LAYOUT_DRAWER_USERS_CLOSED,
+  LAYOUT_DRAWER_USERS_OPEN,
+  LAYOUT_DRAWER_MENU_CLOSED,
+  LAYOUT_DRAWER_MENU_OPEN,
   LAYOUT_LIST_MENU_HIDDEN,
   LAYOUT_LIST_MENU_VISIBLE,
   LAYOUT_LIST_MENU_SET_ANCHOR_EL,
@@ -10,9 +12,15 @@ import {
   LAYOUT_CHANGE_TAB
 } from '../constants';
 
-export const toggleDrawer = () => (dispatch, getState) => {
-  if (getState().layout.open) dispatch({ type: LAYOUT_DRAWER_CLOSED });
-  else dispatch({ type: LAYOUT_DRAWER_OPEN });
+export const toggleUsersDrawer = () => (dispatch, getState) => {
+  if (getState().layout.usersOpen)
+    dispatch({ type: LAYOUT_DRAWER_USERS_CLOSED });
+  else dispatch({ type: LAYOUT_DRAWER_USERS_OPEN });
+};
+
+export const toggleMenuDrawer = () => (dispatch, getState) => {
+  if (getState().layout.menuOpen) dispatch({ type: LAYOUT_DRAWER_MENU_CLOSED });
+  else dispatch({ type: LAYOUT_DRAWER_MENU_OPEN });
 };
 
 export const hideUserMenu = position => dispatch =>

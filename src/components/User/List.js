@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { withStyles } from 'material-ui/styles';
 import { withRouter } from 'react-router-dom';
 import { users } from '../../actions/data';
 import Hidden from 'material-ui/Hidden';
@@ -7,12 +8,13 @@ import Icon from 'material-ui/Icon';
 import List, { ListItemIcon, ListItemText } from 'material-ui/List';
 import ListSubheader from 'material-ui/List/ListSubheader';
 import Menu, { MenuItem } from 'material-ui/Menu';
-import UserListItemWithMenu from './UserListItemWithMenu';
+import ListItem from './ListItem';
 import { USER_MENU_ID } from '../../constants/index';
 import { remove } from '../../actions/data';
 import { clearListMenuAnchorEl } from '../../actions/layout';
 
-const mapStateToProps = state => ({
+const PATH = '/users',
+  mapStateToProps = state => ({
     listMenuAnchorEl: state.layout.listMenuAnchorEl,
     user: state.layout.user,
     users: state.data.users
@@ -21,7 +23,10 @@ const mapStateToProps = state => ({
     getUsers: users,
     removeUser: remove,
     clearListMenuAnchorEl: clearListMenuAnchorEl
-  };
+  },
+  styles = theme => ({
+    toolbar: theme.mixins.toolbar
+  });
 
 class UserList extends PureComponent {
   constructor(props) {
@@ -31,6 +36,7 @@ class UserList extends PureComponent {
 
   render() {
     const {
+        classes,
         clearListMenuAnchorEl,
         listMenuAnchorEl,
         history,
@@ -49,13 +55,14 @@ class UserList extends PureComponent {
       };
 
     return (
-      <span>
+      <span style={{ width: '100%' }}>
+        <div className={classes.toolbar} />
         <List>
           <Hidden smUp>
-            <ListSubheader>ToDo - Search Bar</ListSubheader>
+            <ListSubheader>ToDo - Search Here</ListSubheader>
           </Hidden>
           {users.map((user, index) => (
-            <UserListItemWithMenu key={index} position={index} user={user} />
+            <ListItem key={index} position={index} user={user} />
           ))}
         </List>
         <Menu
@@ -82,7 +89,7 @@ class UserList extends PureComponent {
   }
 }
 
-export { USER_MENU_ID };
+export { PATH, USER_MENU_ID };
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(UserList)
+  withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(UserList))
 );

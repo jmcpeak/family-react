@@ -3,21 +3,17 @@ import { connect } from 'react-redux';
 import { withStyles } from 'material-ui/styles';
 import Drawer from 'material-ui/Drawer';
 import UserList from '../../components/User/List';
-import { toggleDrawer } from '../../actions/layout';
 
-const drawerWidth = 320,
-  mapDispatchToProps = {
-    toggleDrawer: toggleDrawer
-  },
+const drawerWidth = 380,
   mapStateToProps = state => ({
-    open: state.layout.open
+    open: state.layout.usersOpen
   }),
-  styles = theme => ({
+  mapDispatchToProps = {},
+  styles = () => ({
     drawerPaper: {
       position: 'relative',
       width: drawerWidth
-    },
-    toolbar: theme.mixins.toolbar
+    }
   });
 
 const UserListDrawer = ({ classes, open }) => (
@@ -26,7 +22,6 @@ const UserListDrawer = ({ classes, open }) => (
     open={open}
     variant="persistent"
   >
-    <div className={classes.toolbar} />
     <UserList />
   </Drawer>
 );

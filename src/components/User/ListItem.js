@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import compose from 'recompose/compose';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from 'material-ui/styles';
 import Avatar from 'material-ui/Avatar';
 import Hidden from 'material-ui/Hidden';
 import IconButton from 'material-ui/IconButton';
+import withWidth, { isWidthDown } from 'material-ui/utils/withWidth';
 import Icon from 'material-ui/Icon';
 import {
-  ListItem,
+  ListItem as MdListItem,
   ListItemText,
   ListItemSecondaryAction
 } from 'material-ui/List';
-
 import {
   hideUserMenu,
   showUserMenu,
@@ -25,9 +26,9 @@ const mapStateToProps = state => ({
     listMenuAnchorEl: state.layout.listMenuAnchorEl
   }),
   mapDispatchToProps = {
-    hideUserMenu: hideUserMenu,
-    showUserMenu: showUserMenu,
-    setListMenuAnchorEl: setListMenuAnchorEl
+    hideUserMenu,
+    showUserMenu,
+    setListMenuAnchorEl
   },
   styles = theme => ({
     selectedItem: {
@@ -49,15 +50,21 @@ const mapStateToProps = state => ({
     colorSecondary: {}
   });
 
-const UserListItemWithMenu = props => {
-  const { classes, listMenuAnchorEl, position, user } = props,
+const ListItem = props => {
+  const { classes, listMenuAnchorEl, position, user, width } = props,
     ICON_BUTTON_ID = `iconButtonMenu${position}`,
     mouseOut = () => props.hideUserMenu(position),
     mouseOver = () => props.showUserMenu(position),
-    setUser = () => props.history.push(`/${user.team}/${user.todoId}/`);
+    setUser = () => {
+      props.history.push(
+        `${isWidthDown('sm', width) ? '/drawer/' : '/'}${user.team}/${
+          user.todoId
+        }/`
+      );
+    };
 
   return (
-    <ListItem
+    <MdListItem
       button={true}
       classes={{
         button: classes.selectedItem
@@ -103,17 +110,17 @@ const UserListItemWithMenu = props => {
           </IconButton>
         </Hidden>
       </ListItemSecondaryAction>
-    </ListItem>
+    </MdListItem>
   );
 };
 
-UserListItemWithMenu.propTypes = {
+ListItem.propTypes = {
   position: PropTypes.number.isRequired,
   user: PropTypes.object.isRequired
 };
 
 export default withRouter(
-  withStyles(styles)(
-    connect(mapStateToProps, mapDispatchToProps)(UserListItemWithMenu)
+  compose(withStyles(styles), withWidth())(
+    connect(mapStateToProps, mapDispatchToProps)(ListItem)
   )
 );

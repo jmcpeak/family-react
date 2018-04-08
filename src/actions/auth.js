@@ -35,7 +35,11 @@ export const login = () => async (dispatch, state) => {
 
       dispatch({ type: AUTH_SUCCESS });
       dispatch(
-        push(Object.keys(user) ? `/${user.team}/${user.todoId}` : HOME_PATH)
+        push(
+          user && user.team && user.todoId !== undefined
+            ? `/${user.team}/${user.todoId}`
+            : HOME_PATH
+        )
       );
     }
     clearTimeout(timer);

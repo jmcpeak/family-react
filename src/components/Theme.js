@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
+import { withStyles } from 'material-ui/styles';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import AppBar from 'material-ui/AppBar';
 import Button from 'material-ui/Button';
 import Drawer from 'material-ui/Drawer';
 import Grid from 'material-ui/Grid';
+import Hidden from 'material-ui/Hidden';
 import Icon from 'material-ui/Icon';
 import IconButton from 'material-ui/IconButton';
 import { FormLabel, FormControl, FormControlLabel } from 'material-ui/Form';
@@ -51,12 +53,22 @@ const PATH = '*/theme',
     type: state.theme.type
   }),
   mapDispatchToProps = {
-    setAvailable: setAvailable,
-    setPrimaryTheme: setPrimaryTheme,
-    setSecondaryTheme: setSecondaryTheme,
-    toggleDarkMode: toggleDarkMode,
-    togglePaletteSelected: togglePaletteSelected
-  };
+    setAvailable,
+    setPrimaryTheme,
+    setSecondaryTheme,
+    toggleDarkMode,
+    togglePaletteSelected
+  },
+  styles = theme => ({
+    drawerPaper: {
+      [theme.breakpoints.down('sm')]: {
+        width: '100%'
+      },
+      [theme.breakpoints.up('sm')]: {
+        width: 320
+      }
+    }
+  });
 
 class Theme extends PureComponent {
   constructor(props) {
@@ -113,6 +125,7 @@ class Theme extends PureComponent {
 
   render() {
     const {
+      classes,
       history,
       themes,
       paletteSelected,
@@ -160,19 +173,35 @@ class Theme extends PureComponent {
     });
 
     return (
-      <Drawer anchor={'right'} open={true}>
+      <Drawer
+        anchor="right"
+        classes={{ paper: classes.drawerPaper }}
+        ModalProps={{ hideBackdrop: true }}
+        open={true}
+      >
         <AppBar position={'static'} color={'secondary'}>
           <Toolbar>
             <Typography variant="title" color="inherit" style={{ flex: 1 }}>
               {'Theme Color'}
             </Typography>
-            <IconButton
-              color="inherit"
-              aria-label="Close"
-              onClick={history.goBack}
-            >
-              <Icon>close</Icon>
-            </IconButton>
+            <Hidden smUp>
+              <Button
+                color="inherit"
+                aria-label="Done"
+                onClick={history.goBack}
+              >
+                Done
+              </Button>
+            </Hidden>
+            <Hidden smDown>
+              <IconButton
+                color="inherit"
+                aria-label="Close"
+                onClick={history.goBack}
+              >
+                <Icon>close</Icon>
+              </IconButton>
+            </Hidden>
           </Toolbar>
         </AppBar>
         <div style={{ padding: '36px' }}>
@@ -245,4 +274,6 @@ Theme.propTypes = {
 };
 
 export { PATH };
-export default connect(mapStateToProps, mapDispatchToProps)(Theme);
+export default withStyles(styles)(
+  connect(mapStateToProps, mapDispatchToProps)(Theme)
+);

@@ -6,15 +6,17 @@ import Typography from 'material-ui/Typography';
 import { createMuiTheme, MuiThemeProvider } from 'material-ui/styles';
 import { withStyles } from 'material-ui/styles';
 import About, { PATH as ABOUT_PATH } from './About';
-import UserDrawer, { PATH as USER_DRAWER_PATH } from './User/Drawer';
 import ErrorSnackbar from './ErrorSnackbar';
 import MainAppBar from './MainAppBar';
+import Menu from './Menu';
 import Theme, { PATH as THEME_PATH } from './Theme';
 import UndoSnackbar from './UndoSnackbar';
 import User, { PATH as USER_PATH } from './User/User';
+import UserDrawer, { PATH as USER_DRAWER_PATH } from './User/Drawer';
+import UserList from './User/List';
 import UserListDrawer from './User/ListDrawer';
 import './Home.css';
-import { toggleDrawer } from '../actions/layout';
+import { toggleUsersDrawer } from '../actions/layout';
 
 const PATH = '/',
   getTheme = theme =>
@@ -25,14 +27,12 @@ const PATH = '/',
         type: theme.type
       }
     }),
-  mapDispatchToProps = dispatch => ({
-    toggleDrawer: () => dispatch(toggleDrawer())
-  }),
   mapStateToProps = state => ({
     theme: state.theme,
     user: state.data.user
   }),
-  styles = theme => ({
+  mapDispatchToProps = { toggleUsersDrawer },
+  styles = () => ({
     root: {
       flexGrow: 1,
       zIndex: 1,
@@ -73,24 +73,27 @@ const Home = props => {
     <MuiThemeProvider theme={theme}>
       <div className={classes.root}>
         <MainAppBar />
-        <UserListDrawer />
+
+        <Hidden mdUp>
+          <UserList />
+          <Route path={USER_DRAWER_PATH} component={UserDrawer} />
+        </Hidden>
 
         <Hidden smDown>
+          <UserListDrawer />
           <main className={classes.content}>
-            <div className={classes.toolbar} />
-
             {Object.keys(user).length === 0 && empty}
             <Route path={USER_PATH} component={User} />
           </main>
         </Hidden>
-
-        <Route path={ABOUT_PATH} component={About} />
-        <Route path={USER_DRAWER_PATH} component={UserDrawer} />
       </div>
 
-      <Route path={THEME_PATH} component={Theme} />
       <ErrorSnackbar />
+      <Menu />
       <UndoSnackbar />
+
+      <Route path={ABOUT_PATH} component={About} />
+      <Route path={THEME_PATH} component={Theme} />
     </MuiThemeProvider>
   );
 };

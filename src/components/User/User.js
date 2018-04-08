@@ -8,7 +8,7 @@ import { withStyles } from 'material-ui/styles';
 import { user } from '../../actions/data';
 import { changeTab } from '../../actions/layout';
 
-const PATH = '/:team/:id',
+const PATH = '*/:team/:id',
   drawerWidth = 320,
   mapDispatchToProps = dispatch => ({
     getUser: (team, id) => dispatch(user(team, id)),
@@ -16,7 +16,7 @@ const PATH = '/:team/:id',
   }),
   mapStateToProps = state => ({
     activeTab: state.layout.activeTab,
-    open: state.layout.open,
+    open: state.layout.usersOpen,
     theme: state.theme,
     user: state.data.user
   }),
